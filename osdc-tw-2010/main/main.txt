@@ -1,0 +1,152 @@
+* <strong class="title"><span class="initial">X</span>slate</strong> - High performance template engine in Perl/XS
+
+
+Fuji, Goro (gfx) &lt;gfuji&#64;cpan.org&gt;
+
+
+At <strong>OSDC.TW</strong> 2010/4/24
+(which is also Shibuya.pm Technical Talk #13 &#x263A;)
+
+# Hello, I'm happy to talk in Taiwan, where many Perl hackers live in.
+----
+* Agenda
+
+- What's <strong class="title"><span class="initial">X</span>slate</strong>?
+- Why I wrote it?
+- Salient features?
+I am writing a new template engine for Perl, wich has some salient features, so I'll introduce it here.
+----
+* What's <strong class="title"><span class="initial">X</span>slate</strong>?
+
+A template engine written in Perl/XS, compilng templates into virtual machine codes and then execute them in a virtual machine. Here is a template file for Xslate for example. You can see that HTML tags are escaped by default.
+Template file "hello.tx":
+>||
+Hello, <:= $lang :> world!
+||<
+Perl code:
+>||
+my $tx = Text::Xslate->new();
+print $tx->render_file("hello.tx",{
+    lang => '<Perl>',
+});
+||<
+Result:
+>||
+Hello, &lt;Perl&gt; world!
+||<
+----
+* Aobout <strong>XS</strong>
+
+# Do you know XS?
+<strong>XS</strong> is a macro language for Perl extentions
+on C or C++.
+
+This is used
+to write Perl bindings like DBI and DBD::*,
+or to access Perl internals like Devel::NYTProf,
+or to get <strong>performance</strong> like Mouse.
+
+----
+* More about <strong>XS</strong> - For example
+# Here is
+A subroutine call <code>foo(42)</code> in <strong>XS</strong>:
+>||
+void call_foo(pTHX){
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    mXPUSHi(42);
+    PUTBACK;
+    call_pv("foo", G_VOID);
+    FREETMPS;
+    LEAVE;
+}
+||<
+It's lovely, isn't it? &#x263A;
+# Then, in the perlglossary manual page is an entry describing XS.
+----
+* More about <strong>XS</strong>
+
+<em>perlglossary</em> says:
+<blockquote><strong>XS</strong> - An extraordinarily exported, expeditiously excellent, expressly e<strong>x</strong>ternal <strong>s</strong>ubroutine, executed in existing C or C++ or in an exciting new extension language called (exasperatingly) XS.  Examine <em>perlxs</em> for the exact explanation or <em>perlxstut</em> for an exemplary unexacting one.
+</blockquote>
+# Would you like to know that how many "ex" are here?
+# The anser is:
+----
+* More about <strong>XS</strong>
+
+# Fifteen :)
+<em>perlglossary</em> says:
+<blockquote><strong>XS</strong> - An <em class="ex">ex</em>traordinarily <em class="ex">ex</em>ported, <em class="ex">ex</em>peditiously <em class="ex">ex</em>cellent, <em class="ex">ex</em>pressly e<strong>x</strong>ternal <strong>s</strong>ubroutine, <em class="ex">ex</em>ecuted in <em class="ex">ex</em>isting C or C++ or in an <em class="ex">ex</em>citing new <em class="ex">ex</em>tension language called (<em class="ex">ex</em>asperatingly) XS.  <em class="ex">Ex</em>amine <em>perlxs</em> for the <em class="ex">ex</em>act <em class="ex">ex</em>planation or <em>perlxstut</em> for an <em class="ex">ex</em>emplary un<em class="ex">ex</em>acting one.
+</blockquote>(15 "<em class="ex">ex</em>")
+----
+* Why I wrote <strong class="title"><span class="initial">X</span>slate</strong>.?
+
+Short: Just because I <span class="love">&hearts;</span> Perl/XS.
+
+Long: A month ago, when I wrote a clearsilver binding, I thought from my experience, "possibly, clearsilver may <em>not</em> be the fastest template engine. If I wrote one in XS, I would like to do ...".
+
+Then, I started to write <strong class="title"><span class="initial">X</span>slate</strong>.
+
+----
+* Salient Features
+
+# The most salient feature is its performance, but
+# there are two other salient features. One is Template cascading, and the
+# other is synax alternation.
+- <strong>Performance</strong>
+
+- Template cascading
+
+- Syntax alternation
+
+----
+* How fast is it?
+
+<strong class="title"><span class="initial">X</span>slate</strong> exceeds any existing templates in performance.
+
+Template engines in Perl:
+- Templat-Toolkit
+- HTML::Template::Pro
+- Text::MicroTemplate
+- Text::ClearSilver
+
+----
+* Demo
+
+Template-Toolkit vs. Text::Xslate
+
+----
+* Cascading templates
+Also called as <em>Template Inheritance</em> in Django.
+
+Like as CSS (Cascading Style Sheet), this feature allows you to extend base templates by overriding their components.
+
+----
+* Syntax alternaion
+
+<strong class="title"><span class="initial">X</span>slate</strong> is a compiling langage, so you can change its parser/compiler. That is, you could use another template syntax.
+
+For example, you may use syntax like Template-Toolkit:
+>||
+Hello, [% lang %] world!
+||<
+or like HTML::Template:
+>||
+Hello, <TMPL_VAR NAME="lang"> world!
+||<
+
+(although these syntaxes are not yet implemented &#x263A;)
+
+----
+* That's all
+
+Thank you for your extra attention!
+
+CPAN:
+<span class="uri">http://search.cpan.org/dist/Text-<strong class="title"><span class="initial">X</span>slate</strong>/</span>
+
+Repository:
+<span class="uri">git://github.com/gfx/p5-Text-<strong class="title"><span class="initial">X</span>slate</strong>/</span>
+
