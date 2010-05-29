@@ -1,0 +1,153 @@
+
+=head1 NAME
+
+Text::Xslate::Internal - Introduction to Xslate internals
+
+=head1 ABSTRACT
+
+この文書では、高速なテンプレートエンジンであるXslateの内部構造を解説します。そのため、まずText::ClearSilver, HTML::Template::Pro, Template-Toolkitの各テンプレートエンジンの実行モデルを概観し、その後Xslateが採用している仮想マシンモデルの解説を行います。そして最後に、Xslate仮想マシンの解説を行います。
+
+=head1 DESCRIPTION
+
+=head2 Introduction
+
+Text::CelarSilverというモジュールをという、ClearSilverテンプレートエンジンのPerl bindingを書く機会がありました。ClearSilverはなかなか高速なテンプレートエンジンなのですが、高速化の余地が少なくないことに気付きました。具体的には、(1)Perlのデータ構造をCSで使用するデータ構造に変換しなければならないこと、(2)テンプレートをコンパイルした結果を再利用できないこと、(3)実行モデルがASTのインタプリタであり、効率が悪いこと、などです。そこで、これらの課題を解決した最速のテンプレートエンジンを目指すべく、Xslateの開発を始めました。
+
+開発に当たっては、瞬間アクセス数の多いWebアプリケーション環境を想定しました。すなわち、永続的なPSGI環境で最高の実行性能が出るように最適化してあります。また、Xslateはコンパイルしたアセンブリコードをディスクにキャッシュできるため、二度目以降の実行にコンパイラは不要です。これで余計なメモリ消費を抑えることができます。
+
+実際に永続PSGI環境を模したベンチマークではText::CelarSilverやHTML::Template::Proの5倍、Template-Toolkitの20倍ほどの速度が出ています。Xslateのコンセプトは正解だったといえるでしょう。
+
+なお、開発当初はXSコードを出力するテンプレートエンジンということでXslate - XS tempLATEと命名したのですが、これは実現していません(2010年5月現在)。
+
+=head2 Execution Models
+
+Text::ClearSilver - ASTインタプリタ。コンパイルしてASTを作り、エンジンがそれを解釈実行する
+Template-Toolkit - ASTインタプリタ/VM。Perlのサブルーチンを作り、PerlのVMがそれを実行する。
+HTML::Template::Pro - インタプリタ。エンジンがその場で解釈実行する
+
+=head1 Xslate Execution Model
+
+Xslateは仮想マシンモデルを採用しています。仮想マシンモデルとは、プログラムを中間コードにコンパイルしたのち、仮想マシン上で実行するもので、Javaが採用している実行環境として有名です。
+
+以下にXslateの実行フローを示します。
+
+	テンプレート -> [プリプロセッサ] -> 原始コード
+	原始コード   -> [パーザ]         -> AST
+	AST          -> [コンパイラ]     -> アセンブリ
+	アセンブリ   -> [アセンブラ]     -> VMコード
+	VMコード     -> [インタプリタ    -> 出力
+
+=head2 Preprocess
+
+まず、プリプロセッサがテンプレート文字列を「ふつう」のプログラミング言語風に変換します。具体的には、以下のような変換を行います。
+
+	Template:
+	Hello, <: $lang :> world!
+
+	Preprocessed-template:
+	print_raw "Hello, "; $lang; print_raw " world!";
+
+この時点でタグは消え、パーザにとって処理のしやすい形になります。
+
+この処理は単純であるため、プリプロセッサはパーザに組み込まれています。
+
+=head2 Parse
+
+パーザは演算子優先順位解析法という手法を使って構文解析を行い、抽象構文木(AST)を作ります。このパーザは柔軟性が高く、僅かな修正でTemplate-Toolkitのようなまったく異なる構文をサポートすることができます。
+
+生成されたASTはそのままコンパイラへと渡されます。
+
+=head2 Compile
+
+コンパイラはASTを仮想マシン用のアセンブリコードへとコンパイルします。このときカスケードの処理が静的に行われます。
+
+いくつかの糖衣構文はこの段階で処理されます。たとえば <: $a | f :> というフィルタ構文と <: f($a) :> という関数呼び出し構文は同じアセンブリコードにコンパイルされます。また、このフェイズで最適化も行います。
+
+なお、このアセンブリコードの段階でディスクキャッシュを行います。
+
+=head2 Assemble
+
+アセンブルフェイズでは、アセンブリコードを仮想マシンコードに変換します。
+
+=head3 Interpret
+
+仮想マシンコードはそのまま実行ループに渡されます。
+
+まず、仮想マシンの構造は以下の様になっています。
+
+	typedef struct tx_code_s tx_code_t;
+
+	struct tx_code_s {
+		tx_exec_t exec_code;
+
+		SV* arg;
+	};
+
+	struct tx_state_s {
+		U32 pc; /* the program counter */
+
+		tx_code_t* code; /* compiled code */
+		U32        code_len;
+
+		/* snip */
+	};
+
+一つの仮想マシンコード(struct tx_code_s)は手続きである実行コード(exec_code)と一つの引数(arg)を持ち、テンプレート全体が一つの配列に直列化されます。これに対し、perl5の実装では、構文木を他の形式に変換することなくそのまま実行します。
+
+実行ループは非常に簡単です。
+
+	while(st.pc < st.code_len) {
+		CALL_FPTR(st.code[st.pc].exec_code)(aTHX_ &st);
+	}
+
+マシン状態オブジェクト(st)の実行コードを、プログラムカウンタの値にしたがって呼び出すだけです。このあたりはPerlの実行ループとよく似ていますが、コード全体が一つの配列に直列化されているのがPerlとの決定的な違いです。
+
+=head1 The Virtual Machine
+
+Xslateの仮想マシンはレジスタマシンです。これに対し、Perlの仮想マシンはスタックマシンです。これは、OPコードに対する引数の与え方と、結果の受け取り方に違いがあります。
+
+たとえば (1 + 5) - 2 という演算を行うとします。
+
+Perl Opcode (疑似コード):
+
+	push 1
+	push 3
+	add
+	# ここでstack topは1+3=6
+	push 2
+	sub
+	# ここでstack topは6-2=4
+
+Xslate Opcode (疑似コード):
+
+	store_to_a 1
+	store_to_b 3
+	add
+	# ここでレジスタaは6
+	store_to_b 2
+	sub
+	# ここでレジスタaは4
+
+この例だとあまり変わりませんが、式が複雑になるとXslateではレジスタの値をローカル変数に退避しなければならないためコードが複雑になり速度が低下します。その反面、スタックの長さを実行時にチェックしなくて済むので、単純なケースの繰り返しでは高速になると期待できます。
+
+実際の中間コードは、PerlならばB::Conciseなどで、Xslateでは環境変数XSLATEにdump=asmを指定することで観察することができます。
+
+=head1 Conclusion
+
+Xslateが数あるテンプレートエンジンの中でも際立って高速なのは、テンプレートの実行に特化したVM(DSVM: Domain Specific Virtual Machine)を用意したからといえます。目的に合わせてDSVMを書く。2010年代はそんな時代になるのかもしれません。
+
+=head1 SEE ALSO
+
+L<Text::Xslate>
+
+L<Text::ClearSilver>
+
+L<HTML::Template>
+
+L<Template-Toolkit>
+
+L<Text::MocriTemplate>
+
+L<Text::MicroTemplate::Extended>
+
+=cut

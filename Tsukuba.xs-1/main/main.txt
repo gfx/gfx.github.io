@@ -1,0 +1,207 @@
+* Inside <strong class="title"><span class="initial">X</span>slate</strong>
+
+
+Fuji, Goro (gfx) &lt;gfuji&#64;cpan.org&gt;
+
+
+At <strong>Tsukuba.xs</strong> Beer Talk #1, 2010/5/28
+----
+* 自己紹介
+
+- 名前：藤 吾郎
+- 所属：筑波大学 心理学類 (4年)
+- CPAN: <a href="http://search.cpan.org/~gfuji/">GFUJI</a>
+- Hatena: <a href="http://d.hatena.ne.jp/gfx/">id:gfx</a>
+- Github: <a href="http://github.com/gfx/">id:gfx</a>
+- Twitter: <a href="http://twitter.com/__gfx__">@__gfx__</a>
+
+----
+* Agenda
+
+- Introduction to Xslate
+- Execution Models in template engines
+- Execution Model in Xslate
+- The Virtual Machine
+- XS specific optimization
+- Conclusion
+
+----
+* Introduction to Xslate
+
+A template engine written in Perl/XS, compilng templates into intermediate code and then executing it in the virtual machine.
+Template file "hello.tx":
+>||
+Hello, <: $lang :> world!
+||<
+Perl code:
+>||
+my $tx = Text::Xslate->new();
+print $tx->render("hello.tx", {
+    lang => '<Perl>',
+});
+||<
+Result:
+>||
+Hello, &lt;Perl&gt; world!
+||<
+
+----
+* The philosophy
+
+Strongly influenced by Text::MicroTemplate (and ::Extended) and Template-Toolkit.
+
+- Tuned for persistent applications
+- Sandboxing
+- Don't reproduce PHP
+
+----
+* Benchmark (by benchmark/others.pl)
+
+benchmark/template/list.tx:
+>||
+List:
+: for $data -> $item     {
+    * <:= $item.title :>
+    * <:= $item.title :>
+    * <:= $item.title :>
+: }
+||<
+
+----
+* Benchmark Result
+
+>||
+Perl/5.10.1 i686-linux
+Text::Xslate/0.1023
+Text::MicroTemplate/0.11
+Text::ClearSilver/0.10.5.4
+Template/2.22
+          Rate     tt     mt     cs xslate
+tt       322/s     --   -64%   -87%   -98%
+mt       891/s   176%     --   -63%   -93%
+cs      2415/s   650%   171%     --   -82%
+xslate 13398/s  4059%  1405%   455%     --
+||<
+41 times faster than Template-Toolkit
+15 times faster than Text::MicroTemplate
+ 5 times faster than Text::CelarSilver
+
+----
+* Execution Models in template engines
+
+<strong>Compiles templates into Perl code:</strong>
+- Template-Toolkit, Text::MicroTemplate, Mojo::Template, Tenjin
+
+<strong>Compiles templates into AST, and executes it in the interpreter</strong>
+- Text::ClearSilver, Template::Alloy, Template::Sandbox
+
+<strong>Interpretes templates:</strong>
+- HTML::Template::Pro, Template::Tiny
+
+実行環境として「永続的なアプリケーション」を想定するなら、事前にコンパイルするほうがよい。
+
+----
+* The Execution Model in Xslate
+
+<strong>Compiles templates into intermediate code, and executes it in the virtual machine</strong> like Java.
+
+>||
+    テンプレート -> [プリプロセッサ] -> 原始コード
+    原始コード   -> [パーザ]         -> 抽象構文木
+    抽象構文木   -> [コンパイラ]     -> アセンブリ
+    アセンブリ   -> [アセンブラ]     -> 中間コード
+    中間コード   -> [仮想マシン]     -> 出力
+||<
+
+----
+* The Assembly Code
+
+>||
+    # "Hello, <: $lang // 'Xslate' :> world!"
+    @asm = (
+        [ print_raw_s => "Hello, " ],
+        [ fetch_s     => "lang"    ],
+        [ dor         => 2         ],
+        [ literal     => "Xslate"  ],
+        [ print_raw_s => "world!"  ],
+   );
+||<
+中間コードはアセンブリに一対一対応している。
+
+----
+* The Virtual Machine
+
+一口に仮想マシンといっても様々なものがあるが、ここでは「実行ループがあり、関数ポインタを次々と手繰っていくタイプのインタプリタ」を差す。
+実行ループの例(perl 5.8.8 in run.c):
+>||
+int
+Perl_runops_standard(pTHX) {
+    while ((PL_op = CALL_FPTR(PL_op->op_ppaddr)(aTHX))) {
+        PERL_ASYNC_CHECK();
+    }
+    TAINT_NOT;
+    return 0;
+}
+||<
+
+----
+* The execution loop in Xslate
+
+Xslateの実行ループ(簡略化版/tx_execute()):
+>||
+    while(st.pc < code_len) {
+        CALL_FPTR(st.code[st.pc].exec_code)(aTHX_ &st);
+    }
+||<
+Ruby 1.9の実行ループもこれに似ている(vm_exec.c)。
+
+----
+* Xslate Opcodes
+
+Xslateのopcodeの一例:
+>||
+TXC_w_sv(print_raw_s) {
+    sv_catsv_nomg(TX_st->output, TX_op_arg);
+
+    TX_st->pc++;
+}
+||<
+TXC_w_sv()はSVを一つ受けとる(TX_op_arg)ことを示す。
+goto系以外のopcodeは単にpcを一つ進めるだけ。goto系はpcに新しい値を入れる。
+
+----
+* Intermediate code optimization
+
+- 文字列リテラルの連結
+- 組み込みフィルタ(html/raw)の最適化(to zero-overhead)
+- 定数畳み込みはまだ未実装（そのうちやりたい）
+
+最適化は$ENV{XSLATE}='optimize=0'で抑制できる。
+
+----
+* XS specific optimization
+
+- newSVpvs_share()でキーアクセスを高速化
+- 出力領域の事前割当(sv_grow()/SvGROW()) - あるテンプレートの出力は常にほぼ一定のサイズと仮定できるため
+- 配列がtieされていないときは、av_len()の代わりにAvFILLp()を、av_fetch()の代わりにAvARRAY()を使う
+- 不要なSVのコピーを避ける
+
+----
+* Conclusion
+
+- 2010年代は特定領域に特化したVM(DSVM)の時代！
+- 演算子優先順位構文解析法は扱いやすい
+- いろいろな言語のVMを見てまわると面白い
+- XS特有の最適化はいろいろあるので面白い
+
+----
+* That's all
+
+Thank you for your attention!
+
+CPAN:
+<span class="uri">http://search.cpan.org/dist/Text-Xslate/</span>
+
+Repository:
+<span class="uri">git://github.com/gfx/p5-Text-Xslate/</a>
+
