@@ -60,7 +60,7 @@ use Any::Moose 'X::StrictConstructor'; # お勧め
 has file => ( # アトリビュート"foo"は…
     is       => 'rw',   # 読み/書き可能
     isa      => 'Str',  # 文字列のみ
-    requried => 1,      # コンストラクタでは省略不可
+    required => 1,      # コンストラクタでは省略不可
 );
 has line => ( # アトリビュート"bar"は…
     is       => 'rw',  # 読み書き可能
