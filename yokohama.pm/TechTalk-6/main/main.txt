@@ -1,0 +1,185 @@
+* Any::Moose入門
+
+Fuji, Goro gfx&lt;gfuji@cpan.org&gt;
+
+Yokohama.pm#6 2010/7/20
+
+----
+* 自己紹介
+
+藤 吾郎 (Fuji Goro, id:gfx, @__gfx__)
+
+筑波在住の学生です
+Mouseのメンテナンスをしています
+
+----
+* Moose
+
+- <strong>Perlのオブジェクト指向プログラミング機能</strong>を拡張するフレームワーク
+- 高機能
+- MouseはMooseの軽量版
+- Any::MooseはMouseまたはMooseのラッパー
+
+※ これ以降「むーす」とは基本的にAny::Mooseから使うMouseだと思ってください
+
+----
+* Perlのオブジェクト指向プログラミング機能
+
+- 貧弱
+- 組み込み機能はなんと2つだけ！
+-- データとパッケージを結びつける bless() 
+-- そのデータが消滅するときに呼び出される DESTROY()
+
+- しかし、オブジェクト指向プログラミングは必要不可欠
+- <strong>クラスビルダー</strong>が必要
+-- コンストラクタとアクセサを生成するモジュールのこと
+- そしてCPAN上に葉は数のクラスビルダーが！
+-- Class::Struct - core module
+-- Class::Accessor(::Fast) - ex-de fact standard
+
+----
+* というのが過去の話でした
+
+今はMooseがある！
+Perlの諸欠点は気にならなくなった！
+
+----
+* Mooseというクラスビルダー
+
+- コンストラクタやアクセサを作ってくれる
+- 拡張しやすいイニシャライザ(BUILD)とデストラクタ(DEMOLISH)も用意してくれる
+- ロール(またはトレート)によって安全に多重継承を実現できる
+
+----
+* use Any::Moose;
+
+>||
+package Foo::Parser; # 何かの構文解析を行うクラス
+use Any::Moose; # turns on strict and warnings
+use Any::Moose 'X::StrictConstructor'; # お勧め
+has file => ( # アトリビュート"foo"は…
+    is       => 'rw',   # 読み/書き可能
+    isa      => 'Str',  # 文字列のみ
+    requried => 1,      # コンストラクタでは省略不可
+);
+has line => ( # アトリビュート"bar"は…
+    is       => 'rw',  # 読み書き可能
+    isa      => 'Int', # 整数のみ
+    default  => 1,     # デフォルト値があるので省略化
+);
+no Any::Moose; # DSL関数を削除
+__PACKAGE__->meta->make_immutable(); # クラスを変更不能にする
+||<
+アトリビュートに性質を記述すると、その記述に従ったコンストラクタが生成される
+コンストラクタに不正なアトリビュートを渡すとエラー(StrictConstructor)
+
+----
+* アトリビュートの性質 - 頻出オプション10選
+これが便利なので、一旦Mooseに慣れるともう戻れない
+>||
+has $name => (
+    is        => 'ro' || 'rw',              # 必須
+    required  => $is_required,              # defaultを指定しないなら真にすること
+    init_arg  => $name_for_constructor,     # 内部用ならundef
+    isa       => $type_constraint,          # 型制約('Str','Int','ArrayRef',etc.)
+    coerce    => $does_coercion,            # 型変換するか？
+    handles   => $delegate_methods,         # メソッドのデリゲート
+    default   => $default_value,            # 単純なデフォルト値
+    builder   => $default_value_builer,     # 複雑なデフォルト値
+    lazy      => $does_build_default_later, # デフォルト値を遅延評価するか？
+    weak_ref  => $does_weaken,              # 相互参照するオブジェクトに
+);
+||<
+<strong class="warn">注</strong>：default/builderを使わないなら<strong>必ず</strong>required => 1を指定するか、isa => "Maybe[$Type]"を使うこと！じゃないと値の整合性が取れなくなる。
+
+----
+* アトリビュートの遅延評価
+
+>||
+has foo => (
+    is         => 'rw',
+    isa        => 'Int',
+    lazy_build => 1, # builder + lazy + α
+);
+sub _build_foo {
+    my($self) = @_;
+    my $value = ...; # 重い処理
+    return $value;
+}
+||<
+初めてアクセサから値を読み込むときに_build_foo()が呼び出され、アトリビュートが初期化される。アトリビュートの初期化順序は規定されていないため、特に重い処理でなくてもアトリビュートの依存関係が複雑な場合はlazy_buildがお勧め。
+
+----
+* ほかにもいろいろありますが…
+
+『モダンPerl入門』(by lestrrat)で解説しています！
+
+または、JPA: Japan Perl AssociationがMooseドキュメントの日本語訳を公開しているのでそちらへどうぞ！
+
+----
+* Moose FAQ 1/5
+
+- Mooseは使うべき？
+
+非常に便利なので、試す価値はあると思います。
+
+----
+* Moose FAQ 2/5
+
+- Mooseって重いんじゃ？
+
+何を持って重いとするかによります。また、MooseかMouseかでまったく違います。Mooseだとロードは重いですし、メモリも食います(ロードだけで200ms/6MiBくらい)。
+ただしアクセサなどの実行速度は Class::Accessor::Fastと同程度です。
+
+Mouseだとロード時間もメモリ消費もMooseの1/4くらいです(50ms/1.5MiBくらい)。アクセサなどの実行速度は Class::Accessor::Fastの2倍くらい、Class::XSAccessorと同程度です。（Mouse::XSが有効になっている場合）。
+
+実際のところ、Any::Mooseを使うようにしていればロード時間はほとんど気になりません。「重いから」という理由で避ける必要はないかと思います。
+
+----
+* Moose FAQ - 3/5
+
+- 依存モジュールはありますか？XSは必須ですか？サポートしているPerlのバージョンは？
+
+Mooseは大量に依存モジュールがあり、XSは必須で、要求バージョンは5.8.1です。
+
+Mouseはコアモジュール以外の依存はなく、XSはなくても動き、要求バージョンは5.6.2です（おそらく5.6.0でも動きますが未チェック）。
+
+----
+* Moose FAQ 4/5
+
+- 実際のところ、安定はしていますか？
+
+単なるクラスビルダーとして使う分には、最近はほぼ安定しています。凝った使い方（MOPを使うなど）をしていると、ある日突然猛然と警告されたりします。
+
+コンストラクタ/イニシャライザ(BUILD)/アトリビュート/デストラクタ(DEMOLISH)をドキュメントに書いてある通りの使い方をしていれば、いきなり動かなくなることはないでしょう。
+
+----
+* Moose FAQ 5/5
+
+- MooseとMouseの互換性は？
+
+単なるクラスビルダーとして使う分には、ほとんど違いはありません。違いがあれば教えてほしいくらいです。
+MOPレベルでは足りない機能がありますが、それでもよく使う機能はわりと実装してあります。
+
+※ もし挙動が異なる点があれば@__gfx__までご連絡ください！
+
+----
+* おまけ：Mooseの歴史
+
+- 2006年 0.01-0.17 Moooooooooooooooooose!!!
+- 2007年 0.18-0.33 開発初期
+- 2008年 0.34-0.65 Mouseの誕生/Shika事変
+- 2009年 0.66-0.93 Catamoose/ "To Moose, or Not To Moose"議論
+- 2010年 0.94-1.09 現在に至る
+
+※ 詳しくは「モダンPerlの世界へようこそ」(@gihyo.jp, by charsbar)をご覧ください
+
+----
+* __END__
+
+ご静聴ありがとうございました
+
+http://search.cpan.org/dist/Moose
+http://search.cpan.org/dist/Mouse
+http://search.cpan.org/dist/Any-Moose
+

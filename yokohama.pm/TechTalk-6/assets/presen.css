@@ -1,0 +1,108 @@
+body {
+    background-color: #ccccff;
+    color: #000000;
+    font-family: serif;
+    margin:   0;
+    padding : 0;
+}
+
+body * {
+    margin:   0;
+    padding : 0;
+}
+
+#title {
+    padding-right: 5px;
+}
+
+#topics {
+    padding: 2px;
+
+    margin-left:   5px;
+    margin-right:  5px;
+    margin-top:   30px;
+    margin-bottom: 5px;
+    text-align : left;
+    font-size : 3em;
+}
+
+#topics h2{
+    padding : 5px;
+    font-size : 120%;
+    line-height : 1;
+
+    border-left: 16px solid #6666ff;
+    background-color : #ddddff;
+}
+
+#topics h3 {
+    padding : 5px;
+    margin-bottom : 5px;
+    line-height : 1;
+
+    background-color : #d6d6ff;
+    border-top :    1px solid #9999ff;
+    border-left :   1px solid #9999cc;
+
+    border-right :  1px solid #333399;
+    border-bottom : 1px solid #333399;
+}
+
+#topics pre {
+    padding-left: 4px;
+    font-size: 70%;
+    background-color: #ddddff;
+    font-family: monospace;
+}
+
+
+#footer {
+    position: absolute;
+    width: 99%;
+    height: 30px;
+    padding-left:   5px;
+    padding-top:    3px;
+    padding-bottom: 3px;
+    border-top: 1px solid #0000ff;
+    background-color: #9999ff;
+}
+
+#footer #page_info {
+    position: absolute;
+}
+
+.list{
+    font-size : 80%;
+}
+
+.list_child{
+    font-size : 70%;
+}
+
+/*-----------------------------------------------------*/
+
+table.stimulus {
+	background-color: white;
+	line-height: 0;
+	margin-right: auto;
+	margin-left: auto;
+}
+table.stimulus td{
+	width:  50px;
+	height: 50px;
+}
+td.b {
+	background-color: black;
+}
+td.w {
+	background-color: white;
+}
+
+strong{
+	font-weight: normal;
+	color: blue;
+}
+
+.warn {
+	color: red;
+}
