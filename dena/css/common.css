@@ -1,0 +1,274 @@
+@charset "utf-8";
+/**
+ * reset
+ */
+	html, body, div, span, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	abbr, address, cite, code,
+	del, dfn, em, img, ins, kbd, q, samp,
+	small, strong, sub, sup, var,
+	b, i,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, figcaption, figure, 
+	footer, header, hgroup, menu, nav, section, summary,
+	time, mark, audio, video {
+		 margin:0;
+		 padding:0;
+		 border:0;
+		 outline:0;
+		 font-size:100%;
+		 vertical-align:baseline;
+		 background:transparent;
+	}
+	article,aside,canvas,details,figcaption,figure,
+	footer,header,hgroup,menu,nav,section,summary { 
+		 display:block;
+	}
+	del { text-decoration: line-through; }
+	abbr[title], dfn[title] {
+		 border-bottom:1px dotted #000;
+		 cursor:help;
+	}
+	table {
+		 border-collapse:collapse;
+		 border-spacing:0;
+	}
+	hr{ display:none; }
+	input, select { vertical-align:middle; }
+	*{ list-style-type:none; }
+
+/**
+ * font-face
+ */
+
+	/*
+		font "SYMBOL SIGNS" was designed by Sander Baumann
+		http://www.fontsquirrel.com/fonts/Symbol-Signs
+	*/
+	@font-face {
+		font-family: 'SymbolSignsBasisset';
+		src: local('Symbol Signs Basis set'), local('SymbolSigns-Basisset'), url('../fonts/symbol-signs.ttf') format('truetype');
+	}
+
+/**
+ * base
+ */
+	html,body{
+		/* necessary to enable bg gradient? */
+		overflow:hidden;
+		width:100%;
+		height:100%;
+		font-size:30px;
+		line-height:1.3;
+		background:#000;
+		color:#fff;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	a{
+		color:#fff;
+	}
+
+	/*
+		erase all styles about elems not in view
+		this seems to increase performance
+	*/
+	div.page:not(.onView),
+	div.page:not(.onView) *{
+		display:none !important;
+		background:none !important;
+		border:none !important;
+		border-radius:none !important;
+		transition:none !important;
+		-webkit-transition:none !important;
+		-webkit-background-size: auto !important;
+		float:none !important;
+		-webkit-animation-name: none !important;
+		-webkit-animation-iteration-count:0 !important;
+	}
+
+/**
+ * modules for $.presentation
+ */
+	/**
+	 * .mod-pager
+	 */
+	@-webkit-keyframes 'pagerReveal' {
+		from{ opacity:1; }
+		to{ opacity:0; }
+	}
+	.mod-pager{
+		position:fixed;
+		z-index:9999;
+		top:0;
+		left:0;
+		right:0;
+		height:1.75em;
+		text-align:center;
+		font-family: 'SymbolSignsBasisset', sans-serif;
+		font-size:1.5em;
+		opacity:0;
+		transition:opacity .3s;
+		-o-transition:opacity .3s;
+		-moz-transition:opacity .3s;
+		-webkit-transition:opacity .3s;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+		-webkit-animation-name: 'pagerReveal';
+		-webkit-animation-iteration-count:1;
+		-webkit-animation-duration:1s;
+	}
+	.mod-pager:hover{
+		opacity:1;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	}
+		.mod-pager li{
+			position:absolute;
+			top:0;
+		}
+		.mod-pager li#pager-L{
+			left:0;
+		}
+		.mod-pager li#pager-R{
+			right:0;
+		}
+			.mod-pager li a{
+				line-height:1;
+				text-decoration:none;
+				float:left;
+				color:#000;
+				font-weight:bold;
+				padding:0 .1em .2em .3em;
+				text-decoration:none;
+				background:rgb(255,255,255);
+				border-radius:.4em;
+				margin:.2em;
+			}
+
+	/**
+	 * .mod-pageNum
+	 */
+	.mod-pageNum{
+		position:fixed;
+		z-index:9999;
+		bottom:0;
+		left:0;
+		right:0;
+		font-size:.5em;
+		padding:0 0 .2em;
+		text-align:center;
+	}
+
+	/**
+	 * .mod-page
+	 */
+	.mod-page{
+		position:fixed;
+		left:0;
+		top:0;
+		width:100%;
+		height:100%;
+		display:table;
+		background:#222;
+	}
+	.mod-page.transition{
+		/* class "transition" will be attached by JavaSript */
+		transition:all .5s;
+		-o-transition:all .5s;
+		-moz-transition:all .5s;
+		-webkit-transition:all .5s;
+	}
+		.mod-page > div{
+			display:table-cell;
+			vertical-align:middle;
+			text-align:center;
+			padding:40px 60px;
+		}
+	.mod-page.center{
+		opacity:1;
+		left:0;
+		top:0;
+		transform:rotate(0deg);
+		-webkit-transform:rotate(0deg);
+		z-index:101;
+	}
+	.mod-page.left{
+		left:-100%;
+		top:20%;
+		opacity:0;
+		transform:rotate(-60deg) scale(.5) skew(60deg);
+		-webkit-transform:rotate(-60deg) scale(.5) skew(60deg);
+	}
+	.mod-page.right{
+		left:100%;
+		top:20%;
+		opacity:0;
+		transform:rotate(60deg) scale(.5) skew(-60deg);
+		-webkit-transform:rotate(60deg) scale(.5) skew(-60deg);
+	}
+
+	/**
+	 * .mod-page.top
+	 */
+	.mod-page.top{
+	}
+		.mod-page.plain > div{
+		}
+			.mod-page.top h1{
+				font-size:bold;
+				font-size:3em;
+			}
+			.mod-page.top p{
+				padding:1em 0 0;
+			}
+
+	/**
+	 * .mod-page.plain
+	 */
+	.mod-page.plain{
+	}
+		.mod-page.plain > div{
+			vertical-align:top;
+			text-align:left;
+		}
+			.mod-page.plain h2{
+				font-weight:bold;
+				font-size:1.75em;
+				padding:0 0 .5em;
+			}
+			.mod-page.plain p{
+				padding:0 0 .75em;
+			}
+			.mod-page.plain ul{
+				padding:0 0 .5em;
+			}
+				.mod-page.plain ul li{
+					padding:0 0 .25em .1em;
+					margin:0 0 0 1.75em;
+					list-style-type:disc;
+				}
+			.mod-page.plain ol{
+				padding:0 0 .5em;
+			}
+				.mod-page.plain ol li{
+					padding:0 0 .25em .1em;
+					margin:0 0 0 1.75em;
+					list-style-type:decimal;
+				}
+			.mod-page.plain .sideImgR{
+				float:right;
+				margin:0 0 25px 30px;
+			}
+
+	/**
+	 * .mod-page.shout
+	 */
+	.mod-page.shout{
+	}
+		.mod-page.shout > div{
+		}
+			.mod-page.shout p{
+				font-size:2.5em;
+				font-weight:bold;
+			}
+
