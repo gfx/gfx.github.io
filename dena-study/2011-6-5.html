@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>アルゴリズム勉強会 2011/6/6</title>
+<title>アルゴリズム勉強会 2011/6/5</title>
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/gfx.css">
 <script src="js/jquery.js"></script>
@@ -12,7 +12,7 @@
 
 
 <div class="mod-page top"><div>
-	<h1>アルゴリズム勉強会 2011/6/6</h1>
+	<h1>アルゴリズム勉強会 2011/6/5</h1>
     <p>Binary Search #2</p>
 	<p>Fuji Goro (gfx) &lt;fuji.goro[at]dena.jp&gt;</p>
 </div></div>
@@ -93,15 +93,16 @@
 	<h2>例：N-ary Search (並行N分探索)</h2>
 	<ul>
 		<li>2分探索の拡張</li>
-		<li>リストをN分割して検索を並列に実行する</li>
+        <li>リストをN分割して探索を並列に実行する</li>
+        <li>アルゴリズムの計算量はO(log n)で変化なし</li>
+		<li>並列化するのは比較のみなので、比較に時間がかかるケースでは効果がある（と思われる）</li>
 	</ul>
 </div></div>
 
 <div class="mod-page plain"><div>
-	<h2>例：N-ary Search (並行N分探索)</h2>
+	<h2>N-ary Search のソースコード</h2>
 	<ul>
-		<li>2分探索の拡張</li>
-		<li>リストをN分割して検索を並列に実行する</li>
+        <li><a href="https://github.com/gfx/cpp-NarySearch-sample/blob/master/nary-search.cpp">https://github.com/gfx/cpp-NarySearch-sample/blob/master/nary-search.cpp</a></li>
 	</ul>
 </div></div>
 
