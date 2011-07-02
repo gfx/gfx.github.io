@@ -1,0 +1,13 @@
+@font-family {
+    font-family: "Dasaji";
+    src: url("fonts/dasaji.ttf") format("truetype");
+}
+
+body {
+    font-family: "Dasaji";
+}
+
+.mod-pager {
+    font-family: "Dasaji";
+}
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>アルゴリズム勉強会 2011/6/5</title>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/gfx.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery.presentation.js"></script>
+</head>
+<body>
+
+
+<div class="mod-page top"><div>
+	<h1>アルゴリズム勉強会 2011/6/5</h1>
+    <p>Binary Search #2</p>
+	<p>Fuji Goro (gfx) &lt;fuji.goro[at]dena.jp&gt;</p>
+</div></div>
+
+
+<div class="mod-page plain"><div>
+	<script src="https://gist.github.com/1008052.js?file=BinSearch.pm"></script>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>実際どうなのか</h2>
+	<ul>
+		<li>理論も大事だけど実践も大事</li>
+		<li>そこで…</li>
+	</li>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>XSでLinear Searchを書いて比較してみた</h2>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>Linear Search (線形検索)</h2>
+	<ul>
+		<li>前から一つ一つ要素を見て見つかったら終了</li>
+		<li>値がソートされていなくても使えるので汎用性が高い</li>
+		<li>平均すると要素数÷2回の比較ですむ(O(n/2) == O(n))
+		<li>しかし最悪の場合は要素数と同じだけの比較が必要(O(n))</li>
+	</ul>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>Binary Search (PP) v.s. Linear Search (XS)</h2>
+	<ul>
+		<li><a href="https://github.com/gfx/BinSearch-demo">https://github.com/gfx/BinSearch-demo</a></li>
+		<li>ベンチマーク: benchmark/bs_vs_ls.pl</li>
+	</ul>
+</div></div>
+
+<div class="mod-page plain"><div>
+    <h2>ベンチマークの結果</h2>
+	<ul>
+        <li>Binary searchの実行時間は安定している</li>
+        <li>Linear searchは要素数が少なければ非常に高速だが、要素数が多いときに探し出す値が後ろの方にあると非常に遅くなる</li>
+        <li>要は適材適所で、計算量が少ないアルゴリズムを常に選択すべきという事ではない</li>
+	</ul>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>ところで</h2>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>TechCrunch Japanの記事</h2>
+	<ul>
+		<li><a href="http://jp.techcrunch.com/archives/20110507why-the-new-guy-cant-code/">新人プログラマーが使えない理由</a></li>
+	</ul>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>一部引用すると…</h2>
+	<blockquote>
+	私は反論を恐れず保証するが、ソフトウェアエンジニアが入社後、<strong style="text-decoration: underline;">二分探索のコードを書かなくてはならない場面は来ない</strong>。これは、石炭と鉄と炉とふいごを使って、鋼鉄の焼き入れと鋳造をするやり方を知っているという理由で、工事業者を選ぶようなもので、実際に知るべきなのは １）最寄りのホームセンターの場所と、２）買ってきた鋼鉄ですべきことだ。
+	</blockquote>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>この勉強会全否定キタコレ ＼(^o^)／</h2>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>※ TechCrunchの記事を否定するわけではないが…</h2>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>古典的アルゴリズムの理解は重要だと考える</h2>
+	<ul>
+		<li>日々生まれる新しいアルゴリズムを評価・使用することはありうる</li>
+	</ul>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>例：N-ary Search (並行N分探索)</h2>
+	<ul>
+		<li>2分探索の拡張</li>
+        <li>リストをN分割して探索を並列に実行する</li>
+        <li>アルゴリズムの計算量はO(log n)で変化なし</li>
+		<li>並列化するのは比較のみなので、比較に時間がかかるケースでは効果がある（と思われる）</li>
+	</ul>
+</div></div>
+
+<div class="mod-page plain"><div>
+	<h2>N-ary Search のソースコード</h2>
+	<ul>
+        <li><a href="https://github.com/gfx/cpp-NarySearch-sample/blob/master/nary-search.cpp">https://github.com/gfx/cpp-NarySearch-sample/blob/master/nary-search.cpp</a></li>
+	</ul>
+</div></div>
+
+<div class="mod-page plain">
+    <h2>参考文献</h2>
+    <ul>
+        <li>『並列コンピューティング技法』</li>
+    </ul>
+</div></div>
+
+<hr />
+
+<ul class="mod-pager" id="pager"> <li id="pager-L"><a href="#">L</a></li> <li id="pager-R"><a href="#">R</a></li> </ul>
+<p class="mod-pageNum" id="pageNum"> <span class="current" id="pageNum-current">0</span> / <span class="total" id="pageNum-total">0</span> </p>
+</body>
+</html>
