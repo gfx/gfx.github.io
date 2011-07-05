@@ -1,0 +1,98 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="presentation.css" />
+    <script type="text/javascript" src="presentation.js"></script>
+    <title>Presentation</title>
+</head>
+<body onload="init()">
+<div class="slide">
+    <h1>Hello, re::engine!</h1>
+    <p>Shibuya.pm Technical Talk #16</p>
+    <p><a href="http://d.hatena.ne.jp/gfx">id:gfx</a> / <a href="http://twitter.com/__gfx__">@__gfx__</a>
+    &lt;Fuji.Goro at DeNA.jp&gt;</p>
+</div>
+<div class="slide">
+  <h2>自己紹介</h2>
+  <p>Fuji Goro (gfx)</p>
+  <ul>
+      <li>A programmer working at <a href="http://dena.jp">DeNA, Co., Ltd.</a></li>
+      <li>Products: <a href="http://xslate.org/"</a>Xslate</a></li>
+  </ul>
+</div>
+<div class="slide">
+  <h2>正規表現との付き合い</h2>
+  <p>HTML::FillInForm::Lite - 正規表現で実装し、HTML::ParserベースのHTML::FillInFormより高速に</p>
+  <p>Text::Xslate - tokenizerを正規表現で実装</p>
+</div>
+<div class="slide">
+  <h2>re::engineとは</h2>
+  <p>Perlの正規表現演算をオーバーロードできるようにする仕組み</p>
+</div>
+<div class="slide">
+  <h2>Example 1</h2>
+  <pre><code>
+#!/usr/bin/env perl
+# list prime numbers up to 100
+use 5.10.0;
+use strict;
+use warnings;
+
+use re::engine::RE2;
+
+('1' x $_) !~ <em>/^(11+?)\1+$/</em> and say for 2 .. 100;
+  </code></pre>
+</div>
+
+<div class="slide">
+  <h2>ありがたみが見えにくい…</h2>
+</div>
+
+<div class="slide">
+    <h2>How it works</h2>
+    <p>関数ポインタを格納したregexp_engineをvirtual tableにして関数をディスパッチする手法。</p>
+    <p>Cでpolymophic methodを実現するよくあるやりかた。Perlでは他にもMAGIC変数やPerlIOなどでもこの手法が使われている。</p>
+</div>
+
+<div class="slide">
+  <h2>各種正規表現エンジンそろってます</h2>
+  <ul>
+      <li>re::engine::PCRE</li>
+      <li>re::engine::Oniguruma</li>
+      <li>re::engine::RE2</li>
+  </ul>
+</div>
+<div class="slide">
+  <h2>re::engine::PCRE</h2>
+  <ul>
+      <li>PCRE: Perl Compatible Regular Expressions</li>
+      <li>Perlと互換性のある正規表現がつかえる！！１１１</li>
+      <li>速度・機能はPerl組み込みとほぼ同等</li>
+  </ul>
+</div>
+<div class="slide">
+  <h2>re::engine::Oniguruma</h2>
+  <ul>
+      <li>鬼車: Ruby 1.9で採用された正規表現エンジン</li>
+      <li>マルチエンコーディング対応 ※ 意味なし</li>
+      <li>バックトラックに強い(参考：<a href="http://d.hatena.ne.jp/gfx/20110212/1297512479">正規表現の限界を突破する</a>)</li>
+  </ul>
+</div>
+<div class="slide">
+  <h2>re::engine::RE2</h2>
+  <ul>
+      <li>RE2: Googleが開発した高速・省メモリの正規表現エンジン</li>
+      <li>複雑な正規表現だとPerl組み込みのものより高速</li>
+      <li>やや低機能で、処理しきれないとPerl組み込みのものにフォールバックする</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>See Also</h2>
+  <p><a href="http://search.cpan.org/perldoc?perlreapi">perldoc perlreapi</a></p>
+  <p><a href="http://search.cpan.org/perldoc?perlreguts">perldoc perlreguts</a></p>
+  <p><a href="http://jsdo.it/os0x/slide">HTML slide</a>
+</div>
+</body>
+</html>
+
