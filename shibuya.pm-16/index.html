@@ -22,8 +22,8 @@
 </div>
 <div class="slide">
   <h2>正規表現との付き合い</h2>
-  <p>HTML::FillInForm::Lite - 正規表現で実装し、HTML::ParserベースのHTML::FillInFormより高速に</p>
-  <p>Text::Xslate - tokenizerを正規表現で実装</p>
+  <p><strong>HTML::FillInForm::Lite</strong> - 正規表現で実装し、HTML::ParserベースのHTML::FillInFormより高速に</p>
+  <p><strong>Text::Xslate</strong> - tokenizerを正規表現で実装</p>
 </div>
 <div class="slide">
   <h2>re::engineとは</h2>
@@ -33,12 +33,12 @@
   <h2>Use Perl; - Perl5 Regex Engine Abstracted</h2>
   <p>Perl5の正規表現をプラガブルにしたよーという記事(2006)</p>
   <p>Perlコアと正規表現エンジンを独立させた</p>
+  <p>Perl6への布石だったと思われる</p>
 </div>
 <div class="slide">
   <h2>Example 1</h2>
   <pre><code>
 #!/usr/bin/env perl
-# list prime numbers up to 100
 use 5.10.0;
 use strict;
 use warnings;
@@ -64,6 +64,79 @@ use re::engine::RE2;
     <p>関数ポインタを格納したregexp_engineをvirtual tableにして関数をディスパッチする手法。</p>
     <p>Cでpolymophic methodを実現するよくあるやりかた。Perlでは他にもMAGIC変数やPerlIOなどでもこの手法が使われている。</p>
 </div>
+
+<div class="slide">
+    <h2>Virutal Table</h2>
+<pre><code>
+typedef struct regexp_engine {
+  REGEXP* (*comp) (pTHX_ SV * const pattern, U32 flags);
+  I32     (*exec) (pTHX_ REGEXP * const rx, char* stringarg, char* strend,
+  char* strbeg, I32 minend, SV* screamer,
+  void* data, U32 flags);
+  char*   (*intuit) (pTHX_ REGEXP * const rx, SV *sv, char *strpos,
+  char *strend, const U32 flags,
+  re_scream_pos_data *data);
+  SV*     (*checkstr) (pTHX_ REGEXP * const rx);
+  void    (*free) (pTHX_ REGEXP * const rx);
+  void    (*numbered_buff_FETCH) (pTHX_ REGEXP * const rx, const I32 paren,
+  SV * const sv);
+  void    (*numbered_buff_STORE) (pTHX_ REGEXP * const rx, const I32 paren,
+  SV const * const value);
+  I32     (*numbered_buff_LENGTH) (pTHX_ REGEXP * const rx, const SV * const sv,
+  const I32 paren);
+  SV*     (*named_buff) (pTHX_ REGEXP * const rx, SV * const key,
+  SV * const value, const U32 flags);
+  SV*     (*named_buff_iter) (pTHX_ REGEXP * const rx, const SV * const lastkey,
+  const U32 flags);
+  SV*     (*qr_package)(pTHX_ REGEXP * const rx);
+#ifdef USE_ITHREADS
+  void*   (*dupe) (pTHX_ REGEXP * const rx, CLONE_PARAMS *param);
+#endif
+} regexp_engine;
+</code></pre>
+</div>
+
+<div class="slide">
+    <h2>Compile & Execute</h2>
+<pre><code>
+  REGEXP* (*comp) (pTHX_ SV * const pattern, U32 flags);
+
+  I32     (*exec) (pTHX_ REGEXP * const rx, char* stringarg, char* strend,
+                      char* strbeg, I32 minend, SV* screamer,
+                      void* data, U32 flags);
+</code></pre>
+<pre><code>
+
+<div class="slide">
+    <h2>Hints for optimization</h2>
+<pre><code>
+  char*   (*intuit) (pTHX_ REGEXP * const rx, SV *sv, char *strpos,
+                      char *strend, const U32 flags,
+                      re_scream_pos_data *data);
+
+  SV*     (*checkstr) (pTHX_ REGEXP * const rx);
+</code></pre>
+<pre><code>
+
+<div class="slide">
+    <h2>Captured variables ($1, %+, etc)</h2>
+<pre><code>
+  void    (*numbered_buff_FETCH) (pTHX_ REGEXP * const rx, const I32 paren,
+                          SV * const sv);
+
+  void    (*numbered_buff_STORE) (pTHX_ REGEXP * const rx, const I32 paren,
+                          SV const * const value);
+
+  I32     (*numbered_buff_LENGTH) (pTHX_ REGEXP * const rx, const SV * const sv,
+                          const I32 paren);
+
+  SV*     (*named_buff) (pTHX_ REGEXP * const rx, SV * const key,
+                          SV * const value, const U32 flags);
+
+  SV*     (*named_buff_iter) (pTHX_ REGEXP * const rx, const SV * const lastkey,
+                          const U32 flags);
+</code></pre>
+<pre><code>
 
 <div class="slide">
   <h2>各種正規表現エンジンそろってます</h2>
@@ -95,6 +168,20 @@ use re::engine::RE2;
       <li>RE2: Googleが開発した高速・省メモリの正規表現エンジン</li>
       <li>複雑な正規表現だとPerl組み込みのものより高速</li>
       <li>やや低機能で、処理しきれないとPerl組み込みのものにフォールバックする</li>
+  </ul>
+</div>
+<div class="slide">
+    <h2><del>re::engine::boost</del></h2>
+  <ul>
+      <li>boost::regex: boostの正規表現エンジン</li>
+      <li><strong>遅すぎて話にならない</strong></li>
+      <li>Perl mode / JavaScript modeなど揃っているが…</li>
+  </ul>
+</div>
+<div class="slide">
+    <h2><del>re::engine::Plugin</del></h2>
+  <ul>
+      <li>pure Perlで正規表現エンジンを拡張できるようにしたVPIT ware</li>
   </ul>
 </div>
 
