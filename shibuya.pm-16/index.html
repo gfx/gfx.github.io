@@ -8,7 +8,7 @@
 <body onload="init()">
 <div class="slide">
     <h1>Hello, re::engine!</h1>
-    <p>Shibuya.pm Technical Talk #16</p>
+    <p>Shibuya.pm Technical Talk #16 夏の正規表現祭り</p>
     <p><a href="http://d.hatena.ne.jp/gfx">id:gfx</a> / <a href="http://twitter.com/__gfx__">@__gfx__</a>
     &lt;Fuji.Goro at DeNA.jp&gt;</p>
 </div>
@@ -30,6 +30,11 @@
   <p>Perlの正規表現演算をオーバーロードできるようにする仕組み</p>
 </div>
 <div class="slide">
+  <h2>Use Perl; - Perl5 Regex Engine Abstracted</h2>
+  <p>Perl5の正規表現をプラガブルにしたよーという記事(2006)</p>
+  <p>Perlコアと正規表現エンジンを独立させた</p>
+</div>
+<div class="slide">
   <h2>Example 1</h2>
   <pre><code>
 #!/usr/bin/env perl
@@ -46,6 +51,12 @@ use re::engine::RE2;
 
 <div class="slide">
   <h2>ありがたみが見えにくい…</h2>
+</div>
+
+<div class="slide">
+    <h2>コードを修正しなくてもエンジンを差し替えられるのがメリット</h2>
+    <p>CレベルのAPIなので高速なのもポイント</p>
+    <p>m//だけでなくs//, split // でも使われる</p>
 </div>
 
 <div class="slide">
@@ -88,10 +99,18 @@ use re::engine::RE2;
 </div>
 
 <div class="slide">
+  <h2>これからの展望</h2>
+  <ul>
+      <li>別の正規表現エンジンを簡単に試せるのがすごい</li>
+      <li>世界最速grepの正規表現エンジンのバインディングも！</li>
+  </ul>
+</div>
+
+<div class="slide">
   <h2>See Also</h2>
   <p><a href="http://search.cpan.org/perldoc?perlreapi">perldoc perlreapi</a></p>
   <p><a href="http://search.cpan.org/perldoc?perlreguts">perldoc perlreguts</a></p>
-  <p><a href="http://jsdo.it/os0x/slide">HTML slide</a>
+  <p><a href="http://use.perl.org/articles/06/12/04/1526217.shtml">Perl5 Regex Engine Abstracted</a>
 </div>
 </body>
 </html>
