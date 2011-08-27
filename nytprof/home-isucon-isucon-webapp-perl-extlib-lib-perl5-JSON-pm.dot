@@ -51,28 +51,28 @@ subgraph cluster_JSON_Backend_XS {
 }
 subgraph cluster_JSON {
 	label="JSON";
-	"JSON::CORE:close";
 	"JSON::import";
+	"JSON::CORE:close";
 	"JSON::_set_module";
 	"JSON::CORE:readline";
 	"JSON::_load_xs";
 }
 "JSON::import" -> "Exporter::export_to_level";
 "JSON::_load_xs" -> "JSON::CORE:readline";
-"JSON::import" -> "Exporter::Heavy::heavy_export_to_level";
 "JSON::_load_xs" -> "Exporter::import";
-"Isucon::BEGIN" -> "JSON::import";
 "JSON::_load_xs" -> "common::sense::import";
 "JSON::_load_xs" -> "JSON::_set_module";
-"Isucon::BEGIN" -> "JSON::_load_xs";
 "JSON::_load_xs" -> "constant::import";
 "JSON::_load_xs" -> "JSON::CORE:close";
 "JSON::Backend::PP::BEGIN" -> "strict::unimport";
 "JSON::_load_xs" -> "strict::unimport";
-"JSON::_load_xs" -> "XSLoader::load";
 "JSON::Boolean::_overrride_overload" -> "overload::import";
 "JSON::_load_xs" -> "overload::import";
-"JSON::_load_xs" -> "JSON::Backend::XS::init";
 "JSON::_load_xs" -> "JSON::Boolean::_overrride_overload";
+"JSON::import" -> "Exporter::Heavy::heavy_export_to_level";
+"Isucon::BEGIN" -> "JSON::import";
+"Isucon::BEGIN" -> "JSON::_load_xs";
+"JSON::_load_xs" -> "XSLoader::load";
+"JSON::_load_xs" -> "JSON::Backend::XS::init";
 "JSON::_load_xs" -> "UNIVERSAL::VERSION";
 }

@@ -4,9 +4,23 @@ subgraph cluster_Symbol {
 	label="Symbol";
 	"Symbol::qualify";
 }
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+	"strict::unimport";
+}
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+}
 subgraph cluster_IO_Handle {
 	label="IO::Handle";
 	"IO::Handle::autoflush";
+	"IO::Handle::BEGIN";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
 }
 subgraph cluster_SelectSaver {
 	label="SelectSaver";
@@ -17,8 +31,12 @@ subgraph cluster_Plack_Handler_CLI {
 	label="Plack::Handler::CLI";
 	"Plack::Handler::CLI::_handle_response";
 }
+"IO::Handle::BEGIN" -> "Exporter::import";
+"IO::Handle::BEGIN" -> "strict::unimport";
 "Plack::Handler::CLI::_handle_response" -> "IO::Handle::autoflush";
 "IO::Handle::autoflush" -> "Symbol::qualify";
+"IO::Handle::BEGIN" -> "XSLoader::load";
 "IO::Handle::autoflush" -> "SelectSaver::CORE:select";
+"IO::Handle::BEGIN" -> "strict::import";
 "IO::Handle::autoflush" -> "SelectSaver::new";
 }

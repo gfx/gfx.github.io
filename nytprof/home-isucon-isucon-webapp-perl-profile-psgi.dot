@@ -1,0 +1,538 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Router_Simple_Route {
+	label="Router::Simple::Route";
+	"Router::Simple::Route::BEGIN";
+}
+subgraph cluster_Mouse_Meta_Attribute {
+	label="Mouse::Meta::Attribute";
+	"Mouse::Meta::Attribute::is_weak_ref";
+	"Mouse::Meta::Attribute::init_arg";
+	"Mouse::Meta::Attribute::has_trigger";
+	"Mouse::Meta::Attribute::should_coerce";
+	"Mouse::Meta::Attribute::is_required";
+	"Mouse::Meta::Attribute::has_type_constraint";
+	"Mouse::Meta::Attribute::is_lazy";
+	"Mouse::Meta::Attribute::install_accessors";
+	"Mouse::Meta::Attribute::name";
+	"Mouse::Meta::Attribute::type_constraint";
+	"Mouse::Meta::Attribute::should_auto_deref";
+	"Mouse::Meta::Attribute::has_default";
+	"Mouse::Meta::Attribute::has_builder";
+}
+subgraph cluster_Config {
+	label="Config";
+	"Config::import";
+	"Config::FETCH";
+}
+subgraph cluster_Encode {
+	label="Encode";
+	"Encode::BEGIN";
+}
+subgraph cluster_Kossy_Connection {
+	label="Kossy::Connection";
+	"Kossy::Connection::BEGIN";
+}
+subgraph cluster_DynaLoader {
+	label="DynaLoader";
+	"DynaLoader::BEGIN";
+}
+subgraph cluster_Mouse_Meta_Class {
+	label="Mouse::Meta::Class";
+	"Mouse::Meta::Class::BEGIN";
+	"Mouse::Meta::Class::make_immutable";
+	"Mouse::Meta::Class::verify_superclass";
+}
+subgraph cluster_Data_MessagePack {
+	label="Data::MessagePack";
+	"Data::MessagePack::BEGIN";
+}
+subgraph cluster_DBI {
+	label="DBI";
+	"DBI::BEGIN";
+	"DBI::_new_sth";
+	"DBI::__ANON__[extlib/lib/perl5/x86_64-linux-thread-multi/DBI.pm:732]";
+	"DBI::_concat_hash_sorted";
+	"DBI::_new_dbh";
+	"DBI::install_driver";
+	"DBI::disconnect_all";
+	"DBI::setup_driver";
+	"DBI::connect";
+}
+subgraph cluster_base {
+	label="base";
+	"base::import";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::__ANON__[lib/Isucon.pm:70]";
+	"Isucon::BEGIN";
+	"Isucon::__ANON__[lib/Isucon.pm:84]";
+}
+subgraph cluster_vars {
+	label="vars";
+	"vars::BEGIN";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+	"strict::unimport";
+	"strict::bits";
+}
+subgraph cluster_DBD_mysql {
+	label="DBD::mysql";
+	"DBD::mysql::_OdbcParse";
+}
+subgraph cluster_Plack_App_URLMap {
+	label="Plack::App::URLMap";
+	"Plack::App::URLMap::BEGIN";
+}
+subgraph cluster_Encode_Encoding {
+	label="Encode::Encoding";
+	"Encode::Encoding::BEGIN";
+}
+subgraph cluster_DBI_common {
+	label="DBI::common";
+	"DBI::common::func";
+	"DBI::common::STORE";
+	"DBI::common::FETCH";
+}
+subgraph cluster_attributes {
+	label="attributes";
+	"attributes::import";
+}
+subgraph cluster_Kossy_Request {
+	label="Kossy::Request";
+	"Kossy::Request::BEGIN";
+}
+subgraph cluster_DBI_Const_GetInfo_ODBC {
+	label="DBI::Const::GetInfo::ODBC";
+	"DBI::Const::GetInfo::ODBC::CORE:match";
+}
+subgraph cluster_Plack_Middleware_Conditional {
+	label="Plack::Middleware::Conditional";
+	"Plack::Middleware::Conditional::BEGIN";
+}
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+	"XSLoader::bootstrap_inherit";
+}
+subgraph cluster_URI_Escape {
+	label="URI::Escape";
+	"URI::Escape::BEGIN";
+}
+subgraph cluster_Router_Simple {
+	label="Router::Simple";
+	"Router::Simple::BEGIN";
+}
+subgraph cluster_IO_Handle {
+	label="IO::Handle";
+	"IO::Handle::BEGIN";
+}
+subgraph cluster_DBD___st {
+	label="DBD::_::st";
+	"DBD::_::st::fetchrow_hashref";
+	"DBD::_::st::BEGIN";
+	"DBD::_::st::fetchall_arrayref";
+}
+subgraph cluster_Mouse_Meta_Method_Constructor_XS {
+	label="Mouse::Meta::Method::Constructor::XS";
+	"Mouse::Meta::Method::Constructor::XS::_generate_constructor";
+}
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::BEGIN";
+	"Cache::Memcached::Fast::new";
+}
+subgraph cluster_Mouse_Meta_Method_Destructor_XS {
+	label="Mouse::Meta::Method::Destructor::XS";
+	"Mouse::Meta::Method::Destructor::XS::_generate_destructor";
+}
+subgraph cluster_URI {
+	label="URI";
+	"URI::implementor";
+}
+subgraph cluster_DBI_dr {
+	label="DBI::dr";
+	"DBI::dr::disconnect_all";
+	"DBI::dr::connect_cached";
+	"DBI::dr::connect";
+}
+subgraph cluster_constant {
+	label="constant";
+	"constant::BEGIN";
+}
+subgraph cluster_Class_Accessor_Lite {
+	label="Class::Accessor::Lite";
+	"Class::Accessor::Lite::BEGIN";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::as_heavy";
+}
+subgraph cluster_DBD___common {
+	label="DBD::_::common";
+	"DBD::_::common::BEGIN";
+}
+subgraph cluster_Mouse_Exporter {
+	label="Mouse::Exporter";
+	"Mouse::Exporter::build_import_methods";
+	"Mouse::Exporter::BEGIN";
+}
+subgraph cluster_DBI_st {
+	label="DBI::st";
+	"DBI::st::fetchall_arrayref";
+	"DBI::st::fetch";
+	"DBI::st::mysql_async_ready";
+	"DBI::st::execute";
+	"DBI::st::fetchrow_hashref";
+}
+subgraph cluster_Mouse_Meta_Module {
+	label="Mouse::Meta::Module";
+	"Mouse::Meta::Module::BEGIN";
+}
+subgraph cluster_File_Basename {
+	label="File::Basename";
+	"File::Basename::BEGIN";
+}
+subgraph cluster_AutoLoader {
+	label="AutoLoader";
+	"AutoLoader::BEGIN";
+}
+subgraph cluster_Text_Xslate {
+	label="Text::Xslate";
+	"Text::Xslate::BEGIN";
+}
+subgraph cluster_File_Spec_Unix {
+	label="File::Spec::Unix";
+	"File::Spec::Unix::BEGIN";
+}
+subgraph cluster_List_Util {
+	label="List::Util";
+	"List::Util::BEGIN";
+}
+subgraph cluster_Kossy_Response {
+	label="Kossy::Response";
+	"Kossy::Response::BEGIN";
+}
+subgraph cluster_IO {
+	label="IO";
+	"IO::BEGIN";
+}
+subgraph cluster_Text_Xslate_Util {
+	label="Text::Xslate::Util";
+	"Text::Xslate::Util::import_from";
+	"Text::Xslate::Util::BEGIN";
+}
+subgraph cluster_Data_MessagePack_Unpacker {
+	label="Data::MessagePack::Unpacker";
+	"Data::MessagePack::Unpacker::data";
+	"Data::MessagePack::Unpacker::utf8";
+	"Data::MessagePack::Unpacker::new";
+	"Data::MessagePack::Unpacker::execute";
+	"Data::MessagePack::Unpacker::reset";
+}
+subgraph cluster_Plack_Builder {
+	label="Plack::Builder";
+	"Plack::Builder::BEGIN";
+}
+subgraph cluster_Kossy_Exception {
+	label="Kossy::Exception";
+	"Kossy::Exception::BEGIN";
+}
+subgraph cluster_Try_Tiny {
+	label="Try::Tiny";
+	"Try::Tiny::BEGIN";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::BEGIN";
+	"parent::import";
+}
+subgraph cluster_Router_Simple_SubMapper {
+	label="Router::Simple::SubMapper";
+	"Router::Simple::SubMapper::BEGIN";
+}
+subgraph cluster_JSON_Backend_PP {
+	label="JSON::Backend::PP";
+	"JSON::Backend::PP::BEGIN";
+}
+subgraph cluster_URI__server {
+	label="URI::_server";
+	"URI::_server::_host_escape";
+}
+subgraph cluster_main {
+	label="main";
+	"main::BEGIN";
+	"main::RUNTIME";
+}
+subgraph cluster_Plack_Util {
+	label="Plack::Util";
+	"Plack::Util::load_class";
+	"Plack::Util::BEGIN";
+}
+subgraph cluster_Any_Moose {
+	label="Any::Moose";
+	"Any::Moose::BEGIN";
+	"Any::Moose::import";
+	"Any::Moose::_backer_of";
+}
+subgraph cluster_DBI_db {
+	label="DBI::db";
+	"DBI::db::connected";
+	"DBI::db::ping";
+	"DBI::db::selectall_arrayref";
+	"DBI::db::prepare";
+}
+subgraph cluster_Scalar_Util {
+	label="Scalar::Util";
+	"Scalar::Util::BEGIN";
+}
+subgraph cluster_UNIVERSAL {
+	label="UNIVERSAL";
+	"UNIVERSAL::isa";
+	"UNIVERSAL::VERSION";
+	"UNIVERSAL::can";
+}
+subgraph cluster_File_Spec {
+	label="File::Spec";
+	"File::Spec::BEGIN";
+}
+subgraph cluster_DBD___dr {
+	label="DBD::_::dr";
+	"DBD::_::dr::BEGIN";
+}
+subgraph cluster_Mouse_Meta_Method_Accessor_XS {
+	label="Mouse::Meta::Method::Accessor::XS";
+	"Mouse::Meta::Method::Accessor::XS::_generate_reader";
+}
+subgraph cluster_Encode_Config {
+	label="Encode::Config";
+	"Encode::Config::BEGIN";
+}
+subgraph cluster_DBD_mysql_db {
+	label="DBD::mysql::db";
+	"DBD::mysql::db::_login";
+}
+subgraph cluster_Mouse {
+	label="Mouse";
+	"Mouse::has";
+}
+subgraph cluster_lib {
+	label="lib";
+	"lib::import";
+}
+subgraph cluster_Mouse_Object {
+	label="Mouse::Object";
+	"Mouse::Object::new";
+}
+subgraph cluster_DBD_mysql_st {
+	label="DBD::mysql::st";
+	"DBD::mysql::st::_prepare";
+}
+subgraph cluster_DBI_Const_GetInfo_ANSI {
+	label="DBI::Const::GetInfo::ANSI";
+	"DBI::Const::GetInfo::ANSI::CORE:match";
+}
+subgraph cluster_Mouse_Util {
+	label="Mouse::Util";
+	"Mouse::Util::BEGIN";
+}
+subgraph cluster_Text_Xslate_Engine {
+	label="Text::Xslate::Engine";
+	"Text::Xslate::Engine::_load_compiled";
+}
+subgraph cluster_Plack_Handler_CLI {
+	label="Plack::Handler::CLI";
+	"Plack::Handler::CLI::run";
+	"Plack::Handler::CLI::meta";
+}
+subgraph cluster_DBD___db {
+	label="DBD::_::db";
+	"DBD::_::db::BEGIN";
+	"DBD::_::db::selectall_arrayref";
+}
+subgraph cluster_JSON {
+	label="JSON";
+	"JSON::BEGIN";
+	"JSON::_load_xs";
+}
+subgraph cluster_Encode_Alias {
+	label="Encode::Alias";
+	"Encode::Alias::BEGIN";
+}
+subgraph cluster_Cwd {
+	label="Cwd";
+	"Cwd::BEGIN";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::__ANON__[lib/Kossy.pm:107]";
+	"Kossy::filter";
+	"Kossy::psgi";
+	"Kossy::BEGIN";
+	"Kossy::get";
+	"Kossy::post";
+}
+"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::utf8";
+"main::RUNTIME" -> "Kossy::psgi";
+"DBI::db::prepare" -> "DBD::mysql::st::_prepare";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "DBI::db::selectall_arrayref";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "DBI::db::selectall_arrayref";
+"DBD::_::db::selectall_arrayref" -> "DBI::st::fetchall_arrayref";
+"DBI::__ANON__[extlib/lib/perl5/x86_64-linux-thread-multi/DBI.pm:732]" -> "DBI::db::connected";
+"Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Method::Constructor::XS::_generate_constructor";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::name";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::should_auto_deref";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::has_default";
+"DBD::_::st::fetchall_arrayref" -> "DBI::st::fetchrow_hashref";
+"DBI::db::prepare" -> "DBI::_new_sth";
+"main::BEGIN" -> "Kossy::filter";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::should_coerce";
+"DBI::db::prepare" -> "DBI::common::func";
+"Mouse::Exporter::BEGIN" -> "strict::bits";
+"Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Method::Destructor::XS::_generate_destructor";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::is_lazy";
+"DBI::st::fetchrow_hashref" -> "DBD::_::st::fetchrow_hashref";
+"Text::Xslate::Util::import_from" -> "UNIVERSAL::can";
+"Mouse::Exporter::build_import_methods" -> "UNIVERSAL::can";
+"Kossy::BEGIN" -> "UNIVERSAL::can";
+"Text::Xslate::BEGIN" -> "UNIVERSAL::can";
+"attributes::import" -> "UNIVERSAL::can";
+"Mouse::Meta::Class::verify_superclass" -> "UNIVERSAL::can";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::is_weak_ref";
+"main::RUNTIME" -> "Plack::Handler::CLI::run";
+"parent::BEGIN" -> "strict::unimport";
+"Any::Moose::BEGIN" -> "strict::unimport";
+"JSON::BEGIN" -> "strict::unimport";
+"Text::Xslate::Util::BEGIN" -> "strict::unimport";
+"File::Spec::Unix::BEGIN" -> "strict::unimport";
+"Data::MessagePack::BEGIN" -> "strict::unimport";
+"base::import" -> "strict::unimport";
+"constant::BEGIN" -> "strict::unimport";
+"JSON::Backend::PP::BEGIN" -> "strict::unimport";
+"Mouse::Meta::Module::BEGIN" -> "strict::unimport";
+"DBI::BEGIN" -> "strict::unimport";
+"Exporter::as_heavy" -> "strict::unimport";
+"Class::Accessor::Lite::BEGIN" -> "strict::unimport";
+"AutoLoader::BEGIN" -> "strict::unimport";
+"Cwd::BEGIN" -> "strict::unimport";
+"Mouse::Exporter::BEGIN" -> "strict::unimport";
+"parent::import" -> "strict::unimport";
+"Mouse::Util::BEGIN" -> "strict::unimport";
+"Mouse::Meta::Class::BEGIN" -> "strict::unimport";
+"DBI::install_driver" -> "strict::unimport";
+"IO::Handle::BEGIN" -> "strict::unimport";
+"JSON::_load_xs" -> "strict::unimport";
+"Cache::Memcached::Fast::new" -> "strict::unimport";
+"DBI::disconnect_all" -> "DBI::dr::disconnect_all";
+"Mouse::Meta::Attribute::install_accessors" -> "Mouse::Meta::Method::Accessor::XS::_generate_reader";
+"Kossy::__ANON__[lib/Kossy.pm:107]" -> "UNIVERSAL::isa";
+"DBI::setup_driver" -> "UNIVERSAL::isa";
+"Any::Moose::_backer_of" -> "UNIVERSAL::isa";
+"base::import" -> "UNIVERSAL::isa";
+"DBD::_::db::selectall_arrayref" -> "DBI::db::prepare";
+"main::BEGIN" -> "Kossy::post";
+"main::BEGIN" -> "Kossy::get";
+"DBI::install_driver" -> "DBI::Const::GetInfo::ANSI::CORE:match";
+"DBI::dr::connect_cached" -> "DBI::_concat_hash_sorted";
+"DBI::db::selectall_arrayref" -> "DBD::_::db::selectall_arrayref";
+"DBI::dr::connect" -> "DBI::_new_dbh";
+"DBD::_::st::fetchrow_hashref" -> "DBI::st::fetch";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::has_builder";
+"main::BEGIN" -> "Mouse::has";
+"Plack::Util::load_class" -> "Config::import";
+"DynaLoader::BEGIN" -> "Config::import";
+"parent::import" -> "Config::import";
+"main::BEGIN" -> "Plack::Handler::CLI::meta";
+"main::BEGIN" -> "Mouse::Meta::Class::make_immutable";
+"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::reset";
+"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::new";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::has_trigger";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::has_type_constraint";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::is_required";
+"DBD::_::st::fetchrow_hashref" -> "DBI::common::FETCH";
+"DBI::dr::connect_cached" -> "DBI::common::FETCH";
+"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::execute";
+"main::RUNTIME" -> "Mouse::Object::new";
+"DBI::dr::connect" -> "DBD::mysql::db::_login";
+"DBI::__ANON__[extlib/lib/perl5/x86_64-linux-thread-multi/DBI.pm:732]" -> "DBI::dr::connect_cached";
+"main::BEGIN" -> "lib::import";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::init_arg";
+"DBI::dr::connect_cached" -> "DBI::dr::connect";
+"DBI::dr::connect_cached" -> "DBI::db::ping";
+"DBI::install_driver" -> "DBI::Const::GetInfo::ODBC::CORE:match";
+"DBD::_::db::selectall_arrayref" -> "DBI::st::execute";
+"Plack::Util::load_class" -> "Config::FETCH";
+"Kossy::BEGIN" -> "Config::FETCH";
+"parent::import" -> "Config::FETCH";
+"XSLoader::bootstrap_inherit" -> "Config::FETCH";
+"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::data";
+"DBI::dr::connect" -> "DBD::mysql::_OdbcParse";
+"Plack::Handler::CLI::run" -> "UNIVERSAL::VERSION";
+"JSON::_load_xs" -> "UNIVERSAL::VERSION";
+"parent::import" -> "UNIVERSAL::VERSION";
+"Cache::Memcached::Fast::new" -> "UNIVERSAL::VERSION";
+"parent::BEGIN" -> "strict::import";
+"Any::Moose::BEGIN" -> "strict::import";
+"DBD::_::dr::BEGIN" -> "strict::import";
+"JSON::BEGIN" -> "strict::import";
+"Text::Xslate::Util::BEGIN" -> "strict::import";
+"Plack::Builder::BEGIN" -> "strict::import";
+"Isucon::BEGIN" -> "strict::import";
+"Data::MessagePack::BEGIN" -> "strict::import";
+"vars::BEGIN" -> "strict::import";
+"File::Spec::BEGIN" -> "strict::import";
+"Router::Simple::BEGIN" -> "strict::import";
+"Text::Xslate::Util::import_from" -> "strict::import";
+"Kossy::Connection::BEGIN" -> "strict::import";
+"constant::BEGIN" -> "strict::import";
+"Kossy::Response::BEGIN" -> "strict::import";
+"Encode::BEGIN" -> "strict::import";
+"URI::Escape::BEGIN" -> "strict::import";
+"DBI::BEGIN" -> "strict::import";
+"Plack::Util::load_class" -> "strict::import";
+"Exporter::as_heavy" -> "strict::import";
+"Try::Tiny::BEGIN" -> "strict::import";
+"Encode::Config::BEGIN" -> "strict::import";
+"Cwd::BEGIN" -> "strict::import";
+"Text::Xslate::BEGIN" -> "strict::import";
+"parent::import" -> "strict::import";
+"Router::Simple::Route::BEGIN" -> "strict::import";
+"Encode::Encoding::BEGIN" -> "strict::import";
+"Plack::Middleware::Conditional::BEGIN" -> "strict::import";
+"Plack::App::URLMap::BEGIN" -> "strict::import";
+"DBI::install_driver" -> "strict::import";
+"main::BEGIN" -> "strict::import";
+"List::Util::BEGIN" -> "strict::import";
+"Cache::Memcached::Fast::BEGIN" -> "strict::import";
+"Cache::Memcached::Fast::new" -> "strict::import";
+"Plack::Util::BEGIN" -> "strict::import";
+"File::Spec::Unix::BEGIN" -> "strict::import";
+"Router::Simple::SubMapper::BEGIN" -> "strict::import";
+"Any::Moose::import" -> "strict::import";
+"Kossy::Request::BEGIN" -> "strict::import";
+"URI::implementor" -> "strict::import";
+"Encode::Alias::BEGIN" -> "strict::import";
+"DBD::_::db::BEGIN" -> "strict::import";
+"base::import" -> "strict::import";
+"URI::_server::_host_escape" -> "strict::import";
+"IO::BEGIN" -> "strict::import";
+"DBD::_::common::BEGIN" -> "strict::import";
+"XSLoader::load" -> "strict::import";
+"Kossy::Exception::BEGIN" -> "strict::import";
+"Scalar::Util::BEGIN" -> "strict::import";
+"Class::Accessor::Lite::BEGIN" -> "strict::import";
+"AutoLoader::BEGIN" -> "strict::import";
+"Mouse::Exporter::BEGIN" -> "strict::import";
+"DBD::_::st::BEGIN" -> "strict::import";
+"Kossy::BEGIN" -> "strict::import";
+"IO::Handle::BEGIN" -> "strict::import";
+"File::Basename::BEGIN" -> "strict::import";
+"Mouse::Meta::Method::Accessor::XS::_generate_reader" -> "Mouse::Meta::Attribute::type_constraint";
+"DBI::st::fetchrow_hashref" -> "DBI::st::mysql_async_ready";
+"DBI::st::fetchall_arrayref" -> "DBD::_::st::fetchall_arrayref";
+"DBI::__ANON__[extlib/lib/perl5/x86_64-linux-thread-multi/DBI.pm:732]" -> "DBI::common::STORE";
+"DBI::connect" -> "DBI::common::STORE";
+}

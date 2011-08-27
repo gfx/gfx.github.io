@@ -1,5 +1,9 @@
 digraph {
 graph [overlap=false]
+subgraph cluster_Storable {
+	label="Storable";
+	"Storable::nfreeze";
+}
 subgraph cluster_JSON_XS {
 	label="JSON::XS";
 	"JSON::XS::decode_json";
@@ -21,25 +25,36 @@ subgraph cluster_warnings {
 subgraph cluster_Isucon {
 	label="Isucon";
 	"Isucon::dbh";
-	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]";
-	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]";
 	"Isucon::CORE:readline";
+	"Isucon::cache";
+	"Isucon::__ANON__[lib/Isucon.pm:71]";
+	"Isucon::__ANON__[lib/Isucon.pm:70]";
 	"Isucon::load_config";
-	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:44]";
 	"Isucon::BEGIN";
 	"Isucon::CORE:open";
+	"Isucon::__ANON__[lib/Isucon.pm:84]";
 }
 subgraph cluster_strict {
 	label="strict";
 	"strict::import";
 }
-subgraph cluster_Exporter {
-	label="Exporter";
-	"Exporter::import";
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+}
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::set";
+	"Cache::Memcached::Fast::new";
+	"Cache::Memcached::Fast::get";
 }
 subgraph cluster_Class_Accessor_Lite {
 	label="Class::Accessor::Lite";
-	"Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+	"Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
 }
 subgraph cluster_utf8 {
 	label="utf8";
@@ -60,33 +75,43 @@ subgraph cluster_JSON {
 }
 subgraph cluster_Kossy {
 	label="Kossy";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]";
+	"Kossy::__ANON__[lib/Kossy.pm:115]";
+	"Kossy::__ANON__[lib/Kossy.pm:107]";
 	"Kossy::wrap_filter";
 }
 "Isucon::load_config" -> "Isucon::CORE:readline";
-"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]";
-"Kossy::wrap_filter" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:44]";
-"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]" -> "DBI::db::selectall_arrayref";
-"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "DBI::db::selectall_arrayref";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "DBI::db::selectall_arrayref";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "DBI::db::selectall_arrayref";
 "Isucon::load_config" -> "JSON::XS::decode_json";
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]";
-"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
-"Isucon::load_config" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Storable::nfreeze";
 "Isucon::BEGIN" -> "Scalar::Util::weaken";
 "Isucon::BEGIN" -> "Exporter::import";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Cache::Memcached::Fast::get";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "Cache::Memcached::Fast::get";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Isucon::dbh";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "Isucon::dbh";
+"Isucon::dbh" -> "Isucon::load_config";
+"Isucon::cache" -> "Isucon::load_config";
+"Isucon::dbh" -> "DBI::connect_cached";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "Kossy::Connection::render";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Cache::Memcached::Fast::set";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "Cache::Memcached::Fast::set";
+"Isucon::BEGIN" -> "warnings::import";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Kossy::__ANON__[lib/Kossy.pm:107]";
+"Isucon::BEGIN" -> "DBI::_install_method";
+"Kossy::wrap_filter" -> "Isucon::__ANON__[lib/Isucon.pm:71]";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Isucon::cache";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "Isucon::cache";
+"Kossy::__ANON__[lib/Kossy.pm:115]" -> "Isucon::__ANON__[lib/Isucon.pm:70]";
 "Isucon::BEGIN" -> "JSON::import";
 "Isucon::BEGIN" -> "JSON::_load_xs";
-"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]" -> "Isucon::dbh";
-"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "Isucon::dbh";
-"Isucon::dbh" -> "Isucon::load_config";
-"Isucon::dbh" -> "DBI::connect_cached";
-"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]" -> "Kossy::Connection::render";
+"Isucon::cache" -> "Cache::Memcached::Fast::new";
 "Isucon::BEGIN" -> "DBI::setup_driver";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+"Isucon::load_config" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+"Isucon::BEGIN" -> "XSLoader::load";
 "Isucon::load_config" -> "Isucon::CORE:open";
-"Isucon::BEGIN" -> "warnings::import";
 "Isucon::BEGIN" -> "utf8::import";
-"Isucon::BEGIN" -> "DBI::_install_method";
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]";
 "Isucon::BEGIN" -> "strict::import";
+"Kossy::__ANON__[lib/Kossy.pm:107]" -> "Isucon::__ANON__[lib/Isucon.pm:84]";
 }

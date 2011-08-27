@@ -8,17 +8,17 @@ subgraph cluster_Fcntl {
 	label="Fcntl";
 	"Fcntl::AUTOLOAD";
 	"Fcntl::__ANON__[Fcntl.pm:230]";
-	"Fcntl::CORE:subst";
 	"Fcntl::constant";
+	"Fcntl::CORE:subst";
 }
 subgraph cluster_Text_Xslate_Engine {
 	label="Text::Xslate::Engine";
 	"Text::Xslate::Engine::_load_compiled";
 }
+"Fcntl::AUTOLOAD" -> "Fcntl::CORE:subst";
 "Fcntl::AUTOLOAD" -> "Fcntl::constant";
 "Text::Xslate::Engine::_load_compiled" -> "Fcntl::__ANON__[Fcntl.pm:230]";
 "parent::import" -> "Fcntl::__ANON__[Fcntl.pm:230]";
 "Text::Xslate::Engine::_load_compiled" -> "Fcntl::AUTOLOAD";
 "parent::import" -> "Fcntl::AUTOLOAD";
-"Fcntl::AUTOLOAD" -> "Fcntl::CORE:subst";
 }

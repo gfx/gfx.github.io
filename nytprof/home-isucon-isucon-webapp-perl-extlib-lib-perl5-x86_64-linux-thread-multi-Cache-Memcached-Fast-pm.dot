@@ -1,0 +1,129 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Storable {
+	label="Storable";
+	"Storable::_freeze";
+}
+subgraph cluster_IO_Compress_Base {
+	label="IO::Compress::Base";
+	"IO::Compress::Base::_notAvailable";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::unimport";
+	"warnings::import";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::cache";
+	"Isucon::__ANON__[lib/Isucon.pm:70]";
+	"Isucon::__ANON__[lib/Isucon.pm:84]";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+	"strict::unimport";
+}
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+}
+subgraph cluster_bytes {
+	label="bytes";
+	"bytes::import";
+}
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::set";
+	"Cache::Memcached::Fast::_check_args";
+	"Cache::Memcached::Fast::_new";
+	"Cache::Memcached::Fast::BEGIN";
+	"Cache::Memcached::Fast::new";
+	"Cache::Memcached::Fast::get";
+}
+subgraph cluster_Exporter_Heavy {
+	label="Exporter::Heavy";
+	"Exporter::Heavy::heavy_export_ok_tags";
+}
+subgraph cluster_File_Glob {
+	label="File::Glob";
+	"File::Glob::import";
+	"File::Glob::GLOB_CSH";
+	"File::Glob::CORE:match";
+}
+subgraph cluster_constant {
+	label="constant";
+	"constant::import";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+	"Exporter::export_ok_tags";
+}
+subgraph cluster_utf8 {
+	label="utf8";
+	"utf8::import";
+}
+subgraph cluster_AutoLoader {
+	label="AutoLoader";
+	"AutoLoader::CORE:match";
+	"AutoLoader::CORE:fteread";
+	"AutoLoader::CORE:substcont";
+	"AutoLoader::import";
+	"AutoLoader::CORE:regcomp";
+	"AutoLoader::CORE:subst";
+}
+subgraph cluster_Scalar_Util {
+	label="Scalar::Util";
+	"Scalar::Util::weaken";
+}
+subgraph cluster_UNIVERSAL {
+	label="UNIVERSAL";
+	"UNIVERSAL::VERSION";
+}
+subgraph cluster_IO_Compress_Gzip_Constants {
+	label="IO::Compress::Gzip::Constants";
+	"IO::Compress::Gzip::Constants::CORE:pack";
+}
+subgraph cluster_IO_Uncompress_Base {
+	label="IO::Uncompress::Base";
+	"IO::Uncompress::Base::_notAvailable";
+}
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:substcont";
+"Cache::Memcached::Fast::set" -> "Storable::_freeze";
+"Cache::Memcached::Fast::new" -> "Scalar::Util::weaken";
+"Cache::Memcached::Fast::new" -> "File::Glob::CORE:match";
+"Cache::Memcached::Fast::new" -> "bytes::import";
+"Cache::Memcached::Fast::new" -> "File::Glob::import";
+"Cache::Memcached::Fast::new" -> "File::Glob::GLOB_CSH";
+"Cache::Memcached::Fast::new" -> "warnings::unimport";
+"Cache::Memcached::Fast::new" -> "Exporter::import";
+"Cache::Memcached::Fast::BEGIN" -> "Exporter::import";
+"Cache::Memcached::Fast::new" -> "IO::Uncompress::Base::_notAvailable";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Cache::Memcached::Fast::get";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "Cache::Memcached::Fast::get";
+"Cache::Memcached::Fast::new" -> "constant::import";
+"Cache::Memcached::Fast::new" -> "Exporter::Heavy::heavy_export_ok_tags";
+"Cache::Memcached::Fast::new" -> "strict::unimport";
+"Cache::Memcached::Fast::new" -> "AutoLoader::import";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Cache::Memcached::Fast::set";
+"Isucon::__ANON__[lib/Isucon.pm:84]" -> "Cache::Memcached::Fast::set";
+"Cache::Memcached::Fast::new" -> "warnings::import";
+"Cache::Memcached::Fast::BEGIN" -> "warnings::import";
+"Cache::Memcached::Fast::_check_args" -> "Cache::Memcached::Fast::_check_args";
+"Cache::Memcached::Fast::new" -> "Cache::Memcached::Fast::_check_args";
+"Cache::Memcached::Fast::new" -> "IO::Compress::Base::_notAvailable";
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:subst";
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:match";
+"Cache::Memcached::Fast::new" -> "Exporter::export_ok_tags";
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:regcomp";
+"Cache::Memcached::Fast::new" -> "IO::Compress::Gzip::Constants::CORE:pack";
+"Isucon::cache" -> "Cache::Memcached::Fast::new";
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:fteread";
+"Cache::Memcached::Fast::new" -> "XSLoader::load";
+"Cache::Memcached::Fast::new" -> "utf8::import";
+"Cache::Memcached::Fast::new" -> "UNIVERSAL::VERSION";
+"Cache::Memcached::Fast::new" -> "strict::import";
+"Cache::Memcached::Fast::BEGIN" -> "strict::import";
+"Cache::Memcached::Fast::new" -> "Cache::Memcached::Fast::_new";
+}

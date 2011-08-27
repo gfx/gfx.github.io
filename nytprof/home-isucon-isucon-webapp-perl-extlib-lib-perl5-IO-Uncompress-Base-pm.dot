@@ -1,0 +1,12 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::new";
+}
+subgraph cluster_IO_Uncompress_Base {
+	label="IO::Uncompress::Base";
+	"IO::Uncompress::Base::_notAvailable";
+}
+"Cache::Memcached::Fast::new" -> "IO::Uncompress::Base::_notAvailable";
+}

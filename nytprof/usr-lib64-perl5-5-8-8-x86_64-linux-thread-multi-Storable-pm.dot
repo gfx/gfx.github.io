@@ -2,11 +2,33 @@ digraph {
 graph [overlap=false]
 subgraph cluster_Storable {
 	label="Storable";
+	"Storable::nfreeze";
+	"Storable::net_mstore";
+	"Storable::_freeze";
 	"Storable::bootstrap";
+	"Storable::CORE:subst";
 }
 subgraph cluster_DynaLoader {
 	label="DynaLoader";
 	"DynaLoader::bootstrap";
 }
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::__ANON__[lib/Isucon.pm:70]";
+}
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::set";
+}
+subgraph cluster_AutoLoader {
+	label="AutoLoader";
+	"AutoLoader::AUTOLOAD";
+}
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Storable::nfreeze";
+"Cache::Memcached::Fast::set" -> "Storable::_freeze";
+"Storable::nfreeze" -> "Storable::_freeze";
+"Storable::_freeze" -> "Storable::net_mstore";
+"Storable::nfreeze" -> "AutoLoader::AUTOLOAD";
+"Storable::_freeze" -> "Storable::CORE:subst";
 "DynaLoader::bootstrap" -> "Storable::bootstrap";
 }

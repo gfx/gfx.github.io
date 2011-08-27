@@ -17,7 +17,7 @@ subgraph cluster_List_Util {
 	"List::Util::BEGIN";
 	"List::Util::bootstrap";
 }
-"List::Util::BEGIN" -> "vars::import";
 "DynaLoader::bootstrap" -> "List::Util::bootstrap";
+"List::Util::BEGIN" -> "vars::import";
 "List::Util::BEGIN" -> "strict::import";
 }

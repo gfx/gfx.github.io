@@ -50,6 +50,9 @@ subgraph cluster_URI__server {
 "URI::new" -> "URI::CORE:subst";
 "URI::_uric_escape" -> "URI::CORE:subst";
 "URI::implementor" -> "URI::CORE:subst";
+"URI::new" -> "URI::_init";
+"URI::_server::canonical" -> "URI::canonical";
+"URI::_init" -> "URI::_server::_uric_escape";
 "URI::new" -> "URI::implementor";
 "URI::canonical" -> "URI::CORE:match";
 "URI::new" -> "URI::CORE:match";
@@ -57,10 +60,7 @@ subgraph cluster_URI__server {
 "URI::_init" -> "URI::CORE:match";
 "URI::implementor" -> "URI::CORE:match";
 "URI::implementor" -> "URI::_init_implementor";
-"URI::new" -> "URI::_init";
-"URI::_server::canonical" -> "URI::canonical";
 "URI::_server::_uric_escape" -> "URI::_uric_escape";
 "Plack::Request::base" -> "URI::new";
-"URI::_init" -> "URI::_server::_uric_escape";
 "URI::implementor" -> "strict::import";
 }

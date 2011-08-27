@@ -51,17 +51,9 @@ subgraph cluster_Plack_Middleware_Conditional {
 	label="Plack::Middleware::Conditional";
 	"Plack::Middleware::Conditional::BEGIN";
 }
-subgraph cluster_XSLoader {
-	label="XSLoader";
-	"XSLoader::load";
-}
 subgraph cluster_bytes {
 	label="bytes";
 	"bytes::import";
-}
-subgraph cluster_URI_Escape {
-	label="URI::Escape";
-	"URI::Escape::CORE:qr";
 }
 subgraph cluster_FileHandle {
 	label="FileHandle";
@@ -91,6 +83,10 @@ subgraph cluster_HTTP_Body_UrlEncoded {
 subgraph cluster_Kossy_Response {
 	label="Kossy::Response";
 	"Kossy::Response::BEGIN";
+}
+subgraph cluster_Plack_Util_IOWithPath {
+	label="Plack::Util::IOWithPath";
+	"Plack::Util::IOWithPath::BEGIN";
 }
 subgraph cluster_Text_Xslate_Util {
 	label="Text::Xslate::Util";
@@ -123,25 +119,16 @@ subgraph cluster_Fcntl {
 	"Fcntl::AUTOLOAD";
 	"Fcntl::__ANON__[Fcntl.pm:230]";
 }
-subgraph cluster_warnings_register {
-	label="warnings::register";
-	"warnings::register::import";
-}
-"parent::import" -> "Exporter::Heavy::heavy_export_tags";
-"parent::import" -> "Config::import";
-"parent::import" -> "parent::CORE:subst";
-"parent::import" -> "URI::Escape::CORE:qr";
 "parent::import" -> "bytes::import";
-"parent::BEGIN" -> "vars::import";
-"parent::import" -> "vars::import";
 "parent::import" -> "Exporter::export_tags";
 "Plack::Util::load_class" -> "parent::import";
 "Text::Xslate::Util::BEGIN" -> "parent::import";
 "Plack::Builder::BEGIN" -> "parent::import";
-"Kossy::Request::BEGIN" -> "parent::import";
+"Plack::Util::IOWithPath::BEGIN" -> "parent::import";
 "parent::import" -> "parent::import";
-"Router::Simple::Route::BEGIN" -> "parent::import";
+"Kossy::Request::BEGIN" -> "parent::import";
 "Plack::Middleware::Conditional::BEGIN" -> "parent::import";
+"Router::Simple::Route::BEGIN" -> "parent::import";
 "Plack::App::URLMap::BEGIN" -> "parent::import";
 "Kossy::Response::BEGIN" -> "parent::import";
 "parent::import" -> "warnings::unimport";
@@ -149,21 +136,24 @@ subgraph cluster_warnings_register {
 "parent::import" -> "DynaLoader::bootstrap";
 "parent::import" -> "constant::import";
 "parent::import" -> "HTTP::Body::UrlEncoded::CORE:qr";
-"parent::import" -> "Fcntl::__ANON__[Fcntl.pm:230]";
 "parent::import" -> "Plack::Util::Accessor::import";
 "parent::BEGIN" -> "strict::unimport";
 "parent::import" -> "strict::unimport";
 "parent::import" -> "base::import";
+"parent::import" -> "AutoLoader::import";
+"parent::import" -> "overload::import";
+"parent::import" -> "warnings::import";
+"parent::import" -> "Exporter::Heavy::heavy_export_tags";
+"parent::import" -> "Config::import";
+"parent::import" -> "parent::CORE:subst";
+"parent::BEGIN" -> "vars::import";
+"parent::import" -> "vars::import";
+"parent::import" -> "Fcntl::__ANON__[Fcntl.pm:230]";
 "parent::import" -> "Fcntl::AUTOLOAD";
 "parent::import" -> "IO::File::CORE:match";
 "parent::import" -> "FileHandle::import";
-"parent::import" -> "AutoLoader::import";
-"parent::import" -> "XSLoader::load";
-"parent::import" -> "overload::import";
 "parent::import" -> "Config::FETCH";
-"parent::import" -> "warnings::import";
 "parent::import" -> "UNIVERSAL::VERSION";
 "parent::BEGIN" -> "strict::import";
 "parent::import" -> "strict::import";
-"parent::import" -> "warnings::register::import";
 }

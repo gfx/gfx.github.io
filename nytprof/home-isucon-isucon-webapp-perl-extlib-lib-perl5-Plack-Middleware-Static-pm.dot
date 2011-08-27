@@ -9,21 +9,21 @@ subgraph cluster_Plack_Middleware_Static {
 }
 subgraph cluster_Plack_Util_Accessor {
 	label="Plack::Util::Accessor";
-	"Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+	"Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
 }
 subgraph cluster_Plack_Component {
 	label="Plack::Component";
-	"Plack::Component::__ANON__[Plack/Component.pm:39]";
+	"Plack::Component::__ANON__[extlib/lib/perl5/Plack/Component.pm:39]";
 }
 subgraph cluster_Kossy {
 	label="Kossy";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]";
+	"Kossy::__ANON__[lib/Kossy.pm:123]";
 }
-"Plack::Middleware::Static::_handle_static" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
-"Plack::Middleware::Static::call" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
-"Plack::Middleware::Static::call" -> "Plack::Middleware::Static::_handle_static";
+"Plack::Middleware::Static::_handle_static" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
+"Plack::Middleware::Static::call" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
 "Plack::Middleware::Static::_handle_static" -> "Plack::Middleware::Static::CORE:match";
-"Plack::Middleware::Static::call" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]";
-"Plack::Component::__ANON__[Plack/Component.pm:39]" -> "Plack::Middleware::Static::call";
+"Plack::Component::__ANON__[extlib/lib/perl5/Plack/Component.pm:39]" -> "Plack::Middleware::Static::call";
 "Plack::Middleware::Static::_handle_static" -> "Plack::Middleware::Static::CORE:regcomp";
+"Plack::Middleware::Static::call" -> "Plack::Middleware::Static::_handle_static";
+"Plack::Middleware::Static::call" -> "Kossy::__ANON__[lib/Kossy.pm:123]";
 }

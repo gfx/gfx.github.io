@@ -7,9 +7,9 @@ subgraph cluster_Plack_Middleware_Static {
 subgraph cluster_Plack_Component {
 	label="Plack::Component";
 	"Plack::Component::prepare_app";
-	"Plack::Component::__ANON__[Plack/Component.pm:39]";
 	"Plack::Component::new";
 	"Plack::Component::to_app";
+	"Plack::Component::__ANON__[extlib/lib/perl5/Plack/Component.pm:39]";
 }
 subgraph cluster_Plack_Middleware {
 	label="Plack::Middleware";
@@ -27,12 +27,12 @@ subgraph cluster_Plack_Middleware_ReverseProxy {
 	label="Plack::Middleware::ReverseProxy";
 	"Plack::Middleware::ReverseProxy::call";
 }
-"Plack::Middleware::ReverseProxy::call" -> "Plack::Component::__ANON__[Plack/Component.pm:39]";
-"Plack::Util::run_app" -> "Plack::Component::__ANON__[Plack/Component.pm:39]";
 "Plack::Middleware::wrap" -> "Plack::Component::to_app";
+"Plack::Component::__ANON__[extlib/lib/perl5/Plack/Component.pm:39]" -> "Plack::Middleware::Static::call";
+"Plack::Middleware::ReverseProxy::call" -> "Plack::Component::__ANON__[extlib/lib/perl5/Plack/Component.pm:39]";
+"Plack::Util::run_app" -> "Plack::Component::__ANON__[extlib/lib/perl5/Plack/Component.pm:39]";
 "Plack::Builder::builder" -> "Plack::Component::new";
 "Plack::Middleware::wrap" -> "Plack::Component::new";
-"Plack::Component::__ANON__[Plack/Component.pm:39]" -> "Plack::Middleware::ReverseProxy::call";
+"Plack::Component::__ANON__[extlib/lib/perl5/Plack/Component.pm:39]" -> "Plack::Middleware::ReverseProxy::call";
 "Plack::Component::to_app" -> "Plack::Component::prepare_app";
-"Plack::Component::__ANON__[Plack/Component.pm:39]" -> "Plack::Middleware::Static::call";
 }

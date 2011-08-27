@@ -9,6 +9,10 @@ subgraph cluster_Plack_App_URLMap {
 	label="Plack::App::URLMap";
 	"Plack::App::URLMap::BEGIN";
 }
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::new";
+}
 subgraph cluster_constant {
 	label="constant";
 	"constant::import";
@@ -39,6 +43,7 @@ subgraph cluster_JSON {
 "Plack::Handler::CLI::BEGIN" -> "constant::import";
 "JSON::_load_xs" -> "constant::import";
 "parent::import" -> "constant::import";
+"Cache::Memcached::Fast::new" -> "constant::import";
 "URI::_server::_host_escape" -> "constant::import";
 "constant::BEGIN" -> "strict::unimport";
 "constant::import" -> "constant::CORE:match";

@@ -8,11 +8,17 @@ subgraph cluster_IO_Handle {
 	label="IO::Handle";
 	"IO::Handle::autoflush";
 }
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
 subgraph cluster_SelectSaver {
 	label="SelectSaver";
 	"SelectSaver::CORE:select";
+	"SelectSaver::BEGIN";
 	"SelectSaver::new";
 }
+"SelectSaver::BEGIN" -> "Exporter::import";
 "SelectSaver::new" -> "Symbol::qualify";
 "IO::Handle::autoflush" -> "SelectSaver::CORE:select";
 "SelectSaver::new" -> "SelectSaver::CORE:select";

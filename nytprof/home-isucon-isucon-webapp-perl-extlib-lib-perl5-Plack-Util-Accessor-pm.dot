@@ -12,8 +12,8 @@ subgraph cluster_Kossy_Connection {
 subgraph cluster_Plack_Util_Accessor {
 	label="Plack::Util::Accessor";
 	"Plack::Util::Accessor::mk_accessors";
-	"Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
 	"Plack::Util::Accessor::import";
+	"Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
 }
 subgraph cluster_Plack_Middleware_Conditional {
 	label="Plack::Middleware::Conditional";
@@ -40,13 +40,13 @@ subgraph cluster_Plack_Response {
 	"Plack::Response::new";
 	"Plack::Response::finalize";
 }
-"Kossy::Connection::render" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
-"Kossy::Response::_body" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
-"Plack::Middleware::Static::_handle_static" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
-"Plack::Response::new" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
-"Plack::Middleware::Static::call" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
-"Plack::Middleware::ReverseProxy::call" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
-"Plack::Response::finalize" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Kossy::Connection::render" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
+"Kossy::Response::_body" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
+"Plack::Middleware::Static::_handle_static" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
+"Plack::Response::new" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
+"Plack::Middleware::Static::call" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
+"Plack::Middleware::ReverseProxy::call" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
+"Plack::Response::finalize" -> "Plack::Util::Accessor::__ANON__[extlib/lib/perl5/Plack/Util/Accessor.pm:19]";
 "Plack::Util::load_class" -> "Plack::Util::Accessor::import";
 "parent::import" -> "Plack::Util::Accessor::import";
 "Plack::Middleware::Conditional::BEGIN" -> "Plack::Util::Accessor::import";

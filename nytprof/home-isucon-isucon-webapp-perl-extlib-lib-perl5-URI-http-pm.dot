@@ -19,6 +19,6 @@ subgraph cluster_URI__server {
 }
 "URI::http::canonical" -> "URI::_server::canonical";
 "URI::http::canonical" -> "URI::_generic::path";
-"URI::http::canonical" -> "URI::_generic::authority";
 "Plack::Request::base" -> "URI::http::canonical";
+"URI::http::canonical" -> "URI::_generic::authority";
 }

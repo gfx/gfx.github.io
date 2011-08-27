@@ -61,24 +61,24 @@ subgraph cluster_Encode_Alias {
 }
 subgraph cluster_Kossy {
 	label="Kossy";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]";
+	"Kossy::__ANON__[lib/Kossy.pm:76]";
 }
 "Encode::encode_utf8" -> "utf8::encode";
 "Encode::decode" -> "Encode::utf8::decode_xs";
 "Encode::decode" -> "Encode::find_encoding";
+"Encode::utf8::BEGIN" -> "bytes::import";
+"Encode::BEGIN" -> "warnings::unimport";
+"Encode::BEGIN" -> "Exporter::import";
+"Kossy::__ANON__[lib/Kossy.pm:76]" -> "Encode::decode_utf8";
+"Encode::utf8::decode_xs" -> "Encode::Encoding::renewed";
+"Encode::BEGIN" -> "base::import";
 "Encode::find_encoding" -> "Encode::getEncoding";
 "Encode::decode" -> "Encode::LEAVE_SRC";
 "Kossy::Request::BEGIN" -> "Encode::CORE:match";
-"Encode::utf8::BEGIN" -> "bytes::import";
 "Kossy::Request::BEGIN" -> "Encode::predefine_encodings";
 "Kossy::Response::_body" -> "Encode::encode_utf8";
 "Encode::decode_utf8" -> "Encode::decode";
-"Encode::BEGIN" -> "warnings::unimport";
-"Encode::BEGIN" -> "Exporter::import";
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]" -> "Encode::decode_utf8";
 "Encode::BEGIN" -> "Encode::Encoding::CORE:match";
-"Encode::utf8::decode_xs" -> "Encode::Encoding::renewed";
-"Encode::BEGIN" -> "base::import";
 "Encode::BEGIN" -> "Encode::Alias::CORE:match";
 "Encode::BEGIN" -> "Encode::Alias::init_aliases";
 "Encode::BEGIN" -> "strict::import";

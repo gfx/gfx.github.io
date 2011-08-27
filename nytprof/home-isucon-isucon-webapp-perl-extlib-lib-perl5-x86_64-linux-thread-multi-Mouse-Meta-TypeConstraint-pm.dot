@@ -24,8 +24,8 @@ subgraph cluster_Mouse_Object {
 	"Mouse::Object::new";
 }
 "Mouse::Meta::TypeConstraint::new" -> "Mouse::Meta::TypeConstraint::compile_type_constraint";
+"Mouse::Object::new" -> "Mouse::Meta::TypeConstraint::_compiled_type_constraint";
 "Mouse::Meta::TypeConstraint::BEGIN" -> "Mouse::Exporter::do_import";
 "Mouse::BEGIN" -> "Mouse::Meta::TypeConstraint::new";
 "Mouse::Util::TypeConstraints::_define_type" -> "Mouse::Meta::TypeConstraint::new";
-"Mouse::Object::new" -> "Mouse::Meta::TypeConstraint::_compiled_type_constraint";
 }

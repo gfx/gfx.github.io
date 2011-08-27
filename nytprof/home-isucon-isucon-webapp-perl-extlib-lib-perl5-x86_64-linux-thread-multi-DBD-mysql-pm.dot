@@ -37,11 +37,11 @@ subgraph cluster_DBD_mysql_st {
 	"DBD::mysql::st::_prepare";
 }
 "DBI::db::prepare" -> "DBD::mysql::st::_prepare";
-"DBI::dr::connect" -> "DBD::mysql::db::_login";
 "DBI::install_driver" -> "DBD::mysql::driver";
-"DBD::mysql::_OdbcParse" -> "DBD::mysql::CORE:match";
-"DBI::dr::connect" -> "DBD::mysql::_OdbcParse";
 "DBD::mysql::driver" -> "DBD::_::common::install_method";
 "DBD::mysql::driver" -> "DBI::_new_drh";
 "DynaLoader::bootstrap" -> "DBD::mysql::bootstrap";
+"DBI::dr::connect" -> "DBD::mysql::db::_login";
+"DBD::mysql::_OdbcParse" -> "DBD::mysql::CORE:match";
+"DBI::dr::connect" -> "DBD::mysql::_OdbcParse";
 }

@@ -1,5 +1,9 @@
 digraph {
 graph [overlap=false]
+subgraph cluster_URI_Escape {
+	label="URI::Escape";
+	"URI::Escape::CORE:qr";
+}
 subgraph cluster_IO_Handle {
 	label="IO::Handle";
 	"IO::Handle::autoflush";
@@ -38,39 +42,40 @@ subgraph cluster_Mouse_Object {
 }
 subgraph cluster_Plack_Handler_CLI {
 	label="Plack::Handler::CLI";
+	"Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:49]";
 	"Plack::Handler::CLI::run";
 	"Plack::Handler::CLI::stdout";
-	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:37]";
 	"Plack::Handler::CLI::CORE:print";
 	"Plack::Handler::CLI::BEGIN";
-	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:49]";
-	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:168]";
 	"Plack::Handler::CLI::need_headers";
-	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:43]";
+	"Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:37]";
+	"Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:43]";
+	"Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:168]";
 	"Plack::Handler::CLI::stdin";
 	"Plack::Handler::CLI::stderr";
 	"Plack::Handler::CLI::_handle_response";
 }
 "Plack::Handler::CLI::BEGIN" -> "Any::Moose::_is_moose_loaded";
-"Plack::Handler::CLI::_handle_response" -> "IO::Handle::autoflush";
 "Plack::Handler::CLI::BEGIN" -> "Any::Moose::unimport";
-"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:49]";
-"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:43]";
-"Plack::Handler::CLI::run" -> "Plack::Handler::CLI::_handle_response";
-"Plack::Handler::CLI::run" -> "Plack::Util::run_app";
+"Plack::Handler::CLI::BEGIN" -> "URI::Escape::CORE:qr";
+"Plack::Util::foreach" -> "Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:168]";
 "Plack::Handler::CLI::BEGIN" -> "constant::import";
 "Plack::Handler::CLI::BEGIN" -> "Mouse::Exporter::setup_import_methods";
 "main::RUNTIME" -> "Plack::Handler::CLI::run";
 "Plack::Handler::CLI::BEGIN" -> "Any::Moose::import";
 "Plack::Handler::CLI::BEGIN" -> "Any::Moose::moose_is_preferred";
-"Plack::Handler::CLI::_handle_response" -> "Plack::Handler::CLI::stdout";
-"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:37]";
-"Plack::Util::foreach" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:168]";
-"Plack::Handler::CLI::run" -> "Plack::Handler::CLI::stdin";
 "Plack::Handler::CLI::_handle_response" -> "Plack::Util::foreach";
-"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:168]" -> "Plack::Handler::CLI::CORE:print";
-"Plack::Handler::CLI::_handle_response" -> "Plack::Handler::CLI::CORE:print";
 "Plack::Handler::CLI::_handle_response" -> "Plack::Handler::CLI::need_headers";
+"Plack::Handler::CLI::_handle_response" -> "IO::Handle::autoflush";
+"Plack::Handler::CLI::run" -> "Plack::Handler::CLI::_handle_response";
+"Plack::Handler::CLI::run" -> "Plack::Util::run_app";
+"Plack::Handler::CLI::_handle_response" -> "Plack::Handler::CLI::stdout";
+"Plack::Handler::CLI::run" -> "Plack::Handler::CLI::stdin";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:49]";
+"Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:168]" -> "Plack::Handler::CLI::CORE:print";
+"Plack::Handler::CLI::_handle_response" -> "Plack::Handler::CLI::CORE:print";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:37]";
 "Plack::Handler::CLI::run" -> "UNIVERSAL::VERSION";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[extlib/lib/perl5/Plack/Handler/CLI.pm:43]";
 "Plack::Handler::CLI::run" -> "Plack::Handler::CLI::stderr";
 }

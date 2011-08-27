@@ -48,12 +48,10 @@ subgraph cluster_Kossy {
 	label="Kossy";
 	"Kossy::BEGIN";
 }
-"base::import" -> "base::has_version";
 "base::import" -> "Exporter::import";
 "base::import" -> "strict::unimport";
-"base::import" -> "base::has_attr";
-"Encode::BEGIN" -> "base::import";
 "JSON::BEGIN" -> "base::import";
+"Encode::BEGIN" -> "base::import";
 "Text::Xslate::Util::import_from" -> "base::import";
 "Kossy::BEGIN" -> "base::import";
 "parent::import" -> "base::import";
@@ -61,5 +59,7 @@ subgraph cluster_Kossy {
 "base::import" -> "UNIVERSAL::isa";
 "base::import" -> "base::has_fields";
 "base::import" -> "warnings::import";
+"base::import" -> "base::has_version";
+"base::import" -> "base::has_attr";
 "base::import" -> "strict::import";
 }

@@ -11,8 +11,13 @@ subgraph cluster_parent {
 subgraph cluster_overload {
 	label="overload";
 	"overload::OVERLOAD";
+	"overload::BEGIN";
 	"overload::import";
 	"overload::CORE:match";
+}
+subgraph cluster_warnings_register {
+	label="warnings::register";
+	"warnings::register::import";
 }
 subgraph cluster_JSON {
 	label="JSON";
@@ -23,4 +28,5 @@ subgraph cluster_JSON {
 "JSON::_load_xs" -> "overload::import";
 "parent::import" -> "overload::import";
 "overload::OVERLOAD" -> "overload::CORE:match";
+"overload::BEGIN" -> "warnings::register::import";
 }

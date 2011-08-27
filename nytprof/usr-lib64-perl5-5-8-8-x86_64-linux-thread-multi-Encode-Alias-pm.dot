@@ -34,8 +34,8 @@ subgraph cluster_Encode_Alias {
 "Encode::Alias::BEGIN" -> "Exporter::import";
 "Encode::Alias::BEGIN" -> "base::import";
 "Encode::Alias::init_aliases" -> "Encode::Alias::undef_aliases";
-"Encode::BEGIN" -> "Encode::Alias::CORE:match";
 "Encode::Alias::init_aliases" -> "Encode::Alias::define_alias";
+"Encode::BEGIN" -> "Encode::Alias::CORE:match";
 "Encode::BEGIN" -> "Encode::Alias::init_aliases";
 "Encode::Alias::BEGIN" -> "strict::import";
 }

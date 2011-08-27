@@ -8,6 +8,10 @@ subgraph cluster_FileHandle {
 	label="FileHandle";
 	"FileHandle::import";
 }
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::new";
+}
 subgraph cluster_Exporter_Heavy {
 	label="Exporter::Heavy";
 	"Exporter::Heavy::_push_tags";
@@ -31,15 +35,16 @@ subgraph cluster_JSON {
 	label="JSON";
 	"JSON::import";
 }
-"parent::import" -> "Exporter::Heavy::heavy_export_tags";
 "Exporter::Heavy::heavy_export" -> "Exporter::Heavy::CORE:match";
+"DBI::BEGIN" -> "Exporter::Heavy::heavy_export_ok_tags";
+"Cache::Memcached::Fast::new" -> "Exporter::Heavy::heavy_export_ok_tags";
+"Exporter::Heavy::heavy_export_to_level" -> "Exporter::export";
+"Exporter::Heavy::heavy_export_tags" -> "Exporter::Heavy::_push_tags";
+"Exporter::Heavy::heavy_export_ok_tags" -> "Exporter::Heavy::_push_tags";
+"parent::import" -> "Exporter::Heavy::heavy_export_tags";
 "JSON::import" -> "Exporter::Heavy::heavy_export_to_level";
 "Exporter::Heavy::heavy_export" -> "Exporter::Heavy::CORE:subst";
-"DBI::BEGIN" -> "Exporter::Heavy::heavy_export_ok_tags";
-"Exporter::Heavy::heavy_export_to_level" -> "Exporter::export";
 "Exporter::import" -> "Exporter::Heavy::heavy_export";
 "FileHandle::import" -> "Exporter::Heavy::heavy_export";
 "Exporter::Heavy::heavy_export_to_level" -> "Exporter::Heavy::heavy_export";
-"Exporter::Heavy::heavy_export_tags" -> "Exporter::Heavy::_push_tags";
-"Exporter::Heavy::heavy_export_ok_tags" -> "Exporter::Heavy::_push_tags";
 }

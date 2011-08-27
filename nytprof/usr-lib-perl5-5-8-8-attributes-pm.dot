@@ -18,6 +18,6 @@ subgraph cluster_UNIVERSAL {
 "attributes::import" -> "attributes::reftype";
 "attributes::import" -> "UNIVERSAL::can";
 "XSLoader::load" -> "attributes::import";
-"XSLoader::load" -> "attributes::bootstrap";
 "attributes::import" -> "attributes::_modify_attrs";
+"XSLoader::load" -> "attributes::bootstrap";
 }

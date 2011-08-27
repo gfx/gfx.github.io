@@ -44,20 +44,20 @@ subgraph cluster_Plack_Handler_CLI {
 	label="Plack::Handler::CLI";
 	"Plack::Handler::CLI::meta";
 }
-"Mouse::has" -> "Mouse::Meta::Class::add_attribute";
-"main::BEGIN" -> "Mouse::has";
-"main::BEGIN" -> "Plack::Handler::CLI::meta";
 "Mouse::init_meta" -> "Mouse::Meta::Module::add_method";
 "Mouse::Exporter::do_import" -> "Mouse::init_meta";
 "Mouse::BEGIN" -> "Mouse::Util::generate_can_predicate_for";
+"Mouse::BEGIN" -> "Mouse::Exporter::setup_import_methods";
+"Mouse::BEGIN" -> "Mouse::Util::__register_metaclass_storage";
+"Mouse::init_meta" -> "Mouse::Util::TypeConstraints::class_type";
+"Mouse::init_meta" -> "Mouse::Util::TypeConstraints::find_type_constraint";
+"Mouse::BEGIN" -> "Mouse::Exporter::import";
+"Mouse::has" -> "Mouse::Meta::Class::add_attribute";
+"main::BEGIN" -> "Mouse::has";
+"main::BEGIN" -> "Plack::Handler::CLI::meta";
 "Plack::Handler::CLI::meta" -> "Mouse::Meta::Module::initialize";
 "Mouse::has" -> "Mouse::Meta::Module::initialize";
 "Mouse::init_meta" -> "Mouse::Meta::Module::initialize";
 "Mouse::BEGIN" -> "Mouse::Meta::TypeConstraint::new";
-"Mouse::BEGIN" -> "Mouse::Exporter::setup_import_methods";
-"Mouse::BEGIN" -> "Mouse::Util::__register_metaclass_storage";
 "Mouse::init_meta" -> "Mouse::Meta::Class::superclasses";
-"Mouse::init_meta" -> "Mouse::Util::TypeConstraints::class_type";
-"Mouse::init_meta" -> "Mouse::Util::TypeConstraints::find_type_constraint";
-"Mouse::BEGIN" -> "Mouse::Exporter::import";
 }

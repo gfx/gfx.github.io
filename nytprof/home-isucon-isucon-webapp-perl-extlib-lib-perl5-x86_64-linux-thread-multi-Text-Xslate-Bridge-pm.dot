@@ -12,7 +12,7 @@ subgraph cluster_Text_Xslate_Bridge {
 	"Text::Xslate::Bridge::_functions";
 }
 "Text::Xslate::Util::import_from" -> "Text::Xslate::Bridge::bridge";
-"Text::Xslate::Bridge::export_into_xslate" -> "Text::Xslate::Bridge::methods";
 "Text::Xslate::Bridge::methods" -> "Text::Xslate::Bridge::_functions";
+"Text::Xslate::Bridge::export_into_xslate" -> "Text::Xslate::Bridge::methods";
 "Text::Xslate::Util::import_from" -> "Text::Xslate::Bridge::export_into_xslate";
 }

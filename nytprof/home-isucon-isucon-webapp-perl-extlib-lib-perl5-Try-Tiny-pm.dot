@@ -20,15 +20,15 @@ subgraph cluster_Try_Tiny {
 }
 subgraph cluster_Kossy {
 	label="Kossy";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]";
+	"Kossy::__ANON__[lib/Kossy.pm:115]";
+	"Kossy::__ANON__[lib/Kossy.pm:76]";
+	"Kossy::__ANON__[lib/Kossy.pm:123]";
 }
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Try::Tiny::catch";
-"Try::Tiny::try" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]";
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Try::Tiny::try";
-"Try::Tiny::try" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]";
-"Try::Tiny::BEGIN" -> "vars::import";
+"Kossy::__ANON__[lib/Kossy.pm:123]" -> "Try::Tiny::catch";
+"Kossy::__ANON__[lib/Kossy.pm:123]" -> "Try::Tiny::try";
 "Try::Tiny::BEGIN" -> "Exporter::import";
+"Try::Tiny::try" -> "Kossy::__ANON__[lib/Kossy.pm:115]";
+"Try::Tiny::BEGIN" -> "vars::import";
+"Try::Tiny::try" -> "Kossy::__ANON__[lib/Kossy.pm:76]";
 "Try::Tiny::BEGIN" -> "strict::import";
 }

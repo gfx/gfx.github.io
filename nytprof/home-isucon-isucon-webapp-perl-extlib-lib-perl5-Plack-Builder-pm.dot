@@ -16,13 +16,13 @@ subgraph cluster_Plack_Middleware {
 subgraph cluster_Plack_Builder {
 	label="Plack::Builder";
 	"Plack::Builder::BEGIN";
+	"Plack::Builder::__ANON__[extlib/lib/perl5/Plack/Builder.pm:20]";
 	"Plack::Builder::to_app";
-	"Plack::Builder::__ANON__[Plack/Builder.pm:94]";
 	"Plack::Builder::builder";
 	"Plack::Builder::add_middleware";
-	"Plack::Builder::__ANON__[Plack/Builder.pm:20]";
 	"Plack::Builder::new";
 	"Plack::Builder::enable";
+	"Plack::Builder::__ANON__[extlib/lib/perl5/Plack/Builder.pm:94]";
 }
 subgraph cluster_parent {
 	label="parent";
@@ -35,20 +35,20 @@ subgraph cluster_Plack_Util {
 subgraph cluster_Kossy {
 	label="Kossy";
 	"Kossy::psgi";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]";
+	"Kossy::__ANON__[lib/Kossy.pm:46]";
 }
-"Plack::Builder::__ANON__[Plack/Builder.pm:20]" -> "Plack::Middleware::wrap";
+"Plack::Builder::__ANON__[extlib/lib/perl5/Plack/Builder.pm:20]" -> "Plack::Middleware::wrap";
+"Plack::Builder::BEGIN" -> "parent::import";
+"Kossy::__ANON__[lib/Kossy.pm:46]" -> "Plack::Builder::enable";
+"Plack::Builder::BEGIN" -> "Plack::Middleware::import";
+"Plack::Builder::to_app" -> "Plack::Builder::__ANON__[extlib/lib/perl5/Plack/Builder.pm:20]";
+"Plack::Builder::builder" -> "Plack::Builder::new";
+"Plack::Builder::enable" -> "Plack::Builder::__ANON__[extlib/lib/perl5/Plack/Builder.pm:94]";
 "Plack::Builder::add_middleware" -> "Plack::Util::load_class";
 "Plack::Builder::builder" -> "Plack::Component::new";
-"Plack::Builder::BEGIN" -> "parent::import";
-"Plack::Builder::enable" -> "Plack::Builder::__ANON__[Plack/Builder.pm:94]";
 "Kossy::psgi" -> "Plack::Builder::builder";
-"Plack::Builder::__ANON__[Plack/Builder.pm:94]" -> "Plack::Builder::add_middleware";
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]" -> "Plack::Builder::enable";
-"Plack::Builder::BEGIN" -> "Plack::Middleware::import";
+"Plack::Builder::builder" -> "Kossy::__ANON__[lib/Kossy.pm:46]";
+"Plack::Builder::__ANON__[extlib/lib/perl5/Plack/Builder.pm:94]" -> "Plack::Builder::add_middleware";
 "Plack::Builder::builder" -> "Plack::Builder::to_app";
-"Plack::Builder::builder" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]";
 "Plack::Builder::BEGIN" -> "strict::import";
-"Plack::Builder::to_app" -> "Plack::Builder::__ANON__[Plack/Builder.pm:20]";
-"Plack::Builder::builder" -> "Plack::Builder::new";
 }

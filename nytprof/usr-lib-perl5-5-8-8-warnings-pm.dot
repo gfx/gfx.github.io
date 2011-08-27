@@ -42,6 +42,11 @@ subgraph cluster_Router_Simple {
 	label="Router::Simple";
 	"Router::Simple::BEGIN";
 }
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::BEGIN";
+	"Cache::Memcached::Fast::new";
+}
 subgraph cluster_Mouse_Exporter {
 	label="Mouse::Exporter";
 	"Mouse::Exporter::BEGIN";
@@ -57,6 +62,10 @@ subgraph cluster_Text_Xslate {
 subgraph cluster_Kossy_Response {
 	label="Kossy::Response";
 	"Kossy::Response::BEGIN";
+}
+subgraph cluster_IO {
+	label="IO";
+	"IO::BEGIN";
 }
 subgraph cluster_Text_Xslate_Util {
 	label="Text::Xslate::Util";
@@ -78,6 +87,7 @@ subgraph cluster_Router_Simple_SubMapper {
 subgraph cluster_Plack_Util {
 	label="Plack::Util";
 	"Plack::Util::load_class";
+	"Plack::Util::BEGIN";
 }
 subgraph cluster_Any_Moose {
 	label="Any::Moose";
@@ -96,23 +106,25 @@ subgraph cluster_Kossy {
 	label="Kossy";
 	"Kossy::BEGIN";
 }
-"Plack::App::URLMap::BEGIN" -> "warnings::unimport";
 "Encode::BEGIN" -> "warnings::unimport";
-"Text::Xslate::Util::import_from" -> "warnings::unimport";
+"Plack::Util::BEGIN" -> "warnings::unimport";
 "Data::MessagePack::BEGIN" -> "warnings::unimport";
 "parent::import" -> "warnings::unimport";
-"Mouse::Util::BEGIN" -> "warnings::unimport";
 "Encode::Alias::BEGIN" -> "warnings::unimport";
-"Mouse::Exporter::BEGIN" -> "warnings::bits";
+"Mouse::Util::BEGIN" -> "warnings::unimport";
+"Plack::App::URLMap::BEGIN" -> "warnings::unimport";
+"Text::Xslate::Util::import_from" -> "warnings::unimport";
+"Cache::Memcached::Fast::new" -> "warnings::unimport";
 "Any::Moose::BEGIN" -> "warnings::import";
-"Router::Simple::SubMapper::BEGIN" -> "warnings::import";
 "Text::Xslate::Util::BEGIN" -> "warnings::import";
+"Router::Simple::SubMapper::BEGIN" -> "warnings::import";
 "Any::Moose::import" -> "warnings::import";
-"Data::MessagePack::BEGIN" -> "warnings::import";
 "Isucon::BEGIN" -> "warnings::import";
+"Data::MessagePack::BEGIN" -> "warnings::import";
 "Kossy::Request::BEGIN" -> "warnings::import";
 "Router::Simple::BEGIN" -> "warnings::import";
 "base::import" -> "warnings::import";
+"IO::BEGIN" -> "warnings::import";
 "Text::Xslate::Util::import_from" -> "warnings::import";
 "Kossy::Connection::BEGIN" -> "warnings::import";
 "Kossy::Response::BEGIN" -> "warnings::import";
@@ -125,5 +137,8 @@ subgraph cluster_Kossy {
 "Router::Simple::Route::BEGIN" -> "warnings::import";
 "Plack::App::URLMap::BEGIN" -> "warnings::import";
 "Kossy::BEGIN" -> "warnings::import";
+"Cache::Memcached::Fast::BEGIN" -> "warnings::import";
+"Cache::Memcached::Fast::new" -> "warnings::import";
 "File::Basename::BEGIN" -> "warnings::import";
+"Mouse::Exporter::BEGIN" -> "warnings::bits";
 }

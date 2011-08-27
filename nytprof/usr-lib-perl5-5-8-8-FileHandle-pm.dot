@@ -16,7 +16,7 @@ subgraph cluster_parent {
 	label="parent";
 	"parent::import";
 }
-"parent::import" -> "FileHandle::import";
 "FileHandle::import" -> "Exporter::export";
+"parent::import" -> "FileHandle::import";
 "FileHandle::import" -> "Exporter::Heavy::heavy_export";
 }

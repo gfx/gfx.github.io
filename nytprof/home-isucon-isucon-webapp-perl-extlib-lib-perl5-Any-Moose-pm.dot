@@ -11,8 +11,8 @@ subgraph cluster_strict {
 }
 subgraph cluster_Mouse_Exporter {
 	label="Mouse::Exporter";
-	"Mouse::Exporter::do_unimport";
 	"Mouse::Exporter::do_import";
+	"Mouse::Exporter::do_unimport";
 }
 subgraph cluster_Mouse_Meta_Module {
 	label="Mouse::Meta::Module";
@@ -26,8 +26,8 @@ subgraph cluster_Any_Moose {
 	"Any::Moose::import";
 	"Any::Moose::moose_is_preferred";
 	"Any::Moose::CORE:subst";
-	"Any::Moose::_canonicalize_fragment";
 	"Any::Moose::_canonicalize_options";
+	"Any::Moose::_canonicalize_fragment";
 	"Any::Moose::CORE:match";
 	"Any::Moose::unimport";
 	"Any::Moose::_install_module";
@@ -45,24 +45,24 @@ subgraph cluster_Plack_Handler_CLI {
 "Plack::Handler::CLI::BEGIN" -> "Any::Moose::_is_moose_loaded";
 "Any::Moose::_backer_of" -> "Any::Moose::_is_moose_loaded";
 "Plack::Handler::CLI::BEGIN" -> "Any::Moose::unimport";
-"Any::Moose::import" -> "Any::Moose::_install_module";
 "Any::Moose::_backer_of" -> "Mouse::Meta::Module::_get_metaclass_by_name";
-"Any::Moose::_install_module" -> "Mouse::Exporter::do_import";
 "Any::Moose::any_moose" -> "Any::Moose::CORE:match";
-"Any::Moose::import" -> "Any::Moose::_canonicalize_options";
 "Plack::Handler::CLI::BEGIN" -> "Any::Moose::import";
 "Any::Moose::BEGIN" -> "strict::unimport";
 "Plack::Handler::CLI::BEGIN" -> "Any::Moose::moose_is_preferred";
 "Any::Moose::_backer_of" -> "UNIVERSAL::isa";
-"Any::Moose::any_moose" -> "Any::Moose::mouse_is_preferred";
 "Any::Moose::unimport" -> "Mouse::Exporter::do_unimport";
 "Any::Moose::_canonicalize_options" -> "Any::Moose::any_moose";
-"Any::Moose::_install_module" -> "Any::Moose::CORE:subst";
-"Any::Moose::any_moose" -> "Any::Moose::CORE:subst";
-"Any::Moose::_canonicalize_fragment" -> "Any::Moose::CORE:subst";
 "Any::Moose::BEGIN" -> "warnings::import";
 "Any::Moose::import" -> "warnings::import";
 "Any::Moose::any_moose" -> "Any::Moose::_canonicalize_fragment";
+"Any::Moose::import" -> "Any::Moose::_install_module";
+"Any::Moose::_install_module" -> "Mouse::Exporter::do_import";
+"Any::Moose::import" -> "Any::Moose::_canonicalize_options";
+"Any::Moose::any_moose" -> "Any::Moose::mouse_is_preferred";
+"Any::Moose::_install_module" -> "Any::Moose::CORE:subst";
+"Any::Moose::any_moose" -> "Any::Moose::CORE:subst";
+"Any::Moose::_canonicalize_fragment" -> "Any::Moose::CORE:subst";
 "Any::Moose::unimport" -> "Any::Moose::_backer_of";
 "Any::Moose::any_moose" -> "Any::Moose::_backer_of";
 "Any::Moose::BEGIN" -> "strict::import";

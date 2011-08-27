@@ -1,26 +1,50 @@
 digraph {
 graph [overlap=false]
+subgraph cluster_Storable {
+	label="Storable";
+	"Storable::nfreeze";
+}
 subgraph cluster_strict {
 	label="strict";
 	"strict::import";
 	"strict::unimport";
 }
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::set";
+	"Cache::Memcached::Fast::new";
+}
 subgraph cluster_AutoLoader {
 	label="AutoLoader";
+	"AutoLoader::CORE:match";
 	"AutoLoader::BEGIN";
+	"AutoLoader::CORE:fteread";
 	"AutoLoader::CORE:substcont";
 	"AutoLoader::import";
 	"AutoLoader::CORE:regcomp";
 	"AutoLoader::CORE:subst";
+	"AutoLoader::AUTOLOAD";
 }
 subgraph cluster_parent {
 	label="parent";
 	"parent::import";
 }
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:substcont";
 "AutoLoader::import" -> "AutoLoader::CORE:substcont";
-"AutoLoader::import" -> "AutoLoader::CORE:subst";
-"AutoLoader::import" -> "AutoLoader::CORE:regcomp";
+"AutoLoader::AUTOLOAD" -> "AutoLoader::CORE:substcont";
 "AutoLoader::BEGIN" -> "strict::unimport";
 "parent::import" -> "AutoLoader::import";
+"Cache::Memcached::Fast::new" -> "AutoLoader::import";
+"Storable::nfreeze" -> "AutoLoader::AUTOLOAD";
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:subst";
+"AutoLoader::import" -> "AutoLoader::CORE:subst";
+"AutoLoader::AUTOLOAD" -> "AutoLoader::CORE:subst";
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:match";
+"AutoLoader::AUTOLOAD" -> "AutoLoader::CORE:match";
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:regcomp";
+"AutoLoader::import" -> "AutoLoader::CORE:regcomp";
+"AutoLoader::AUTOLOAD" -> "AutoLoader::CORE:regcomp";
+"Cache::Memcached::Fast::set" -> "AutoLoader::CORE:fteread";
+"AutoLoader::AUTOLOAD" -> "AutoLoader::CORE:fteread";
 "AutoLoader::BEGIN" -> "strict::import";
 }

@@ -20,7 +20,7 @@ subgraph cluster_vars {
 	label="vars";
 	"vars::import";
 }
-"DynaLoader::BEGIN" -> "Config::import";
 "Isucon::load_config" -> "JSON::XS::decode_json";
+"DynaLoader::BEGIN" -> "Config::import";
 "DynaLoader::BEGIN" -> "vars::import";
 }

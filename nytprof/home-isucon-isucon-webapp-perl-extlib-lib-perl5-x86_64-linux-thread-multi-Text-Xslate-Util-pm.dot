@@ -51,8 +51,6 @@ subgraph cluster_Text_Xslate_Bridge {
 	"Text::Xslate::Bridge::export_into_xslate";
 }
 "Text::Xslate::Engine::new" -> "Text::Xslate::Util::import_from";
-"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:qr";
-"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:regcomp";
 "Text::Xslate::Util::BEGIN" -> "parent::import";
 "Text::Xslate::Util::import_from" -> "warnings::unimport";
 "Text::Xslate::Util::import_from" -> "Exporter::import";
@@ -62,10 +60,12 @@ subgraph cluster_Text_Xslate_Bridge {
 "Text::Xslate::Util::import_from" -> "base::import";
 "Text::Xslate::Util::import_from" -> "Text::Xslate::Bridge::bridge";
 "Text::Xslate::Util::import_from" -> "Text::Xslate::Util::html_builder";
-"Text::Xslate::Util::import_from" -> "Text::Xslate::Util::CORE:match";
-"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:match";
 "Text::Xslate::Util::BEGIN" -> "warnings::import";
 "Text::Xslate::Util::import_from" -> "warnings::import";
+"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:qr";
+"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:regcomp";
+"Text::Xslate::Util::import_from" -> "Text::Xslate::Util::CORE:match";
+"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:match";
 "Text::Xslate::Util::BEGIN" -> "strict::import";
 "Text::Xslate::Util::import_from" -> "strict::import";
 "Text::Xslate::Util::import_from" -> "Text::Xslate::Bridge::export_into_xslate";

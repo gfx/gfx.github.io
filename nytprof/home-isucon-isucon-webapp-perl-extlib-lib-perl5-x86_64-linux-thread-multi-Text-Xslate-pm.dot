@@ -29,13 +29,13 @@ subgraph cluster_Text_Xslate_Bridge_TT2Like {
 	label="Text::Xslate::Bridge::TT2Like";
 	"Text::Xslate::Bridge::TT2Like::CORE:regcomp";
 }
+subgraph cluster_Class_Accessor_Lite {
+	label="Class::Accessor::Lite";
+	"Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+}
 subgraph cluster_Exporter {
 	label="Exporter";
 	"Exporter::import";
-}
-subgraph cluster_Class_Accessor_Lite {
-	label="Class::Accessor::Lite";
-	"Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
 }
 subgraph cluster_Text_Xslate {
 	label="Text::Xslate";
@@ -90,19 +90,19 @@ subgraph cluster_Text_Xslate_Engine {
 	"Text::Xslate::Engine::load_file";
 	"Text::Xslate::Engine::CORE:read";
 	"Text::Xslate::Engine::_resolve_function_aliases";
-	"Text::Xslate::Engine::_register_builtin_methods";
 	"Text::Xslate::Engine::CORE:ftewrite";
+	"Text::Xslate::Engine::_register_builtin_methods";
 	"Text::Xslate::Engine::_assemble";
 	"Text::Xslate::Engine::CORE:regcomp";
 	"Text::Xslate::Engine::default_functions";
 	"Text::Xslate::Engine::CORE:sort";
 	"Text::Xslate::Engine::render";
-	"Text::Xslate::Engine::_magic_token";
 	"Text::Xslate::Engine::_extract_options";
 	"Text::Xslate::Engine::options";
+	"Text::Xslate::Engine::_magic_token";
 	"Text::Xslate::Engine::_merge_hash";
-	"Text::Xslate::Engine::CORE:close";
 	"Text::Xslate::Engine::CORE:ftdir";
+	"Text::Xslate::Engine::CORE:close";
 	"Text::Xslate::Engine::CORE:flock";
 	"Text::Xslate::Engine::_load_compiled";
 	"Text::Xslate::Engine::CORE:match";
@@ -116,56 +116,56 @@ subgraph cluster_Kossy {
 "Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:stat";
 "Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::utf8";
 "Text::Xslate::Engine::load_file" -> "Text::Xslate::Engine::find_file";
-"Kossy::build_app" -> "Text::Xslate::Engine::new";
 "Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:read";
 "Text::Xslate::Engine::new" -> "Text::Xslate::Util::import_from";
-"Text::Xslate::Engine::render" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
-"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:qr";
-"Text::Xslate::Engine::new" -> "Text::Xslate::Engine::_register_builtin_methods";
-"Text::Xslate::Engine::BEGIN" -> "Text::Xslate::Engine::CORE:ftewrite";
-"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::reset";
 "Text::Xslate::Engine::load_file" -> "Text::Xslate::Engine::_assemble";
 "Text::Xslate::Engine::new" -> "Text::Xslate::Engine::default_functions";
 "Text::Xslate::Engine::new" -> "Text::Xslate::Engine::CORE:sort";
 "Text::Xslate::Engine::_extract_options" -> "Text::Xslate::Engine::CORE:sort";
 "Kossy::Connection::render" -> "Text::Xslate::Engine::render";
-"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:regcomp";
 "Text::Xslate::Engine::new" -> "File::Spec::Unix::rel2abs";
-"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::new";
 "Text::Xslate::Engine::_magic_token" -> "Text::Xslate::Engine::_extract_options";
 "Text::Xslate::Engine::new" -> "Text::Xslate::Engine::options";
-"Text::Xslate::Engine::new" -> "Text::Xslate::Engine::_merge_hash";
 "Kossy::BEGIN" -> "Text::Xslate::CORE:match";
-"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::execute";
 "Text::Xslate::Engine::BEGIN" -> "Exporter::import";
 "Text::Xslate::BEGIN" -> "Exporter::import";
 "Text::Xslate::Engine::BEGIN" -> "Text::Xslate::Engine::CORE:ftdir";
 "Text::Xslate::Engine::_resolve_function_aliases" -> "Scalar::Util::looks_like_number";
 "Text::Xslate::BEGIN" -> "UNIVERSAL::can";
-"Text::Xslate::Engine::BEGIN" -> "File::Spec::Unix::tmpdir";
 "Text::Xslate::BEGIN" -> "Data::MessagePack::CORE:match";
 "Text::Xslate::Engine::find_file" -> "Text::Xslate::Util::uri_escape";
 "Text::Xslate::Engine::render" -> "Text::Xslate::Bridge::TT2Like::CORE:regcomp";
-"Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:readline";
 "Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:open";
-"Text::Xslate::Engine::_load_compiled" -> "Fcntl::__ANON__[Fcntl.pm:230]";
 "Text::Xslate::Engine::_magic_token" -> "Data::MessagePack::pack";
 "Text::Xslate::Engine::render" -> "Text::Xslate::Engine::load_file";
+"Text::Xslate::Engine::options" -> "Text::Xslate::input_layer";
+"Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::_magic_token";
+"Text::Xslate::BEGIN" -> "warnings::import";
+"Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:close";
+"Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:flock";
+"Kossy::build_app" -> "Text::Xslate::Engine::new";
+"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:qr";
+"Text::Xslate::Engine::new" -> "Text::Xslate::Engine::_register_builtin_methods";
+"Text::Xslate::Engine::BEGIN" -> "Text::Xslate::Engine::CORE:ftewrite";
+"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::reset";
+"Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:regcomp";
+"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::new";
+"Text::Xslate::Engine::new" -> "Text::Xslate::Engine::_merge_hash";
+"Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::execute";
+"Text::Xslate::Engine::BEGIN" -> "File::Spec::Unix::tmpdir";
+"Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:readline";
+"Text::Xslate::Engine::_load_compiled" -> "Fcntl::__ANON__[Fcntl.pm:230]";
 "Text::Xslate::Engine::_load_compiled" -> "Fcntl::AUTOLOAD";
 "Text::Xslate::Engine::new" -> "Text::Xslate::Engine::_resolve_function_aliases";
+"Text::Xslate::Engine::render" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
 "Text::Xslate::BEGIN" -> "XSLoader::load";
 "Text::Xslate::Engine::_load_compiled" -> "Data::MessagePack::Unpacker::data";
 "Text::Xslate::Engine::find_file" -> "Text::Xslate::Engine::CORE:regcomp";
 "Text::Xslate::Engine::render" -> "Kossy::Request::uri_for";
-"Text::Xslate::Engine::options" -> "Text::Xslate::input_layer";
-"Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::_magic_token";
 "Text::Xslate::BEGIN" -> "Text::Xslate::Util::CORE:match";
 "Text::Xslate::Engine::find_file" -> "File::Spec::Unix::catfile";
 "Text::Xslate::Engine::BEGIN" -> "File::Spec::Unix::catfile";
-"Text::Xslate::BEGIN" -> "warnings::import";
 "Kossy::BEGIN" -> "Text::Xslate::CORE:subst";
-"Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:close";
-"Text::Xslate::Engine::_load_compiled" -> "Text::Xslate::Engine::CORE:flock";
 "Text::Xslate::BEGIN" -> "strict::import";
 "Text::Xslate::Engine::load_file" -> "Text::Xslate::Engine::_load_compiled";
 "Text::Xslate::Engine::find_file" -> "Text::Xslate::Engine::CORE:match";

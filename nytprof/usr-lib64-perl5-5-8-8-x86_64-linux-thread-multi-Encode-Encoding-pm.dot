@@ -18,7 +18,7 @@ subgraph cluster_Encode_utf8 {
 	label="Encode::utf8";
 	"Encode::utf8::decode_xs";
 }
-"Encode::BEGIN" -> "Encode::Encoding::CORE:match";
 "Encode::utf8::decode_xs" -> "Encode::Encoding::renewed";
+"Encode::BEGIN" -> "Encode::Encoding::CORE:match";
 "Encode::Encoding::BEGIN" -> "strict::import";
 }

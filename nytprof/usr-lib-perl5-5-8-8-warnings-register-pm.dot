@@ -8,9 +8,9 @@ subgraph cluster_constant {
 	label="constant";
 	"constant::BEGIN";
 }
-subgraph cluster_parent {
-	label="parent";
-	"parent::import";
+subgraph cluster_overload {
+	label="overload";
+	"overload::BEGIN";
 }
 subgraph cluster_warnings_register {
 	label="warnings::register";
@@ -20,5 +20,5 @@ subgraph cluster_warnings_register {
 "warnings::register::import" -> "warnings::register::mkMask";
 "constant::BEGIN" -> "warnings::register::import";
 "vars::BEGIN" -> "warnings::register::import";
-"parent::import" -> "warnings::register::import";
+"overload::BEGIN" -> "warnings::register::import";
 }

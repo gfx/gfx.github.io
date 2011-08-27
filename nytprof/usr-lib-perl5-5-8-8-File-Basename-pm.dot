@@ -15,8 +15,8 @@ subgraph cluster_File_Basename {
 	"File::Basename::fileparse_set_fstype";
 	"File::Basename::CORE:subst";
 	"File::Basename::fileparse";
-	"File::Basename::CORE:regcomp";
 	"File::Basename::_strip_trailing_sep";
+	"File::Basename::CORE:regcomp";
 	"File::Basename::CORE:match";
 	"File::Basename::BEGIN";
 }
@@ -24,26 +24,21 @@ subgraph cluster_re {
 	label="re";
 	"re::import";
 }
-subgraph cluster_FindBin {
-	label="FindBin";
-	"FindBin::init";
-	"FindBin::BEGIN";
-}
 subgraph cluster_Kossy {
 	label="Kossy";
 	"Kossy::psgi";
+	"Kossy::BEGIN";
 }
-"FindBin::init" -> "File::Basename::fileparse";
 "File::Basename::dirname" -> "File::Basename::fileparse";
-"File::Basename::fileparse_set_fstype" -> "File::Basename::CORE:regcomp";
-"File::Basename::BEGIN" -> "re::import";
 "Kossy::psgi" -> "File::Basename::dirname";
 "File::Basename::_strip_trailing_sep" -> "File::Basename::CORE:subst";
 "File::Basename::dirname" -> "File::Basename::_strip_trailing_sep";
+"Kossy::BEGIN" -> "File::Basename::fileparse_set_fstype";
+"File::Basename::BEGIN" -> "warnings::import";
+"File::Basename::fileparse_set_fstype" -> "File::Basename::CORE:regcomp";
+"File::Basename::BEGIN" -> "re::import";
 "File::Basename::fileparse" -> "File::Basename::CORE:match";
 "File::Basename::fileparse_set_fstype" -> "File::Basename::CORE:match";
-"FindBin::BEGIN" -> "File::Basename::fileparse_set_fstype";
 "File::Basename::_strip_trailing_sep" -> "File::Basename::CORE:substcont";
-"File::Basename::BEGIN" -> "warnings::import";
 "File::Basename::BEGIN" -> "strict::import";
 }

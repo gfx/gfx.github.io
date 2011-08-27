@@ -39,9 +39,9 @@ subgraph cluster_URI__server {
 "URI::implementor" -> "URI::_generic::CORE:subst";
 "Kossy::Request::uri_for" -> "URI::_generic::path";
 "URI::http::canonical" -> "URI::_generic::path";
-"URI::_server::_port" -> "URI::_generic::authority";
-"URI::http::canonical" -> "URI::_generic::authority";
-"URI::_server::host" -> "URI::_generic::authority";
 "URI::_generic::path" -> "URI::_generic::CORE:regcomp";
 "URI::_generic::authority" -> "URI::_generic::CORE:regcomp";
+"URI::_server::_port" -> "URI::_generic::authority";
+"URI::_server::host" -> "URI::_generic::authority";
+"URI::http::canonical" -> "URI::_generic::authority";
 }

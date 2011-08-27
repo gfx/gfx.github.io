@@ -16,10 +16,10 @@ subgraph cluster_Class_Accessor_Fast {
 	label="Class::Accessor::Fast";
 	"Class::Accessor::Fast::make_accessor";
 }
-"Router::Simple::BEGIN" -> "Class::Accessor::mk_accessors";
 "Class::Accessor::_mk_accessors" -> "Class::Accessor::mutator_name_for";
 "Router::Simple::BEGIN" -> "Class::Accessor::import";
 "Class::Accessor::_mk_accessors" -> "Class::Accessor::Fast::make_accessor";
+"Router::Simple::BEGIN" -> "Class::Accessor::mk_accessors";
 "Class::Accessor::_mk_accessors" -> "Class::Accessor::accessor_name_for";
 "Class::Accessor::mk_accessors" -> "Class::Accessor::_mk_accessors";
 }

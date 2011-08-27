@@ -7,7 +7,7 @@ subgraph cluster_Kossy_Connection {
 }
 subgraph cluster_Isucon {
 	label="Isucon";
-	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]";
+	"Isucon::__ANON__[lib/Isucon.pm:70]";
 	"Isucon::load_config";
 }
 subgraph cluster_strict {
@@ -19,12 +19,12 @@ subgraph cluster_Class_Accessor_Lite {
 	label="Class::Accessor::Lite";
 	"Class::Accessor::Lite::__m";
 	"Class::Accessor::Lite::BEGIN";
+	"Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:98]";
 	"Class::Accessor::Lite::CORE:sort";
 	"Class::Accessor::Lite::import";
-	"Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
 	"Class::Accessor::Lite::_mk_new";
 	"Class::Accessor::Lite::__m_new";
-	"Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:98]";
+	"Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
 	"Class::Accessor::Lite::_mk_accessors";
 }
 subgraph cluster_Text_Xslate_Engine {
@@ -33,24 +33,24 @@ subgraph cluster_Text_Xslate_Engine {
 }
 subgraph cluster_Kossy {
 	label="Kossy";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]";
+	"Kossy::__ANON__[lib/Kossy.pm:123]";
 	"Kossy::BEGIN";
 	"Kossy::build_app";
 }
-"Kossy::Connection::BEGIN" -> "Class::Accessor::Lite::import";
-"Kossy::BEGIN" -> "Class::Accessor::Lite::import";
-"Kossy::Connection::render" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
-"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
-"Text::Xslate::Engine::render" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
-"Isucon::load_config" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
-"Kossy::build_app" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
 "Class::Accessor::Lite::import" -> "Class::Accessor::Lite::_mk_new";
 "Class::Accessor::Lite::_mk_new" -> "Class::Accessor::Lite::__m_new";
 "Class::Accessor::Lite::import" -> "Class::Accessor::Lite::_mk_accessors";
 "Class::Accessor::Lite::_mk_accessors" -> "Class::Accessor::Lite::__m";
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:98]";
 "Class::Accessor::Lite::BEGIN" -> "strict::unimport";
 "Class::Accessor::Lite::import" -> "Class::Accessor::Lite::CORE:sort";
+"Kossy::__ANON__[lib/Kossy.pm:123]" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:98]";
+"Kossy::Connection::BEGIN" -> "Class::Accessor::Lite::import";
+"Kossy::BEGIN" -> "Class::Accessor::Lite::import";
+"Kossy::Connection::render" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+"Text::Xslate::Engine::render" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+"Kossy::__ANON__[lib/Kossy.pm:123]" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+"Isucon::load_config" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+"Isucon::__ANON__[lib/Isucon.pm:70]" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
+"Kossy::build_app" -> "Class::Accessor::Lite::__ANON__[extlib/lib/perl5/Class/Accessor/Lite.pm:107]";
 "Class::Accessor::Lite::BEGIN" -> "strict::import";
 }

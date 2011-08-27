@@ -16,6 +16,10 @@ subgraph cluster_strict {
 	label="strict";
 	"strict::import";
 }
+subgraph cluster_Cache_Memcached_Fast {
+	label="Cache::Memcached::Fast";
+	"Cache::Memcached::Fast::new";
+}
 subgraph cluster_Scalar_Util {
 	label="Scalar::Util";
 	"Scalar::Util::looks_like_number";
@@ -29,13 +33,14 @@ subgraph cluster_Text_Xslate_Engine {
 }
 subgraph cluster_Kossy {
 	label="Kossy";
-	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]";
+	"Kossy::__ANON__[lib/Kossy.pm:107]";
 }
-"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]" -> "Scalar::Util::blessed";
-"Mouse::Meta::Class::add_attribute" -> "Scalar::Util::blessed";
 "Isucon::BEGIN" -> "Scalar::Util::weaken";
 "Mouse::Meta::Class::add_attribute" -> "Scalar::Util::weaken";
-"Scalar::Util::BEGIN" -> "vars::import";
+"Cache::Memcached::Fast::new" -> "Scalar::Util::weaken";
 "Text::Xslate::Engine::_resolve_function_aliases" -> "Scalar::Util::looks_like_number";
+"Kossy::__ANON__[lib/Kossy.pm:107]" -> "Scalar::Util::blessed";
+"Mouse::Meta::Class::add_attribute" -> "Scalar::Util::blessed";
+"Scalar::Util::BEGIN" -> "vars::import";
 "Scalar::Util::BEGIN" -> "strict::import";
 }

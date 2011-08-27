@@ -13,11 +13,10 @@ subgraph cluster_File_Spec_Unix {
 	label="File::Spec::Unix";
 	"File::Spec::Unix::BEGIN";
 	"File::Spec::Unix::CORE:ftdir";
-	"File::Spec::Unix::path";
 	"File::Spec::Unix::rel2abs";
 	"File::Spec::Unix::canonpath";
-	"File::Spec::Unix::_tmpdir";
 	"File::Spec::Unix::CORE:match";
+	"File::Spec::Unix::_tmpdir";
 	"File::Spec::Unix::catfile";
 	"File::Spec::Unix::updir";
 	"File::Spec::Unix::file_name_is_absolute";
@@ -25,10 +24,6 @@ subgraph cluster_File_Spec_Unix {
 	"File::Spec::Unix::tmpdir";
 	"File::Spec::Unix::CORE:subst";
 	"File::Spec::Unix::catdir";
-}
-subgraph cluster_FindBin {
-	label="FindBin";
-	"FindBin::init";
 }
 subgraph cluster_Text_Xslate_Engine {
 	label="Text::Xslate::Engine";
@@ -40,26 +35,23 @@ subgraph cluster_Kossy {
 	label="Kossy";
 	"Kossy::BEGIN";
 }
+"Text::Xslate::Engine::new" -> "File::Spec::Unix::rel2abs";
+"Kossy::BEGIN" -> "File::Spec::Unix::updir";
+"File::Spec::Unix::BEGIN" -> "strict::unimport";
+"File::Spec::Unix::_tmpdir" -> "File::Spec::Unix::CORE:ftdir";
+"File::Spec::Unix::tmpdir" -> "File::Spec::Unix::_tmpdir";
 "File::Spec::Unix::rel2abs" -> "File::Spec::Unix::canonpath";
 "File::Spec::Unix::_tmpdir" -> "File::Spec::Unix::canonpath";
 "File::Spec::Unix::catfile" -> "File::Spec::Unix::canonpath";
 "File::Spec::Unix::catdir" -> "File::Spec::Unix::canonpath";
-"Text::Xslate::Engine::new" -> "File::Spec::Unix::rel2abs";
 "File::Spec::Unix::BEGIN" -> "vars::import";
-"Kossy::BEGIN" -> "File::Spec::Unix::updir";
 "File::Spec::Unix::rel2abs" -> "File::Spec::Unix::file_name_is_absolute";
-"FindBin::init" -> "File::Spec::Unix::file_name_is_absolute";
 "Text::Xslate::Engine::BEGIN" -> "File::Spec::Unix::tmpdir";
-"File::Spec::Unix::BEGIN" -> "strict::unimport";
 "File::Spec::Unix::_tmpdir" -> "File::Spec::Unix::CORE:ftewrite";
 "File::Spec::Unix::catfile" -> "File::Spec::Unix::catdir";
-"FindBin::init" -> "File::Spec::Unix::path";
-"File::Spec::Unix::_tmpdir" -> "File::Spec::Unix::CORE:ftdir";
 "File::Spec::Unix::file_name_is_absolute" -> "File::Spec::Unix::CORE:match";
-"File::Spec::Unix::tmpdir" -> "File::Spec::Unix::_tmpdir";
 "Text::Xslate::Engine::find_file" -> "File::Spec::Unix::catfile";
 "Text::Xslate::Engine::BEGIN" -> "File::Spec::Unix::catfile";
-"FindBin::init" -> "File::Spec::Unix::catfile";
 "File::Spec::Unix::BEGIN" -> "strict::import";
 "File::Spec::Unix::canonpath" -> "File::Spec::Unix::CORE:subst";
 }

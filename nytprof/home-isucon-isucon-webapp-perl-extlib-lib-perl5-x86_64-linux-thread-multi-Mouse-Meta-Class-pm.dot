@@ -3,8 +3,8 @@ graph [overlap=false]
 subgraph cluster_Mouse_Meta_Attribute {
 	label="Mouse::Meta::Attribute";
 	"Mouse::Meta::Attribute::install_accessors";
-	"Mouse::Meta::Attribute::name";
 	"Mouse::Meta::Attribute::new";
+	"Mouse::Meta::Attribute::name";
 	"Mouse::Meta::Attribute::interpolate_class";
 }
 subgraph cluster_Mouse_Meta_Class {
@@ -76,35 +76,35 @@ subgraph cluster_Mouse_Util {
 	label="Mouse::Util";
 	"Mouse::Util::load_class";
 }
-"Mouse::Object::new" -> "Mouse::Meta::Class::strict_constructor";
-"Mouse::has" -> "Mouse::Meta::Class::add_attribute";
-"Mouse::Meta::Class::add_attribute" -> "Mouse::Meta::Attribute::install_accessors";
 "Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Method::Constructor::XS::_generate_constructor";
-"Mouse::Meta::Class::add_attribute" -> "Mouse::Meta::Attribute::new";
 "Mouse::Meta::Class::_calculate_all_attributes" -> "Mouse::Meta::Attribute::name";
-"Mouse::Object::new" -> "Mouse::Meta::Class::_calculate_all_attributes";
-"Mouse::Meta::Class::add_attribute" -> "Scalar::Util::blessed";
 "Mouse::Meta::Class::add_attribute" -> "Scalar::Util::weaken";
-"main::BEGIN" -> "Mouse::Meta::Class::make_immutable";
 "Mouse::Meta::Class::superclasses" -> "Mouse::Meta::Module::_get_metaclass_by_name";
 "Mouse::Meta::Class::_calculate_all_attributes" -> "Mouse::Meta::Module::_get_metaclass_by_name";
 "Mouse::Meta::Class::add_attribute" -> "Mouse::Meta::Class::attribute_metaclass";
-"Mouse::Meta::Class::_calculate_all_attributes" -> "Mouse::Meta::Class::linearized_isa";
 "Mouse::Object::new" -> "Mouse::Meta::Class::is_immutable";
-"Mouse::Meta::Class::BEGIN" -> "Mouse::Exporter::do_import";
 "Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Module::add_method";
 "Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Method::Destructor::XS::_generate_destructor";
 "Mouse::Meta::Class::add_attribute" -> "Mouse::Meta::Class::CORE:subst";
 "Mouse::Meta::Class::verify_superclass" -> "UNIVERSAL::can";
-"Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Class::immutable_options";
 "Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Class::constructor_class";
-"Mouse::init_meta" -> "Mouse::Meta::Class::superclasses";
 "Mouse::Meta::Class::BEGIN" -> "strict::unimport";
+"Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Class::destructor_class";
+"Mouse::Meta::Class::_calculate_all_attributes" -> "Mouse::Meta::Class::CORE:sort";
+"Mouse::Object::new" -> "Mouse::Meta::Class::strict_constructor";
+"Mouse::has" -> "Mouse::Meta::Class::add_attribute";
+"Mouse::Meta::Class::add_attribute" -> "Mouse::Meta::Attribute::install_accessors";
+"Mouse::Meta::Class::add_attribute" -> "Mouse::Meta::Attribute::new";
+"Mouse::Object::new" -> "Mouse::Meta::Class::_calculate_all_attributes";
+"Mouse::Meta::Class::add_attribute" -> "Scalar::Util::blessed";
+"main::BEGIN" -> "Mouse::Meta::Class::make_immutable";
+"Mouse::Meta::Class::_calculate_all_attributes" -> "Mouse::Meta::Class::linearized_isa";
+"Mouse::Meta::Class::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Class::immutable_options";
+"Mouse::init_meta" -> "Mouse::Meta::Class::superclasses";
 "Mouse::Meta::Class::add_attribute" -> "Mouse::Meta::Attribute::interpolate_class";
 "Mouse::Meta::Class::superclasses" -> "Mouse::Meta::Class::verify_superclass";
 "Mouse::Meta::Class::add_attribute" -> "Mouse::Meta::Class::_invalidate_metaclass_cache";
-"Mouse::Meta::Class::make_immutable" -> "Mouse::Meta::Class::destructor_class";
-"Mouse::Meta::Class::_calculate_all_attributes" -> "Mouse::Meta::Class::CORE:sort";
 "Mouse::Meta::Class::superclasses" -> "Mouse::Util::load_class";
 "Mouse::Meta::Class::make_immutable" -> "Mouse::Util::load_class";
 "Mouse::Object::new" -> "Mouse::Meta::Class::is_anon_class";

@@ -13,10 +13,10 @@ subgraph cluster_Plack_Middleware {
 subgraph cluster_Plack_Builder {
 	label="Plack::Builder";
 	"Plack::Builder::BEGIN";
-	"Plack::Builder::__ANON__[Plack/Builder.pm:20]";
+	"Plack::Builder::__ANON__[extlib/lib/perl5/Plack/Builder.pm:20]";
 }
-"Plack::Builder::__ANON__[Plack/Builder.pm:20]" -> "Plack::Middleware::wrap";
+"Plack::Builder::__ANON__[extlib/lib/perl5/Plack/Builder.pm:20]" -> "Plack::Middleware::wrap";
 "Plack::Middleware::wrap" -> "Plack::Component::to_app";
-"Plack::Middleware::wrap" -> "Plack::Component::new";
 "Plack::Builder::BEGIN" -> "Plack::Middleware::import";
+"Plack::Middleware::wrap" -> "Plack::Component::new";
 }
