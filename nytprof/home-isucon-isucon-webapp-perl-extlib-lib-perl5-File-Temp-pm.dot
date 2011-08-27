@@ -1,9 +1,0 @@
-digraph {
-graph [overlap=false]
-subgraph cluster_File_Temp {
-	label="File::Temp";
-	"File::Temp::cleanup";
-	"File::Temp::END";
-}
-"File::Temp::END" -> "File::Temp::cleanup";
-}
