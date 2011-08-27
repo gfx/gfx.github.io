@@ -1,0 +1,92 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_JSON_XS {
+	label="JSON::XS";
+	"JSON::XS::decode_json";
+}
+subgraph cluster_Kossy_Connection {
+	label="Kossy::Connection";
+	"Kossy::Connection::render";
+}
+subgraph cluster_DBI {
+	label="DBI";
+	"DBI::_install_method";
+	"DBI::setup_driver";
+	"DBI::connect_cached";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::import";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::dbh";
+	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]";
+	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]";
+	"Isucon::CORE:readline";
+	"Isucon::load_config";
+	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:44]";
+	"Isucon::BEGIN";
+	"Isucon::CORE:open";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
+subgraph cluster_Class_Accessor_Lite {
+	label="Class::Accessor::Lite";
+	"Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+}
+subgraph cluster_utf8 {
+	label="utf8";
+	"utf8::import";
+}
+subgraph cluster_DBI_db {
+	label="DBI::db";
+	"DBI::db::selectall_arrayref";
+}
+subgraph cluster_Scalar_Util {
+	label="Scalar::Util";
+	"Scalar::Util::weaken";
+}
+subgraph cluster_JSON {
+	label="JSON";
+	"JSON::import";
+	"JSON::_load_xs";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]";
+	"Kossy::wrap_filter";
+}
+"Isucon::load_config" -> "Isucon::CORE:readline";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]";
+"Kossy::wrap_filter" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:44]";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]" -> "DBI::db::selectall_arrayref";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "DBI::db::selectall_arrayref";
+"Isucon::load_config" -> "JSON::XS::decode_json";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+"Isucon::load_config" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+"Isucon::BEGIN" -> "Scalar::Util::weaken";
+"Isucon::BEGIN" -> "Exporter::import";
+"Isucon::BEGIN" -> "JSON::import";
+"Isucon::BEGIN" -> "JSON::_load_xs";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]" -> "Isucon::dbh";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "Isucon::dbh";
+"Isucon::dbh" -> "Isucon::load_config";
+"Isucon::dbh" -> "DBI::connect_cached";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]" -> "Kossy::Connection::render";
+"Isucon::BEGIN" -> "DBI::setup_driver";
+"Isucon::load_config" -> "Isucon::CORE:open";
+"Isucon::BEGIN" -> "warnings::import";
+"Isucon::BEGIN" -> "utf8::import";
+"Isucon::BEGIN" -> "DBI::_install_method";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]";
+"Isucon::BEGIN" -> "strict::import";
+}

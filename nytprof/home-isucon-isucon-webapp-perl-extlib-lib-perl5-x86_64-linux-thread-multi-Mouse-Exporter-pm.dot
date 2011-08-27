@@ -1,0 +1,107 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Mouse_Meta_Attribute {
+	label="Mouse::Meta::Attribute";
+	"Mouse::Meta::Attribute::BEGIN";
+}
+subgraph cluster_Mouse_Meta_Class {
+	label="Mouse::Meta::Class";
+	"Mouse::Meta::Class::BEGIN";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::bits";
+	"warnings::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+	"strict::unimport";
+	"strict::bits";
+}
+subgraph cluster_Mouse_Util_TypeConstraints {
+	label="Mouse::Util::TypeConstraints";
+	"Mouse::Util::TypeConstraints::BEGIN";
+}
+subgraph cluster_Mouse_Exporter {
+	label="Mouse::Exporter";
+	"Mouse::Exporter::setup_import_methods";
+	"Mouse::Exporter::BEGIN";
+	"Mouse::Exporter::CORE:subst";
+	"Mouse::Exporter::do_import";
+	"Mouse::Exporter::build_import_methods";
+	"Mouse::Exporter::import";
+	"Mouse::Exporter::do_unimport";
+	"Mouse::Exporter::_get_caller_package";
+}
+subgraph cluster_Mouse_Meta_Module {
+	label="Mouse::Meta::Module";
+	"Mouse::Meta::Module::BEGIN";
+}
+subgraph cluster_Mouse_Meta_TypeConstraint {
+	label="Mouse::Meta::TypeConstraint";
+	"Mouse::Meta::TypeConstraint::BEGIN";
+}
+subgraph cluster_Any_Moose {
+	label="Any::Moose";
+	"Any::Moose::unimport";
+	"Any::Moose::_install_module";
+}
+subgraph cluster_Mouse_Meta_Role {
+	label="Mouse::Meta::Role";
+	"Mouse::Meta::Role::BEGIN";
+}
+subgraph cluster_UNIVERSAL {
+	label="UNIVERSAL";
+	"UNIVERSAL::can";
+}
+subgraph cluster_Mouse {
+	label="Mouse";
+	"Mouse::BEGIN";
+	"Mouse::init_meta";
+}
+subgraph cluster_Mouse_Object {
+	label="Mouse::Object";
+	"Mouse::Object::BEGIN";
+}
+subgraph cluster_Mouse_Util {
+	label="Mouse::Util";
+	"Mouse::Util::get_code_info";
+	"Mouse::Util::install_subroutines";
+	"Mouse::Util::BEGIN";
+}
+subgraph cluster_Plack_Handler_CLI {
+	label="Plack::Handler::CLI";
+	"Plack::Handler::CLI::BEGIN";
+}
+"Mouse::Exporter::do_import" -> "Mouse::Exporter::CORE:subst";
+"Mouse::Meta::Module::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Object::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Meta::Attribute::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Meta::Role::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Util::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Util::TypeConstraints::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Meta::Class::BEGIN" -> "Mouse::Exporter::do_import";
+"Any::Moose::_install_module" -> "Mouse::Exporter::do_import";
+"Mouse::Meta::TypeConstraint::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Exporter::BEGIN" -> "strict::bits";
+"Mouse::Exporter::do_import" -> "Mouse::init_meta";
+"Mouse::Exporter::build_import_methods" -> "UNIVERSAL::can";
+"Mouse::BEGIN" -> "Mouse::Exporter::setup_import_methods";
+"Plack::Handler::CLI::BEGIN" -> "Mouse::Exporter::setup_import_methods";
+"Mouse::Util::BEGIN" -> "Mouse::Exporter::setup_import_methods";
+"Mouse::Exporter::BEGIN" -> "strict::unimport";
+"Mouse::Exporter::build_import_methods" -> "Mouse::Util::get_code_info";
+"Mouse::Exporter::setup_import_methods" -> "Mouse::Exporter::build_import_methods";
+"Any::Moose::unimport" -> "Mouse::Exporter::do_unimport";
+"Mouse::Exporter::setup_import_methods" -> "Mouse::Util::install_subroutines";
+"Mouse::Exporter::do_import" -> "Mouse::Util::install_subroutines";
+"Mouse::Exporter::BEGIN" -> "warnings::bits";
+"Mouse::Exporter::BEGIN" -> "warnings::import";
+"Mouse::Exporter::BEGIN" -> "strict::import";
+"Mouse::BEGIN" -> "Mouse::Exporter::import";
+"Mouse::Util::BEGIN" -> "Mouse::Exporter::import";
+"Mouse::Util::TypeConstraints::BEGIN" -> "Mouse::Exporter::import";
+"Mouse::Exporter::do_unimport" -> "Mouse::Exporter::_get_caller_package";
+"Mouse::Exporter::do_import" -> "Mouse::Exporter::_get_caller_package";
+}

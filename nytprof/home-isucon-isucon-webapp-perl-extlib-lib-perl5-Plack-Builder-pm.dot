@@ -1,0 +1,54 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Plack_Component {
+	label="Plack::Component";
+	"Plack::Component::new";
+}
+subgraph cluster_Plack_Middleware {
+	label="Plack::Middleware";
+	"Plack::Middleware::import";
+	"Plack::Middleware::wrap";
+}
+subgraph cluster_Plack_Builder {
+	label="Plack::Builder";
+	"Plack::Builder::BEGIN";
+	"Plack::Builder::to_app";
+	"Plack::Builder::__ANON__[Plack/Builder.pm:94]";
+	"Plack::Builder::builder";
+	"Plack::Builder::add_middleware";
+	"Plack::Builder::__ANON__[Plack/Builder.pm:20]";
+	"Plack::Builder::new";
+	"Plack::Builder::enable";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+subgraph cluster_Plack_Util {
+	label="Plack::Util";
+	"Plack::Util::load_class";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::psgi";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]";
+}
+"Plack::Builder::__ANON__[Plack/Builder.pm:20]" -> "Plack::Middleware::wrap";
+"Plack::Builder::add_middleware" -> "Plack::Util::load_class";
+"Plack::Builder::builder" -> "Plack::Component::new";
+"Plack::Builder::BEGIN" -> "parent::import";
+"Plack::Builder::enable" -> "Plack::Builder::__ANON__[Plack/Builder.pm:94]";
+"Kossy::psgi" -> "Plack::Builder::builder";
+"Plack::Builder::__ANON__[Plack/Builder.pm:94]" -> "Plack::Builder::add_middleware";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]" -> "Plack::Builder::enable";
+"Plack::Builder::BEGIN" -> "Plack::Middleware::import";
+"Plack::Builder::builder" -> "Plack::Builder::to_app";
+"Plack::Builder::builder" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]";
+"Plack::Builder::BEGIN" -> "strict::import";
+"Plack::Builder::to_app" -> "Plack::Builder::__ANON__[Plack/Builder.pm:20]";
+"Plack::Builder::builder" -> "Plack::Builder::new";
+}

@@ -1,0 +1,22 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Plack_Component {
+	label="Plack::Component";
+	"Plack::Component::new";
+	"Plack::Component::to_app";
+}
+subgraph cluster_Plack_Middleware {
+	label="Plack::Middleware";
+	"Plack::Middleware::import";
+	"Plack::Middleware::wrap";
+}
+subgraph cluster_Plack_Builder {
+	label="Plack::Builder";
+	"Plack::Builder::BEGIN";
+	"Plack::Builder::__ANON__[Plack/Builder.pm:20]";
+}
+"Plack::Builder::__ANON__[Plack/Builder.pm:20]" -> "Plack::Middleware::wrap";
+"Plack::Middleware::wrap" -> "Plack::Component::to_app";
+"Plack::Middleware::wrap" -> "Plack::Component::new";
+"Plack::Builder::BEGIN" -> "Plack::Middleware::import";
+}

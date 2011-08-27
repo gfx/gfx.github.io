@@ -1,0 +1,29 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::unimport";
+	"warnings::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Plack_App_URLMap {
+	label="Plack::App::URLMap";
+	"Plack::App::URLMap::BEGIN";
+}
+subgraph cluster_constant {
+	label="constant";
+	"constant::import";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+"Plack::App::URLMap::BEGIN" -> "parent::import";
+"Plack::App::URLMap::BEGIN" -> "warnings::unimport";
+"Plack::App::URLMap::BEGIN" -> "constant::import";
+"Plack::App::URLMap::BEGIN" -> "warnings::import";
+"Plack::App::URLMap::BEGIN" -> "strict::import";
+}

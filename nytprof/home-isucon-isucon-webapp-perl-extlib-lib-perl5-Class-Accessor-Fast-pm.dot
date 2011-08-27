@@ -1,0 +1,12 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Class_Accessor {
+	label="Class::Accessor";
+	"Class::Accessor::_mk_accessors";
+}
+subgraph cluster_Class_Accessor_Fast {
+	label="Class::Accessor::Fast";
+	"Class::Accessor::Fast::make_accessor";
+}
+"Class::Accessor::_mk_accessors" -> "Class::Accessor::Fast::make_accessor";
+}

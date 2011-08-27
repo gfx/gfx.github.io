@@ -1,0 +1,34 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Encode {
+	label="Encode";
+	"Encode::encode_utf8";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::BEGIN";
+}
+subgraph cluster_URI {
+	label="URI";
+	"URI::_uric_escape";
+}
+subgraph cluster_utf8 {
+	label="utf8";
+	"utf8::encode";
+	"utf8::import";
+	"utf8::downgrade";
+}
+subgraph cluster_URI__generic {
+	label="URI::_generic";
+	"URI::_generic::path";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::BEGIN";
+}
+"Encode::encode_utf8" -> "utf8::encode";
+"URI::_generic::path" -> "utf8::downgrade";
+"URI::_uric_escape" -> "utf8::downgrade";
+"Isucon::BEGIN" -> "utf8::import";
+"Kossy::BEGIN" -> "utf8::import";
+}

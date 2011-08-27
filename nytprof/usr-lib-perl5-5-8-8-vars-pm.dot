@@ -1,0 +1,72 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_DynaLoader {
+	label="DynaLoader";
+	"DynaLoader::BEGIN";
+}
+subgraph cluster_DBI {
+	label="DBI";
+	"DBI::install_driver";
+}
+subgraph cluster_vars {
+	label="vars";
+	"vars::import";
+	"vars::BEGIN";
+	"vars::CORE:match";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_File_Spec_Unix {
+	label="File::Spec::Unix";
+	"File::Spec::Unix::BEGIN";
+}
+subgraph cluster_List_Util {
+	label="List::Util";
+	"List::Util::BEGIN";
+}
+subgraph cluster_Try_Tiny {
+	label="Try::Tiny";
+	"Try::Tiny::BEGIN";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::BEGIN";
+	"parent::import";
+}
+subgraph cluster_Plack_Util {
+	label="Plack::Util";
+	"Plack::Util::load_class";
+}
+subgraph cluster_Scalar_Util {
+	label="Scalar::Util";
+	"Scalar::Util::BEGIN";
+}
+subgraph cluster_File_Spec {
+	label="File::Spec";
+	"File::Spec::BEGIN";
+}
+subgraph cluster_warnings_register {
+	label="warnings::register";
+	"warnings::register::import";
+}
+subgraph cluster_Cwd {
+	label="Cwd";
+	"Cwd::BEGIN";
+}
+"parent::BEGIN" -> "vars::import";
+"Plack::Util::load_class" -> "vars::import";
+"File::Spec::Unix::BEGIN" -> "vars::import";
+"Try::Tiny::BEGIN" -> "vars::import";
+"Cwd::BEGIN" -> "vars::import";
+"File::Spec::BEGIN" -> "vars::import";
+"parent::import" -> "vars::import";
+"DBI::install_driver" -> "vars::import";
+"DynaLoader::BEGIN" -> "vars::import";
+"List::Util::BEGIN" -> "vars::import";
+"Scalar::Util::BEGIN" -> "vars::import";
+"vars::import" -> "vars::CORE:match";
+"vars::BEGIN" -> "strict::import";
+"vars::BEGIN" -> "warnings::register::import";
+}

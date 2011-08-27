@@ -1,0 +1,65 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Encode {
+	label="Encode";
+	"Encode::BEGIN";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::import";
+}
+subgraph cluster_base {
+	label="base";
+	"base::has_fields";
+	"base::has_version";
+	"base::has_attr";
+	"base::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+	"strict::unimport";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
+subgraph cluster_Text_Xslate_Util {
+	label="Text::Xslate::Util";
+	"Text::Xslate::Util::import_from";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+subgraph cluster_UNIVERSAL {
+	label="UNIVERSAL";
+	"UNIVERSAL::isa";
+}
+subgraph cluster_JSON {
+	label="JSON";
+	"JSON::BEGIN";
+}
+subgraph cluster_Encode_Alias {
+	label="Encode::Alias";
+	"Encode::Alias::BEGIN";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::BEGIN";
+}
+"base::import" -> "base::has_version";
+"base::import" -> "Exporter::import";
+"base::import" -> "strict::unimport";
+"base::import" -> "base::has_attr";
+"Encode::BEGIN" -> "base::import";
+"JSON::BEGIN" -> "base::import";
+"Text::Xslate::Util::import_from" -> "base::import";
+"Kossy::BEGIN" -> "base::import";
+"parent::import" -> "base::import";
+"Encode::Alias::BEGIN" -> "base::import";
+"base::import" -> "UNIVERSAL::isa";
+"base::import" -> "base::has_fields";
+"base::import" -> "warnings::import";
+"base::import" -> "strict::import";
+}

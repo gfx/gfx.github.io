@@ -1,0 +1,41 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Encode {
+	label="Encode";
+	"Encode::BEGIN";
+}
+subgraph cluster_base {
+	label="base";
+	"base::import";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::unimport";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
+subgraph cluster_Encode_Alias {
+	label="Encode::Alias";
+	"Encode::Alias::CORE:match";
+	"Encode::Alias::define_alias";
+	"Encode::Alias::init_aliases";
+	"Encode::Alias::BEGIN";
+	"Encode::Alias::undef_aliases";
+	"Encode::Alias::CORE:qr";
+}
+"Encode::Alias::init_aliases" -> "Encode::Alias::CORE:qr";
+"Encode::Alias::BEGIN" -> "warnings::unimport";
+"Encode::Alias::BEGIN" -> "Exporter::import";
+"Encode::Alias::BEGIN" -> "base::import";
+"Encode::Alias::init_aliases" -> "Encode::Alias::undef_aliases";
+"Encode::BEGIN" -> "Encode::Alias::CORE:match";
+"Encode::Alias::init_aliases" -> "Encode::Alias::define_alias";
+"Encode::BEGIN" -> "Encode::Alias::init_aliases";
+"Encode::Alias::BEGIN" -> "strict::import";
+}

@@ -1,0 +1,246 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Plack_Middleware_Static {
+	label="Plack::Middleware::Static";
+	"Plack::Middleware::Static::call";
+}
+subgraph cluster_Encode {
+	label="Encode";
+	"Encode::CORE:match";
+	"Encode::decode_utf8";
+	"Encode::predefine_encodings";
+	"Encode::encode_utf8";
+}
+subgraph cluster_Kossy_Connection {
+	label="Kossy::Connection";
+	"Kossy::Connection::render";
+	"Kossy::Connection::BEGIN";
+}
+subgraph cluster_Plack_Request {
+	label="Plack::Request";
+	"Plack::Request::new";
+	"Plack::Request::base";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::import";
+}
+subgraph cluster_base {
+	label="base";
+	"base::import";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]";
+	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]";
+	"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:44]";
+}
+subgraph cluster_Plack_Util_Accessor {
+	label="Plack::Util::Accessor";
+	"Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Kossy_Request {
+	label="Kossy::Request";
+	"Kossy::Request::uri_for";
+	"Kossy::Request::BEGIN";
+}
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+}
+subgraph cluster_Router_Simple {
+	label="Router::Simple";
+	"Router::Simple::new";
+	"Router::Simple::connect";
+	"Router::Simple::match";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
+subgraph cluster_Class_Accessor_Lite {
+	label="Class::Accessor::Lite";
+	"Class::Accessor::Lite::import";
+	"Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+	"Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:98]";
+}
+subgraph cluster_utf8 {
+	label="utf8";
+	"utf8::import";
+}
+subgraph cluster_File_Basename {
+	label="File::Basename";
+	"File::Basename::dirname";
+}
+subgraph cluster_Text_Xslate {
+	label="Text::Xslate";
+	"Text::Xslate::CORE:subst";
+	"Text::Xslate::CORE:match";
+}
+subgraph cluster_File_Spec_Unix {
+	label="File::Spec::Unix";
+	"File::Spec::Unix::updir";
+}
+subgraph cluster_Kossy_Response {
+	label="Kossy::Response";
+	"Kossy::Response::_body";
+	"Kossy::Response::BEGIN";
+}
+subgraph cluster_URI__generic {
+	label="URI::_generic";
+	"URI::_generic::path";
+}
+subgraph cluster_Plack_Builder {
+	label="Plack::Builder";
+	"Plack::Builder::builder";
+	"Plack::Builder::enable";
+}
+subgraph cluster_Kossy_Exception {
+	label="Kossy::Exception";
+	"Kossy::Exception::BEGIN";
+}
+subgraph cluster_Try_Tiny {
+	label="Try::Tiny";
+	"Try::Tiny::catch";
+	"Try::Tiny::try";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+subgraph cluster_main {
+	label="main";
+	"main::BEGIN";
+	"main::RUNTIME";
+}
+subgraph cluster_Scalar_Util {
+	label="Scalar::Util";
+	"Scalar::Util::blessed";
+}
+subgraph cluster_UNIVERSAL {
+	label="UNIVERSAL";
+	"UNIVERSAL::isa";
+	"UNIVERSAL::can";
+}
+subgraph cluster_Encode_Config {
+	label="Encode::Config";
+	"Encode::Config::CORE:match";
+}
+subgraph cluster_Text_Xslate_Engine {
+	label="Text::Xslate::Engine";
+	"Text::Xslate::Engine::render";
+	"Text::Xslate::Engine::new";
+}
+subgraph cluster_Plack_Response {
+	label="Plack::Response";
+	"Plack::Response::content_type";
+	"Plack::Response::new";
+	"Plack::Response::finalize";
+}
+subgraph cluster_Cwd {
+	label="Cwd";
+	"Cwd::abs_path";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::new";
+	"Kossy::psgi";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]";
+	"Kossy::build_app";
+	"Kossy::CORE:qr";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]";
+	"Kossy::post";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]";
+	"Kossy::_router";
+	"Kossy::filter";
+	"Kossy::get";
+	"Kossy::wrap_filter";
+	"Kossy::_connect";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]";
+	"Kossy::BEGIN";
+}
+"Kossy::psgi" -> "Kossy::new";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]";
+"main::RUNTIME" -> "Kossy::psgi";
+"Kossy::build_app" -> "Text::Xslate::Engine::new";
+"Kossy::wrap_filter" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:44]";
+"Kossy::Connection::BEGIN" -> "Class::Accessor::Lite::import";
+"Kossy::BEGIN" -> "Class::Accessor::Lite::import";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:43]";
+"Kossy::Connection::render" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Kossy::Response::_body" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Kossy::Connection::render" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+"Kossy::build_app" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:107]";
+"Kossy::psgi" -> "Cwd::abs_path";
+"Kossy::build_app" -> "Router::Simple::connect";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Try::Tiny::catch";
+"Try::Tiny::try" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Try::Tiny::try";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]" -> "Scalar::Util::blessed";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]" -> "Router::Simple::match";
+"Try::Tiny::try" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]";
+"Kossy::Request::BEGIN" -> "Encode::CORE:match";
+"Kossy::Connection::render" -> "Plack::Response::content_type";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Plack::Response::content_type";
+"Kossy::Connection::render" -> "Text::Xslate::Engine::render";
+"main::BEGIN" -> "Kossy::filter";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Plack::Response::new";
+"Kossy::Request::BEGIN" -> "Encode::predefine_encodings";
+"Kossy::Response::_body" -> "Encode::encode_utf8";
+"Kossy::psgi" -> "File::Basename::dirname";
+"Kossy::Response::BEGIN" -> "parent::import";
+"Kossy::Request::BEGIN" -> "parent::import";
+"Kossy::BEGIN" -> "Text::Xslate::CORE:match";
+"Kossy::BEGIN" -> "File::Spec::Unix::updir";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Kossy::wrap_filter";
+"Kossy::Request::BEGIN" -> "Exporter::import";
+"Kossy::Response::BEGIN" -> "Exporter::import";
+"Kossy::BEGIN" -> "Exporter::import";
+"Plack::Middleware::Static::call" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]" -> "Encode::decode_utf8";
+"Kossy::Request::uri_for" -> "URI::_generic::path";
+"Kossy::psgi" -> "Plack::Builder::builder";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Class::Accessor::Lite::__ANON__[Class/Accessor/Lite.pm:98]";
+"Kossy::BEGIN" -> "UNIVERSAL::can";
+"Kossy::Request::uri_for" -> "Plack::Request::base";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]" -> "Plack::Builder::enable";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Plack::Request::new";
+"Kossy::psgi" -> "Kossy::build_app";
+"Kossy::BEGIN" -> "base::import";
+"Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]" -> "Kossy::Connection::render";
+"Kossy::build_app" -> "Router::Simple::new";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]" -> "UNIVERSAL::isa";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]" -> "Kossy::CORE:qr";
+"main::BEGIN" -> "Kossy::post";
+"Kossy::BEGIN" -> "XSLoader::load";
+"Kossy::Request::BEGIN" -> "XSLoader::load";
+"Kossy::Request::BEGIN" -> "Encode::Config::CORE:match";
+"Kossy::build_app" -> "Kossy::_router";
+"Kossy::_connect" -> "Kossy::_router";
+"Text::Xslate::Engine::render" -> "Kossy::Request::uri_for";
+"main::BEGIN" -> "Kossy::get";
+"Kossy::Request::BEGIN" -> "warnings::import";
+"Kossy::Connection::BEGIN" -> "warnings::import";
+"Kossy::Response::BEGIN" -> "warnings::import";
+"Kossy::Exception::BEGIN" -> "warnings::import";
+"Kossy::BEGIN" -> "warnings::import";
+"Kossy::BEGIN" -> "Text::Xslate::CORE:subst";
+"Kossy::BEGIN" -> "utf8::import";
+"Kossy::get" -> "Kossy::_connect";
+"Kossy::post" -> "Kossy::_connect";
+"Plack::Builder::builder" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:46]";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]" -> "Isucon::__ANON__[/home/isucon/isucon/webapp/perl/lib/Isucon.pm:52]";
+"Plack::Response::finalize" -> "Kossy::Response::_body";
+"Kossy::Connection::BEGIN" -> "strict::import";
+"Kossy::Response::BEGIN" -> "strict::import";
+"Kossy::Request::BEGIN" -> "strict::import";
+"Kossy::Exception::BEGIN" -> "strict::import";
+"Kossy::BEGIN" -> "strict::import";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]" -> "Plack::Response::finalize";
+}

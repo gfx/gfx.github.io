@@ -1,0 +1,12 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_IO_File {
+	label="IO::File";
+	"IO::File::CORE:match";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+"parent::import" -> "IO::File::CORE:match";
+}

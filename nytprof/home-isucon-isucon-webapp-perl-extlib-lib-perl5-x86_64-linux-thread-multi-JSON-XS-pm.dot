@@ -1,0 +1,26 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_JSON_XS {
+	label="JSON::XS";
+	"JSON::XS::decode_json";
+}
+subgraph cluster_Config {
+	label="Config";
+	"Config::import";
+}
+subgraph cluster_DynaLoader {
+	label="DynaLoader";
+	"DynaLoader::BEGIN";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::load_config";
+}
+subgraph cluster_vars {
+	label="vars";
+	"vars::import";
+}
+"DynaLoader::BEGIN" -> "Config::import";
+"Isucon::load_config" -> "JSON::XS::decode_json";
+"DynaLoader::BEGIN" -> "vars::import";
+}

@@ -1,0 +1,32 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Plack_Request {
+	label="Plack::Request";
+	"Plack::Request::new";
+	"Plack::Request::_uri_base";
+	"Plack::Request::env";
+	"Plack::Request::base";
+}
+subgraph cluster_Kossy_Request {
+	label="Kossy::Request";
+	"Kossy::Request::uri_for";
+}
+subgraph cluster_URI {
+	label="URI";
+	"URI::new";
+}
+subgraph cluster_URI_http {
+	label="URI::http";
+	"URI::http::canonical";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]";
+}
+"Plack::Request::_uri_base" -> "Plack::Request::env";
+"Kossy::Request::uri_for" -> "Plack::Request::base";
+"Plack::Request::base" -> "URI::http::canonical";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Plack::Request::new";
+"Plack::Request::base" -> "URI::new";
+"Plack::Request::base" -> "Plack::Request::_uri_base";
+}

@@ -1,0 +1,12 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_HTTP_Body_UrlEncoded {
+	label="HTTP::Body::UrlEncoded";
+	"HTTP::Body::UrlEncoded::CORE:qr";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+"parent::import" -> "HTTP::Body::UrlEncoded::CORE:qr";
+}

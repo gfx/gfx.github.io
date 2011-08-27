@@ -1,0 +1,19 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_integer {
+	label="integer";
+	"integer::import";
+	"integer::unimport";
+}
+subgraph cluster_URI__server {
+	label="URI::_server";
+	"URI::_server::_host_escape";
+}
+subgraph cluster_Plack_Util {
+	label="Plack::Util";
+	"Plack::Util::load_class";
+}
+"Plack::Util::load_class" -> "integer::unimport";
+"Plack::Util::load_class" -> "integer::import";
+"URI::_server::_host_escape" -> "integer::import";
+}

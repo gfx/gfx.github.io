@@ -1,0 +1,52 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Mouse_Meta_Attribute {
+	label="Mouse::Meta::Attribute";
+	"Mouse::Meta::Attribute::_process_options";
+}
+subgraph cluster_Mouse_Util_TypeConstraints {
+	label="Mouse::Util::TypeConstraints";
+	"Mouse::Util::TypeConstraints::class_type";
+	"Mouse::Util::TypeConstraints::find_type_constraint";
+	"Mouse::Util::TypeConstraints::find_or_create_isa_type_constraint";
+	"Mouse::Util::TypeConstraints::find_or_parse_type_constraint";
+	"Mouse::Util::TypeConstraints::BEGIN";
+	"Mouse::Util::TypeConstraints::subtype";
+	"Mouse::Util::TypeConstraints::CORE:subst";
+	"Mouse::Util::TypeConstraints::CORE:match";
+	"Mouse::Util::TypeConstraints::_define_type";
+}
+subgraph cluster_Mouse_Exporter {
+	label="Mouse::Exporter";
+	"Mouse::Exporter::import";
+	"Mouse::Exporter::do_import";
+}
+subgraph cluster_Mouse_Meta_TypeConstraint {
+	label="Mouse::Meta::TypeConstraint";
+	"Mouse::Meta::TypeConstraint::new";
+}
+subgraph cluster_Mouse {
+	label="Mouse";
+	"Mouse::init_meta";
+}
+subgraph cluster_Mouse_Util {
+	label="Mouse::Util";
+	"Mouse::Util::is_a_type_constraint";
+	"Mouse::Util::generate_isa_predicate_for";
+}
+"Mouse::Util::TypeConstraints::_define_type" -> "Mouse::Util::TypeConstraints::find_or_create_isa_type_constraint";
+"Mouse::Util::TypeConstraints::_define_type" -> "Mouse::Util::TypeConstraints::CORE:match";
+"Mouse::Util::TypeConstraints::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Util::TypeConstraints::find_type_constraint" -> "Mouse::Util::is_a_type_constraint";
+"Mouse::Util::TypeConstraints::find_or_parse_type_constraint" -> "Mouse::Util::is_a_type_constraint";
+"Mouse::Util::TypeConstraints::_define_type" -> "Mouse::Meta::TypeConstraint::new";
+"Mouse::Util::TypeConstraints::class_type" -> "Mouse::Util::TypeConstraints::subtype";
+"Mouse::init_meta" -> "Mouse::Util::TypeConstraints::class_type";
+"Mouse::init_meta" -> "Mouse::Util::TypeConstraints::find_type_constraint";
+"Mouse::Meta::Attribute::_process_options" -> "Mouse::Util::TypeConstraints::find_or_parse_type_constraint";
+"Mouse::Util::TypeConstraints::find_or_create_isa_type_constraint" -> "Mouse::Util::TypeConstraints::find_or_parse_type_constraint";
+"Mouse::Util::TypeConstraints::find_type_constraint" -> "Mouse::Util::TypeConstraints::CORE:subst";
+"Mouse::Util::TypeConstraints::subtype" -> "Mouse::Util::TypeConstraints::_define_type";
+"Mouse::Util::TypeConstraints::BEGIN" -> "Mouse::Exporter::import";
+"Mouse::Util::TypeConstraints::class_type" -> "Mouse::Util::generate_isa_predicate_for";
+}

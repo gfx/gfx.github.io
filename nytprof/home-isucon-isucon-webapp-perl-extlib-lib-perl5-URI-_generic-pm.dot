@@ -1,0 +1,47 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Kossy_Request {
+	label="Kossy::Request";
+	"Kossy::Request::uri_for";
+}
+subgraph cluster_URI {
+	label="URI";
+	"URI::implementor";
+}
+subgraph cluster_URI_http {
+	label="URI::http";
+	"URI::http::canonical";
+}
+subgraph cluster_utf8 {
+	label="utf8";
+	"utf8::downgrade";
+}
+subgraph cluster_URI__generic {
+	label="URI::_generic";
+	"URI::_generic::_check_path";
+	"URI::_generic::path";
+	"URI::_generic::CORE:subst";
+	"URI::_generic::CORE:regcomp";
+	"URI::_generic::authority";
+	"URI::_generic::CORE:match";
+}
+subgraph cluster_URI__server {
+	label="URI::_server";
+	"URI::_server::_port";
+	"URI::_server::host";
+}
+"URI::_generic::path" -> "URI::_generic::_check_path";
+"URI::_generic::_check_path" -> "URI::_generic::CORE:match";
+"URI::_generic::path" -> "URI::_generic::CORE:match";
+"URI::_generic::authority" -> "URI::_generic::CORE:match";
+"URI::_generic::path" -> "utf8::downgrade";
+"URI::_generic::path" -> "URI::_generic::CORE:subst";
+"URI::implementor" -> "URI::_generic::CORE:subst";
+"Kossy::Request::uri_for" -> "URI::_generic::path";
+"URI::http::canonical" -> "URI::_generic::path";
+"URI::_server::_port" -> "URI::_generic::authority";
+"URI::http::canonical" -> "URI::_generic::authority";
+"URI::_server::host" -> "URI::_generic::authority";
+"URI::_generic::path" -> "URI::_generic::CORE:regcomp";
+"URI::_generic::authority" -> "URI::_generic::CORE:regcomp";
+}

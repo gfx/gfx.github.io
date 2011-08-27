@@ -1,0 +1,83 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Config {
+	label="Config";
+	"Config::import";
+	"Config::FETCH";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::import";
+}
+subgraph cluster_vars {
+	label="vars";
+	"vars::import";
+}
+subgraph cluster_Plack_Util_Accessor {
+	label="Plack::Util::Accessor";
+	"Plack::Util::Accessor::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Plack_Component {
+	label="Plack::Component";
+	"Plack::Component::__ANON__[Plack/Component.pm:39]";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
+subgraph cluster_integer {
+	label="integer";
+	"integer::import";
+	"integer::unimport";
+}
+subgraph cluster_Time_Local {
+	label="Time::Local";
+	"Time::Local::_daygm";
+}
+subgraph cluster_Plack_Builder {
+	label="Plack::Builder";
+	"Plack::Builder::add_middleware";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+subgraph cluster_Plack_Util {
+	label="Plack::Util";
+	"Plack::Util::load_class";
+	"Plack::Util::CORE:match";
+	"Plack::Util::CORE:regcomp";
+	"Plack::Util::CORE:subst";
+	"Plack::Util::foreach";
+	"Plack::Util::run_app";
+}
+subgraph cluster_Plack_Handler_CLI {
+	label="Plack::Handler::CLI";
+	"Plack::Handler::CLI::run";
+	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:168]";
+	"Plack::Handler::CLI::_handle_response";
+}
+"Plack::Util::load_class" -> "Time::Local::_daygm";
+"Plack::Util::load_class" -> "Plack::Util::CORE:subst";
+"Plack::Util::load_class" -> "Config::import";
+"Plack::Util::run_app" -> "Plack::Component::__ANON__[Plack/Component.pm:39]";
+"Plack::Util::load_class" -> "integer::unimport";
+"Plack::Builder::add_middleware" -> "Plack::Util::load_class";
+"Plack::Util::load_class" -> "vars::import";
+"Plack::Util::load_class" -> "parent::import";
+"Plack::Util::load_class" -> "Exporter::import";
+"Plack::Handler::CLI::run" -> "Plack::Util::run_app";
+"Plack::Util::load_class" -> "integer::import";
+"Plack::Util::load_class" -> "Plack::Util::Accessor::import";
+"Plack::Util::load_class" -> "Plack::Util::CORE:regcomp";
+"Plack::Util::foreach" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:168]";
+"Plack::Util::load_class" -> "Config::FETCH";
+"Plack::Util::load_class" -> "Plack::Util::CORE:match";
+"Plack::Handler::CLI::_handle_response" -> "Plack::Util::foreach";
+"Plack::Util::load_class" -> "warnings::import";
+"Plack::Util::load_class" -> "strict::import";
+}

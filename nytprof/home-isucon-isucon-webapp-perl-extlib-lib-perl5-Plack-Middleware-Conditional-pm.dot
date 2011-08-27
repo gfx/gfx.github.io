@@ -1,0 +1,22 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Plack_Util_Accessor {
+	label="Plack::Util::Accessor";
+	"Plack::Util::Accessor::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Plack_Middleware_Conditional {
+	label="Plack::Middleware::Conditional";
+	"Plack::Middleware::Conditional::BEGIN";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+"Plack::Middleware::Conditional::BEGIN" -> "parent::import";
+"Plack::Middleware::Conditional::BEGIN" -> "Plack::Util::Accessor::import";
+"Plack::Middleware::Conditional::BEGIN" -> "strict::import";
+}

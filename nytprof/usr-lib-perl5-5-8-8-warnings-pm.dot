@@ -1,0 +1,129 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Router_Simple_Route {
+	label="Router::Simple::Route";
+	"Router::Simple::Route::BEGIN";
+}
+subgraph cluster_Encode {
+	label="Encode";
+	"Encode::BEGIN";
+}
+subgraph cluster_Kossy_Connection {
+	label="Kossy::Connection";
+	"Kossy::Connection::BEGIN";
+}
+subgraph cluster_Data_MessagePack {
+	label="Data::MessagePack";
+	"Data::MessagePack::BEGIN";
+}
+subgraph cluster_base {
+	label="base";
+	"base::import";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::unimport";
+	"warnings::bits";
+	"warnings::import";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::BEGIN";
+}
+subgraph cluster_Plack_App_URLMap {
+	label="Plack::App::URLMap";
+	"Plack::App::URLMap::BEGIN";
+}
+subgraph cluster_Kossy_Request {
+	label="Kossy::Request";
+	"Kossy::Request::BEGIN";
+}
+subgraph cluster_Router_Simple {
+	label="Router::Simple";
+	"Router::Simple::BEGIN";
+}
+subgraph cluster_Mouse_Exporter {
+	label="Mouse::Exporter";
+	"Mouse::Exporter::BEGIN";
+}
+subgraph cluster_File_Basename {
+	label="File::Basename";
+	"File::Basename::BEGIN";
+}
+subgraph cluster_Text_Xslate {
+	label="Text::Xslate";
+	"Text::Xslate::BEGIN";
+}
+subgraph cluster_Kossy_Response {
+	label="Kossy::Response";
+	"Kossy::Response::BEGIN";
+}
+subgraph cluster_Text_Xslate_Util {
+	label="Text::Xslate::Util";
+	"Text::Xslate::Util::import_from";
+	"Text::Xslate::Util::BEGIN";
+}
+subgraph cluster_Kossy_Exception {
+	label="Kossy::Exception";
+	"Kossy::Exception::BEGIN";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+subgraph cluster_Router_Simple_SubMapper {
+	label="Router::Simple::SubMapper";
+	"Router::Simple::SubMapper::BEGIN";
+}
+subgraph cluster_Plack_Util {
+	label="Plack::Util";
+	"Plack::Util::load_class";
+}
+subgraph cluster_Any_Moose {
+	label="Any::Moose";
+	"Any::Moose::BEGIN";
+	"Any::Moose::import";
+}
+subgraph cluster_Mouse_Util {
+	label="Mouse::Util";
+	"Mouse::Util::BEGIN";
+}
+subgraph cluster_Encode_Alias {
+	label="Encode::Alias";
+	"Encode::Alias::BEGIN";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::BEGIN";
+}
+"Plack::App::URLMap::BEGIN" -> "warnings::unimport";
+"Encode::BEGIN" -> "warnings::unimport";
+"Text::Xslate::Util::import_from" -> "warnings::unimport";
+"Data::MessagePack::BEGIN" -> "warnings::unimport";
+"parent::import" -> "warnings::unimport";
+"Mouse::Util::BEGIN" -> "warnings::unimport";
+"Encode::Alias::BEGIN" -> "warnings::unimport";
+"Mouse::Exporter::BEGIN" -> "warnings::bits";
+"Any::Moose::BEGIN" -> "warnings::import";
+"Router::Simple::SubMapper::BEGIN" -> "warnings::import";
+"Text::Xslate::Util::BEGIN" -> "warnings::import";
+"Any::Moose::import" -> "warnings::import";
+"Data::MessagePack::BEGIN" -> "warnings::import";
+"Isucon::BEGIN" -> "warnings::import";
+"Kossy::Request::BEGIN" -> "warnings::import";
+"Router::Simple::BEGIN" -> "warnings::import";
+"base::import" -> "warnings::import";
+"Text::Xslate::Util::import_from" -> "warnings::import";
+"Kossy::Connection::BEGIN" -> "warnings::import";
+"Kossy::Response::BEGIN" -> "warnings::import";
+"Kossy::Exception::BEGIN" -> "warnings::import";
+"Plack::Util::load_class" -> "warnings::import";
+"Mouse::Exporter::BEGIN" -> "warnings::import";
+"parent::import" -> "warnings::import";
+"Text::Xslate::BEGIN" -> "warnings::import";
+"Mouse::Util::BEGIN" -> "warnings::import";
+"Router::Simple::Route::BEGIN" -> "warnings::import";
+"Plack::App::URLMap::BEGIN" -> "warnings::import";
+"Kossy::BEGIN" -> "warnings::import";
+"File::Basename::BEGIN" -> "warnings::import";
+}

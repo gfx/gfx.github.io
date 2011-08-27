@@ -1,0 +1,18 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Kossy_Request {
+	label="Kossy::Request";
+	"Kossy::Request::BEGIN";
+}
+subgraph cluster_Encode_Config {
+	label="Encode::Config";
+	"Encode::Config::BEGIN";
+	"Encode::Config::CORE:match";
+}
+"Kossy::Request::BEGIN" -> "Encode::Config::CORE:match";
+"Encode::Config::BEGIN" -> "strict::import";
+}

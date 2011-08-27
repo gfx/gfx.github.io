@@ -1,0 +1,12 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Storable {
+	label="Storable";
+	"Storable::bootstrap";
+}
+subgraph cluster_DynaLoader {
+	label="DynaLoader";
+	"DynaLoader::bootstrap";
+}
+"DynaLoader::bootstrap" -> "Storable::bootstrap";
+}

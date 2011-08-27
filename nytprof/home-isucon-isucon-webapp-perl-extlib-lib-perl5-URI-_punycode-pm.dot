@@ -1,0 +1,12 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_URI__punycode {
+	label="URI::_punycode";
+	"URI::_punycode::CORE:qr";
+}
+subgraph cluster_URI__server {
+	label="URI::_server";
+	"URI::_server::_host_escape";
+}
+"URI::_server::_host_escape" -> "URI::_punycode::CORE:qr";
+}

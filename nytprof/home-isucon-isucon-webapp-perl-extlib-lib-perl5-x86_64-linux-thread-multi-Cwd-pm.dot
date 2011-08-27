@@ -1,0 +1,43 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_vars {
+	label="vars";
+	"vars::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+	"strict::unimport";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
+subgraph cluster_FindBin {
+	label="FindBin";
+	"FindBin::cwd2";
+	"FindBin::init";
+	"FindBin::BEGIN";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::psgi";
+}
+subgraph cluster_Cwd {
+	label="Cwd";
+	"Cwd::abs_path";
+	"Cwd::BEGIN";
+	"Cwd::CORE:fteexec";
+	"Cwd::getcwd";
+	"Cwd::CORE:regcomp";
+}
+"Kossy::psgi" -> "Cwd::abs_path";
+"FindBin::init" -> "Cwd::abs_path";
+"Cwd::BEGIN" -> "vars::import";
+"FindBin::cwd2" -> "Cwd::getcwd";
+"Cwd::BEGIN" -> "Exporter::import";
+"FindBin::BEGIN" -> "Cwd::CORE:fteexec";
+"Cwd::BEGIN" -> "strict::unimport";
+"FindBin::BEGIN" -> "Cwd::CORE:regcomp";
+"Cwd::BEGIN" -> "strict::import";
+}

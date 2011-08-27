@@ -1,0 +1,20 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Symbol {
+	label="Symbol";
+	"Symbol::qualify";
+}
+subgraph cluster_IO_Handle {
+	label="IO::Handle";
+	"IO::Handle::autoflush";
+}
+subgraph cluster_SelectSaver {
+	label="SelectSaver";
+	"SelectSaver::CORE:select";
+	"SelectSaver::new";
+}
+"SelectSaver::new" -> "Symbol::qualify";
+"IO::Handle::autoflush" -> "SelectSaver::CORE:select";
+"SelectSaver::new" -> "SelectSaver::CORE:select";
+"IO::Handle::autoflush" -> "SelectSaver::new";
+}

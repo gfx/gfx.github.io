@@ -1,0 +1,22 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_URI__idna {
+	label="URI::_idna";
+	"URI::_idna::CORE:qr";
+	"URI::_idna::CORE:regcomp";
+	"URI::_idna::encode";
+	"URI::_idna::CORE:match";
+	"URI::_idna::check_size";
+	"URI::_idna::ToASCII";
+}
+subgraph cluster_URI__server {
+	label="URI::_server";
+	"URI::_server::_host_escape";
+}
+"URI::_idna::ToASCII" -> "URI::_idna::check_size";
+"URI::_server::_host_escape" -> "URI::_idna::encode";
+"URI::_idna::ToASCII" -> "URI::_idna::CORE:regcomp";
+"URI::_idna::encode" -> "URI::_idna::ToASCII";
+"URI::_server::_host_escape" -> "URI::_idna::CORE:qr";
+"URI::_idna::ToASCII" -> "URI::_idna::CORE:match";
+}

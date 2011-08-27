@@ -1,0 +1,18 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Text_Xslate_Util {
+	label="Text::Xslate::Util";
+	"Text::Xslate::Util::import_from";
+}
+subgraph cluster_Text_Xslate_Bridge {
+	label="Text::Xslate::Bridge";
+	"Text::Xslate::Bridge::bridge";
+	"Text::Xslate::Bridge::methods";
+	"Text::Xslate::Bridge::export_into_xslate";
+	"Text::Xslate::Bridge::_functions";
+}
+"Text::Xslate::Util::import_from" -> "Text::Xslate::Bridge::bridge";
+"Text::Xslate::Bridge::export_into_xslate" -> "Text::Xslate::Bridge::methods";
+"Text::Xslate::Bridge::methods" -> "Text::Xslate::Bridge::_functions";
+"Text::Xslate::Util::import_from" -> "Text::Xslate::Bridge::export_into_xslate";
+}

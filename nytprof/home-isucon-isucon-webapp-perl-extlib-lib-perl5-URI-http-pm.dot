@@ -1,0 +1,24 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Plack_Request {
+	label="Plack::Request";
+	"Plack::Request::base";
+}
+subgraph cluster_URI_http {
+	label="URI::http";
+	"URI::http::canonical";
+}
+subgraph cluster_URI__generic {
+	label="URI::_generic";
+	"URI::_generic::path";
+	"URI::_generic::authority";
+}
+subgraph cluster_URI__server {
+	label="URI::_server";
+	"URI::_server::canonical";
+}
+"URI::http::canonical" -> "URI::_server::canonical";
+"URI::http::canonical" -> "URI::_generic::path";
+"URI::http::canonical" -> "URI::_generic::authority";
+"Plack::Request::base" -> "URI::http::canonical";
+}

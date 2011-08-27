@@ -1,0 +1,42 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Router_Simple_Route {
+	label="Router::Simple::Route";
+	"Router::Simple::Route::CORE:match";
+	"Router::Simple::Route::CORE:regcomp";
+	"Router::Simple::Route::CORE:subst";
+	"Router::Simple::Route::CORE:substcont";
+	"Router::Simple::Route::new";
+	"Router::Simple::Route::match";
+	"Router::Simple::Route::CORE:qr";
+	"Router::Simple::Route::BEGIN";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Router_Simple {
+	label="Router::Simple";
+	"Router::Simple::connect";
+	"Router::Simple::_match";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+"Router::Simple::Route::match" -> "Router::Simple::Route::CORE:regcomp";
+"Router::Simple::Route::new" -> "Router::Simple::Route::CORE:regcomp";
+"Router::Simple::_match" -> "Router::Simple::Route::match";
+"Router::Simple::Route::new" -> "Router::Simple::Route::CORE:substcont";
+"Router::Simple::Route::BEGIN" -> "parent::import";
+"Router::Simple::connect" -> "Router::Simple::Route::new";
+"Router::Simple::Route::new" -> "Router::Simple::Route::CORE:qr";
+"Router::Simple::Route::BEGIN" -> "warnings::import";
+"Router::Simple::Route::match" -> "Router::Simple::Route::CORE:match";
+"Router::Simple::Route::new" -> "Router::Simple::Route::CORE:subst";
+"Router::Simple::Route::BEGIN" -> "strict::import";
+}

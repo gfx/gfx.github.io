@@ -1,0 +1,76 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_IO_Handle {
+	label="IO::Handle";
+	"IO::Handle::autoflush";
+}
+subgraph cluster_constant {
+	label="constant";
+	"constant::import";
+}
+subgraph cluster_Mouse_Exporter {
+	label="Mouse::Exporter";
+	"Mouse::Exporter::setup_import_methods";
+}
+subgraph cluster_main {
+	label="main";
+	"main::RUNTIME";
+}
+subgraph cluster_Plack_Util {
+	label="Plack::Util";
+	"Plack::Util::foreach";
+	"Plack::Util::run_app";
+}
+subgraph cluster_Any_Moose {
+	label="Any::Moose";
+	"Any::Moose::_is_moose_loaded";
+	"Any::Moose::unimport";
+	"Any::Moose::import";
+	"Any::Moose::moose_is_preferred";
+}
+subgraph cluster_UNIVERSAL {
+	label="UNIVERSAL";
+	"UNIVERSAL::VERSION";
+}
+subgraph cluster_Mouse_Object {
+	label="Mouse::Object";
+	"Mouse::Object::new";
+}
+subgraph cluster_Plack_Handler_CLI {
+	label="Plack::Handler::CLI";
+	"Plack::Handler::CLI::run";
+	"Plack::Handler::CLI::stdout";
+	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:37]";
+	"Plack::Handler::CLI::CORE:print";
+	"Plack::Handler::CLI::BEGIN";
+	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:49]";
+	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:168]";
+	"Plack::Handler::CLI::need_headers";
+	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:43]";
+	"Plack::Handler::CLI::stdin";
+	"Plack::Handler::CLI::stderr";
+	"Plack::Handler::CLI::_handle_response";
+}
+"Plack::Handler::CLI::BEGIN" -> "Any::Moose::_is_moose_loaded";
+"Plack::Handler::CLI::_handle_response" -> "IO::Handle::autoflush";
+"Plack::Handler::CLI::BEGIN" -> "Any::Moose::unimport";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:49]";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:43]";
+"Plack::Handler::CLI::run" -> "Plack::Handler::CLI::_handle_response";
+"Plack::Handler::CLI::run" -> "Plack::Util::run_app";
+"Plack::Handler::CLI::BEGIN" -> "constant::import";
+"Plack::Handler::CLI::BEGIN" -> "Mouse::Exporter::setup_import_methods";
+"main::RUNTIME" -> "Plack::Handler::CLI::run";
+"Plack::Handler::CLI::BEGIN" -> "Any::Moose::import";
+"Plack::Handler::CLI::BEGIN" -> "Any::Moose::moose_is_preferred";
+"Plack::Handler::CLI::_handle_response" -> "Plack::Handler::CLI::stdout";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:37]";
+"Plack::Util::foreach" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:168]";
+"Plack::Handler::CLI::run" -> "Plack::Handler::CLI::stdin";
+"Plack::Handler::CLI::_handle_response" -> "Plack::Util::foreach";
+"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:168]" -> "Plack::Handler::CLI::CORE:print";
+"Plack::Handler::CLI::_handle_response" -> "Plack::Handler::CLI::CORE:print";
+"Plack::Handler::CLI::_handle_response" -> "Plack::Handler::CLI::need_headers";
+"Plack::Handler::CLI::run" -> "UNIVERSAL::VERSION";
+"Plack::Handler::CLI::run" -> "Plack::Handler::CLI::stderr";
+}

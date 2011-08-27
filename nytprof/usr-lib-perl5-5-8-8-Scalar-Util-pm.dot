@@ -1,0 +1,41 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Mouse_Meta_Class {
+	label="Mouse::Meta::Class";
+	"Mouse::Meta::Class::add_attribute";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::BEGIN";
+}
+subgraph cluster_vars {
+	label="vars";
+	"vars::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Scalar_Util {
+	label="Scalar::Util";
+	"Scalar::Util::looks_like_number";
+	"Scalar::Util::blessed";
+	"Scalar::Util::BEGIN";
+	"Scalar::Util::weaken";
+}
+subgraph cluster_Text_Xslate_Engine {
+	label="Text::Xslate::Engine";
+	"Text::Xslate::Engine::_resolve_function_aliases";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]";
+}
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:106]" -> "Scalar::Util::blessed";
+"Mouse::Meta::Class::add_attribute" -> "Scalar::Util::blessed";
+"Isucon::BEGIN" -> "Scalar::Util::weaken";
+"Mouse::Meta::Class::add_attribute" -> "Scalar::Util::weaken";
+"Scalar::Util::BEGIN" -> "vars::import";
+"Text::Xslate::Engine::_resolve_function_aliases" -> "Scalar::Util::looks_like_number";
+"Scalar::Util::BEGIN" -> "strict::import";
+}

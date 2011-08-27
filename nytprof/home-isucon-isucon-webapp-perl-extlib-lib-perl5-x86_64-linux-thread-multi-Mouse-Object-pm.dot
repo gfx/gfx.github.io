@@ -1,0 +1,56 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Mouse_Meta_Attribute {
+	label="Mouse::Meta::Attribute";
+	"Mouse::Meta::Attribute::new";
+	"Mouse::Meta::Attribute::default";
+}
+subgraph cluster_Mouse_Meta_Class {
+	label="Mouse::Meta::Class";
+	"Mouse::Meta::Class::strict_constructor";
+	"Mouse::Meta::Class::is_anon_class";
+	"Mouse::Meta::Class::is_immutable";
+	"Mouse::Meta::Class::_calculate_all_attributes";
+}
+subgraph cluster_Mouse_Exporter {
+	label="Mouse::Exporter";
+	"Mouse::Exporter::do_import";
+}
+subgraph cluster_Mouse_Meta_TypeConstraint {
+	label="Mouse::Meta::TypeConstraint";
+	"Mouse::Meta::TypeConstraint::_compiled_type_constraint";
+}
+subgraph cluster_main {
+	label="main";
+	"main::RUNTIME";
+}
+subgraph cluster_Mouse_Object {
+	label="Mouse::Object";
+	"Mouse::Object::BUILDARGS";
+	"Mouse::Object::new";
+	"Mouse::Object::BEGIN";
+}
+subgraph cluster_Mouse_Util {
+	label="Mouse::Util";
+	"Mouse::Util::__ANON__[x86_64-linux-thread-multi/Mouse/Util.pm:104]";
+}
+subgraph cluster_Plack_Handler_CLI {
+	label="Plack::Handler::CLI";
+	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:37]";
+	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:49]";
+	"Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:43]";
+}
+"Mouse::Object::new" -> "Mouse::Meta::Class::strict_constructor";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:49]";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:43]";
+"Mouse::Object::new" -> "Mouse::Meta::Attribute::default";
+"Mouse::Object::new" -> "Mouse::Meta::Class::_calculate_all_attributes";
+"Mouse::Object::new" -> "Mouse::Meta::Class::is_immutable";
+"Mouse::Object::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Object::new" -> "Mouse::Util::__ANON__[x86_64-linux-thread-multi/Mouse/Util.pm:104]";
+"Mouse::Meta::Attribute::new" -> "Mouse::Object::BUILDARGS";
+"main::RUNTIME" -> "Mouse::Object::new";
+"Mouse::Object::new" -> "Mouse::Meta::TypeConstraint::_compiled_type_constraint";
+"Mouse::Object::new" -> "Plack::Handler::CLI::__ANON__[Plack/Handler/CLI.pm:37]";
+"Mouse::Object::new" -> "Mouse::Meta::Class::is_anon_class";
+}

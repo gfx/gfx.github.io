@@ -1,0 +1,54 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Plack_Middleware_Static {
+	label="Plack::Middleware::Static";
+	"Plack::Middleware::Static::_handle_static";
+	"Plack::Middleware::Static::call";
+}
+subgraph cluster_Kossy_Connection {
+	label="Kossy::Connection";
+	"Kossy::Connection::render";
+}
+subgraph cluster_Plack_Util_Accessor {
+	label="Plack::Util::Accessor";
+	"Plack::Util::Accessor::mk_accessors";
+	"Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+	"Plack::Util::Accessor::import";
+}
+subgraph cluster_Plack_Middleware_Conditional {
+	label="Plack::Middleware::Conditional";
+	"Plack::Middleware::Conditional::BEGIN";
+}
+subgraph cluster_Kossy_Response {
+	label="Kossy::Response";
+	"Kossy::Response::_body";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+subgraph cluster_Plack_Util {
+	label="Plack::Util";
+	"Plack::Util::load_class";
+}
+subgraph cluster_Plack_Middleware_ReverseProxy {
+	label="Plack::Middleware::ReverseProxy";
+	"Plack::Middleware::ReverseProxy::call";
+}
+subgraph cluster_Plack_Response {
+	label="Plack::Response";
+	"Plack::Response::new";
+	"Plack::Response::finalize";
+}
+"Kossy::Connection::render" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Kossy::Response::_body" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Plack::Middleware::Static::_handle_static" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Plack::Response::new" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Plack::Middleware::Static::call" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Plack::Middleware::ReverseProxy::call" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Plack::Response::finalize" -> "Plack::Util::Accessor::__ANON__[Plack/Util/Accessor.pm:19]";
+"Plack::Util::load_class" -> "Plack::Util::Accessor::import";
+"parent::import" -> "Plack::Util::Accessor::import";
+"Plack::Middleware::Conditional::BEGIN" -> "Plack::Util::Accessor::import";
+"Plack::Util::Accessor::import" -> "Plack::Util::Accessor::mk_accessors";
+}

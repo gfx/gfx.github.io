@@ -1,0 +1,14 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_File_Basename {
+	label="File::Basename";
+	"File::Basename::BEGIN";
+}
+subgraph cluster_re {
+	label="re";
+	"re::import";
+	"re::bits";
+}
+"File::Basename::BEGIN" -> "re::import";
+"re::import" -> "re::bits";
+}

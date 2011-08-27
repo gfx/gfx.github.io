@@ -1,0 +1,81 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Mouse_Meta_Class {
+	label="Mouse::Meta::Class";
+	"Mouse::Meta::Class::superclasses";
+	"Mouse::Meta::Class::make_immutable";
+}
+subgraph cluster_warnings {
+	label="warnings";
+	"warnings::unimport";
+	"warnings::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::unimport";
+}
+subgraph cluster_Mouse_Util_TypeConstraints {
+	label="Mouse::Util::TypeConstraints";
+	"Mouse::Util::TypeConstraints::class_type";
+	"Mouse::Util::TypeConstraints::find_type_constraint";
+	"Mouse::Util::TypeConstraints::find_or_parse_type_constraint";
+}
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+}
+subgraph cluster_Mouse_Exporter {
+	label="Mouse::Exporter";
+	"Mouse::Exporter::build_import_methods";
+	"Mouse::Exporter::setup_import_methods";
+	"Mouse::Exporter::import";
+	"Mouse::Exporter::do_import";
+}
+subgraph cluster_Mouse {
+	label="Mouse";
+	"Mouse::BEGIN";
+}
+subgraph cluster_Mouse_Object {
+	label="Mouse::Object";
+	"Mouse::Object::new";
+}
+subgraph cluster_Mouse_Util {
+	label="Mouse::Util";
+	"Mouse::Util::is_class_loaded";
+	"Mouse::Util::is_valid_class_name";
+	"Mouse::Util::install_subroutines";
+	"Mouse::Util::__register_metaclass_storage";
+	"Mouse::Util::BEGIN";
+	"Mouse::Util::load_class";
+	"Mouse::Util::is_a_type_constraint";
+	"Mouse::Util::_try_load_one_class";
+	"Mouse::Util::generate_can_predicate_for";
+	"Mouse::Util::__ANON__[x86_64-linux-thread-multi/Mouse/Util.pm:104]";
+	"Mouse::Util::get_code_info";
+	"Mouse::Util::CORE:subst";
+	"Mouse::Util::generate_isa_predicate_for";
+}
+"Mouse::Util::_try_load_one_class" -> "Mouse::Util::is_valid_class_name";
+"Mouse::Util::load_class" -> "Mouse::Util::_try_load_one_class";
+"Mouse::Util::BEGIN" -> "Mouse::Exporter::do_import";
+"Mouse::Util::TypeConstraints::find_type_constraint" -> "Mouse::Util::is_a_type_constraint";
+"Mouse::Util::TypeConstraints::find_or_parse_type_constraint" -> "Mouse::Util::is_a_type_constraint";
+"Mouse::BEGIN" -> "Mouse::Util::generate_can_predicate_for";
+"Mouse::Util::BEGIN" -> "warnings::unimport";
+"Mouse::Util::__ANON__[x86_64-linux-thread-multi/Mouse/Util.pm:104]" -> "Mouse::Util::__ANON__[x86_64-linux-thread-multi/Mouse/Util.pm:104]";
+"Mouse::Object::new" -> "Mouse::Util::__ANON__[x86_64-linux-thread-multi/Mouse/Util.pm:104]";
+"Mouse::Util::_try_load_one_class" -> "Mouse::Util::is_class_loaded";
+"Mouse::Util::BEGIN" -> "Mouse::Exporter::setup_import_methods";
+"Mouse::BEGIN" -> "Mouse::Util::__register_metaclass_storage";
+"Mouse::Util::BEGIN" -> "strict::unimport";
+"Mouse::Exporter::build_import_methods" -> "Mouse::Util::get_code_info";
+"Mouse::Util::BEGIN" -> "XSLoader::load";
+"Mouse::Exporter::setup_import_methods" -> "Mouse::Util::install_subroutines";
+"Mouse::Exporter::do_import" -> "Mouse::Util::install_subroutines";
+"Mouse::Util::BEGIN" -> "warnings::import";
+"Mouse::Meta::Class::superclasses" -> "Mouse::Util::load_class";
+"Mouse::Meta::Class::make_immutable" -> "Mouse::Util::load_class";
+"Mouse::Util::BEGIN" -> "Mouse::Util::CORE:subst";
+"Mouse::Util::BEGIN" -> "Mouse::Exporter::import";
+"Mouse::Util::TypeConstraints::class_type" -> "Mouse::Util::generate_isa_predicate_for";
+}

@@ -1,0 +1,26 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+	"strict::unimport";
+}
+subgraph cluster_AutoLoader {
+	label="AutoLoader";
+	"AutoLoader::BEGIN";
+	"AutoLoader::CORE:substcont";
+	"AutoLoader::import";
+	"AutoLoader::CORE:regcomp";
+	"AutoLoader::CORE:subst";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+"AutoLoader::import" -> "AutoLoader::CORE:substcont";
+"AutoLoader::import" -> "AutoLoader::CORE:subst";
+"AutoLoader::import" -> "AutoLoader::CORE:regcomp";
+"AutoLoader::BEGIN" -> "strict::unimport";
+"parent::import" -> "AutoLoader::import";
+"AutoLoader::BEGIN" -> "strict::import";
+}

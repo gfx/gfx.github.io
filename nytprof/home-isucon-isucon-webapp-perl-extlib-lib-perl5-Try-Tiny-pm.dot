@@ -1,0 +1,34 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_vars {
+	label="vars";
+	"vars::import";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
+subgraph cluster_Try_Tiny {
+	label="Try::Tiny";
+	"Try::Tiny::BEGIN";
+	"Try::Tiny::catch";
+	"Try::Tiny::try";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]";
+	"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]";
+}
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Try::Tiny::catch";
+"Try::Tiny::try" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:114]";
+"Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:122]" -> "Try::Tiny::try";
+"Try::Tiny::try" -> "Kossy::__ANON__[/home/isucon/isucon/webapp/perl/lib/Kossy.pm:75]";
+"Try::Tiny::BEGIN" -> "vars::import";
+"Try::Tiny::BEGIN" -> "Exporter::import";
+"Try::Tiny::BEGIN" -> "strict::import";
+}

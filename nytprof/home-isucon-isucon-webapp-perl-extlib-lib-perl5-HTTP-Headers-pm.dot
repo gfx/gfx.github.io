@@ -1,0 +1,30 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_HTTP_Headers {
+	label="HTTP::Headers";
+	"HTTP::Headers::CORE:match";
+	"HTTP::Headers::new";
+	"HTTP::Headers::header_field_names";
+	"HTTP::Headers::CORE:subst";
+	"HTTP::Headers::header";
+	"HTTP::Headers::CORE:sort";
+	"HTTP::Headers::content_type";
+	"HTTP::Headers::_sorted_field_names";
+	"HTTP::Headers::_header";
+}
+subgraph cluster_Plack_Response {
+	label="Plack::Response";
+	"Plack::Response::content_type";
+	"Plack::Response::headers";
+	"Plack::Response::finalize";
+}
+"Plack::Response::finalize" -> "HTTP::Headers::header_field_names";
+"HTTP::Headers::content_type" -> "HTTP::Headers::CORE:subst";
+"Plack::Response::headers" -> "HTTP::Headers::new";
+"Plack::Response::finalize" -> "HTTP::Headers::header";
+"Plack::Response::content_type" -> "HTTP::Headers::content_type";
+"HTTP::Headers::_header" -> "HTTP::Headers::CORE:match";
+"HTTP::Headers::_sorted_field_names" -> "HTTP::Headers::CORE:sort";
+"HTTP::Headers::header_field_names" -> "HTTP::Headers::_sorted_field_names";
+"HTTP::Headers::header" -> "HTTP::Headers::_header";
+}

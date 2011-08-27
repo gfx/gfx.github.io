@@ -1,0 +1,60 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Config {
+	label="Config";
+	"Config::FETCH";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::import";
+}
+subgraph cluster_attributes {
+	label="attributes";
+	"attributes::bootstrap";
+	"attributes::import";
+}
+subgraph cluster_Kossy_Request {
+	label="Kossy::Request";
+	"Kossy::Request::BEGIN";
+}
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+	"XSLoader::bootstrap_inherit";
+}
+subgraph cluster_Text_Xslate {
+	label="Text::Xslate";
+	"Text::Xslate::BEGIN";
+}
+subgraph cluster_parent {
+	label="parent";
+	"parent::import";
+}
+subgraph cluster_FindBin {
+	label="FindBin";
+	"FindBin::BEGIN";
+}
+subgraph cluster_Mouse_Util {
+	label="Mouse::Util";
+	"Mouse::Util::BEGIN";
+}
+subgraph cluster_JSON {
+	label="JSON";
+	"JSON::_load_xs";
+}
+subgraph cluster_Kossy {
+	label="Kossy";
+	"Kossy::BEGIN";
+}
+"XSLoader::load" -> "attributes::import";
+"Kossy::BEGIN" -> "XSLoader::load";
+"Kossy::Request::BEGIN" -> "XSLoader::load";
+"JSON::_load_xs" -> "XSLoader::load";
+"Text::Xslate::BEGIN" -> "XSLoader::load";
+"parent::import" -> "XSLoader::load";
+"Mouse::Util::BEGIN" -> "XSLoader::load";
+"FindBin::BEGIN" -> "XSLoader::load";
+"XSLoader::bootstrap_inherit" -> "Config::FETCH";
+"XSLoader::load" -> "attributes::bootstrap";
+"XSLoader::load" -> "strict::import";
+}

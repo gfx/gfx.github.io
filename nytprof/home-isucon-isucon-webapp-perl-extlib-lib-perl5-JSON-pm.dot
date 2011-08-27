@@ -1,0 +1,78 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_JSON_Boolean {
+	label="JSON::Boolean";
+	"JSON::Boolean::_overrride_overload";
+}
+subgraph cluster_Isucon {
+	label="Isucon";
+	"Isucon::BEGIN";
+}
+subgraph cluster_strict {
+	label="strict";
+	"strict::unimport";
+}
+subgraph cluster_common_sense {
+	label="common::sense";
+	"common::sense::import";
+}
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+}
+subgraph cluster_Exporter_Heavy {
+	label="Exporter::Heavy";
+	"Exporter::Heavy::heavy_export_to_level";
+}
+subgraph cluster_constant {
+	label="constant";
+	"constant::import";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+	"Exporter::export_to_level";
+}
+subgraph cluster_JSON_Backend_PP {
+	label="JSON::Backend::PP";
+	"JSON::Backend::PP::BEGIN";
+}
+subgraph cluster_overload {
+	label="overload";
+	"overload::import";
+}
+subgraph cluster_UNIVERSAL {
+	label="UNIVERSAL";
+	"UNIVERSAL::VERSION";
+}
+subgraph cluster_JSON_Backend_XS {
+	label="JSON::Backend::XS";
+	"JSON::Backend::XS::init";
+}
+subgraph cluster_JSON {
+	label="JSON";
+	"JSON::CORE:close";
+	"JSON::import";
+	"JSON::_set_module";
+	"JSON::CORE:readline";
+	"JSON::_load_xs";
+}
+"JSON::import" -> "Exporter::export_to_level";
+"JSON::_load_xs" -> "JSON::CORE:readline";
+"JSON::import" -> "Exporter::Heavy::heavy_export_to_level";
+"JSON::_load_xs" -> "Exporter::import";
+"Isucon::BEGIN" -> "JSON::import";
+"JSON::_load_xs" -> "common::sense::import";
+"JSON::_load_xs" -> "JSON::_set_module";
+"Isucon::BEGIN" -> "JSON::_load_xs";
+"JSON::_load_xs" -> "constant::import";
+"JSON::_load_xs" -> "JSON::CORE:close";
+"JSON::Backend::PP::BEGIN" -> "strict::unimport";
+"JSON::_load_xs" -> "strict::unimport";
+"JSON::_load_xs" -> "XSLoader::load";
+"JSON::Boolean::_overrride_overload" -> "overload::import";
+"JSON::_load_xs" -> "overload::import";
+"JSON::_load_xs" -> "JSON::Backend::XS::init";
+"JSON::_load_xs" -> "JSON::Boolean::_overrride_overload";
+"JSON::_load_xs" -> "UNIVERSAL::VERSION";
+}

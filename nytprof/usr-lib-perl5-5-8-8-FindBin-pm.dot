@@ -1,0 +1,63 @@
+digraph {
+graph [overlap=false]
+subgraph cluster_Config {
+	label="Config";
+	"Config::import";
+	"Config::FETCH";
+}
+subgraph cluster_XSLoader {
+	label="XSLoader";
+	"XSLoader::load";
+}
+subgraph cluster_Exporter {
+	label="Exporter";
+	"Exporter::import";
+}
+subgraph cluster_File_Basename {
+	label="File::Basename";
+	"File::Basename::fileparse";
+	"File::Basename::fileparse_set_fstype";
+}
+subgraph cluster_File_Spec_Unix {
+	label="File::Spec::Unix";
+	"File::Spec::Unix::path";
+	"File::Spec::Unix::file_name_is_absolute";
+	"File::Spec::Unix::catfile";
+}
+subgraph cluster_FindBin {
+	label="FindBin";
+	"FindBin::CORE:fteread";
+	"FindBin::CORE:match";
+	"FindBin::CORE:ftfile";
+	"FindBin::init";
+	"FindBin::cwd2";
+	"FindBin::CORE:readlink";
+	"FindBin::BEGIN";
+}
+subgraph cluster_Cwd {
+	label="Cwd";
+	"Cwd::abs_path";
+	"Cwd::CORE:fteexec";
+	"Cwd::getcwd";
+	"Cwd::CORE:regcomp";
+}
+"FindBin::init" -> "FindBin::CORE:readlink";
+"FindBin::BEGIN" -> "Config::import";
+"FindBin::init" -> "Cwd::abs_path";
+"FindBin::init" -> "File::Basename::fileparse";
+"FindBin::cwd2" -> "Cwd::getcwd";
+"FindBin::BEGIN" -> "Exporter::import";
+"FindBin::init" -> "File::Spec::Unix::file_name_is_absolute";
+"FindBin::init" -> "FindBin::CORE:fteread";
+"FindBin::BEGIN" -> "Cwd::CORE:fteexec";
+"FindBin::BEGIN" -> "File::Basename::fileparse_set_fstype";
+"FindBin::BEGIN" -> "Cwd::CORE:regcomp";
+"FindBin::init" -> "FindBin::cwd2";
+"FindBin::BEGIN" -> "XSLoader::load";
+"FindBin::BEGIN" -> "Config::FETCH";
+"FindBin::init" -> "File::Spec::Unix::path";
+"FindBin::init" -> "FindBin::CORE:match";
+"FindBin::init" -> "FindBin::CORE:ftfile";
+"FindBin::BEGIN" -> "FindBin::init";
+"FindBin::init" -> "File::Spec::Unix::catfile";
+}
