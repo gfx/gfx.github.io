@@ -1,0 +1,175 @@
+* Perl 5.12 features
+
+Goro Fuji (gfx) gfuji@cpan.org
+
+Yokohama.pm#<strong>5.1</strong>(?) 2010/3/5
+
+----
+* 自己紹介
+
+藤 吾郎 (hatena: id:gfx)
+
+perl.gitのcommit logを眺めるのが日課です
+
+----
+* Perl 5.12が間もなくリリースされます
+
+- 5.10が現行実装の最終バージョンとかいう話
+- 5.12はParrot上の初の実装とかいう話
+
+----
+*すべてなかったことに！
+
+- 5.12は単に5.10の後継
+- 機能の追加よりも「機能の整理」が目立つ
+- <strong>"Modern Perl"</strong>がコンセプトか
+
+----
+* Table of Contents
+- 5.12の新機能
+-- auto stricture
+-- yada yada yada operator
+-- each/keys/values @array
+-- delete local $hash{elem}
+-- package NAME VERSION syntax
+-- qr overloading
+-- -X overloading
+-- PL_keyword_plugin
+-- many deprecations
+
+----
+* auto stricture
+
+>||
+use 5.011;    # turns on strict
+
+use warnings; # これも効かせてくれればいいのに
+||<
+
+----
+* yada yada yada operator
+
+>||
+sub foo { ... }
+
+foo(); # => Unimplemented at foo.pl line 1.
+||<
+
+----
+* each/keys/values @array
+
+>||
+my @array = qw(foo bar baz);
+keys   @array; # => (0, 1, 2)
+values @array; # => ('foo', 'bar', 'baz')
+each   @array; # => (0, 'foo'), (1, 'bar'), (2, 'baz')
+||<
+
+----
+* delete local $hash{elem}
+
+>||
+delete local $hash{elem};
+
+# 以下と同じ
+local  $hash{elem};
+delete $hash{elem};
+||<
+
+----
+* package NAME VERSION syntax
+
+>||
+package Foo 0.009001;
+
+# 以下と同じ
+package Foo;
+BEGIN{ our $VERSION = version->new('0.009001') }
+||<
+
+----
+* qr overloading
+
+>||
+use overload qr => 'as_regexp';
+
+sub as_regexp {
+	my($self) = @_;
+	...;
+	return qr/foo/;
+}
+||<
+
+----
+* -X overloading
+
+>||
+use overload -X => 'ftest';
+
+sub ftest {
+	my($self, $opchar) = @_;
+	# opcharは"r", "s", "f"などの演算子名
+	retrun ...; # そのまま演算子の戻り値になる
+}
+||<
+
+
+----
+* PL_keyword_plugin
+
+Better source filter
+独自の構文を追加できるが，Perlの内部構造を知らないといけないのでハードル高杉
+
+----
+* many deprecations
+
+>||
+use UNIVERSAL qw(isa can); # DEPRECATED
+# instead:
+if(blessed($thing) && $thing->isa("Foo")){
+	...;
+}
+use Switch; # DEPRECATED
+# instead:
+use feature 'switch';
+||<
+<em>使用すると警告が出ます</em>
+----
+* use bytes の使用は奨励されなくなる
+
+bytes.pm (bytes::length())などを使うケースのほとんどは，Perlの文字列モデルを理解していないことが原因である
+
+----
+* Perl 5.14 に向けて
+
+- Method-with-block syntax
+- Modern OO support
+
+----
+* Method-with-block syntax
+
+>||
+my @a = $obj->grep { /foo/ };
+# 以下と同じ
+my @a = $obj->grep(sub{ /foo/ });
+||<
+
+- 読みやすい
+- 書きやすい
+- チェインしやすい
+
+----
+* Modern Object-Oriented supporting environment
+
+PerlもそろそろOOサポートモジュールをコア入りさせるべき！
+5.14で低レベルレイヤサポート＆古いPerlでも互換モジュールサポートという形式が望ましいか
+
+----
+* 5.14 が楽しみですね！
+
+今後の野望：5.14の開発に関わる
+
+----
+* __END__
+
+ご静聴ありがとうございました
