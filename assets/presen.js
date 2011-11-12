@@ -5,18 +5,16 @@ var Presen = {
 };
 
 Presen.init = function(data){
-    this.data = data;
-
-    this.init_sections();
+    this.sections = data;
     this.init_title();
     this.init_page();
-    this.format_cache = new Array();
+    this.format_cache = [ ];
     this.rewrite();
 
     $("#total_page").html(Presen.sections.length);
 
     setInterval(
-        Presen.cron, 1
+        Presen.cron, 10
     );
 };
 
@@ -28,21 +26,8 @@ Presen.init_page = function () {
     }
 }
 
-Presen.init_sections = function () {
-    var sections = [[]];
-    var topic_reg = /^----/;
-    $(this.data).each(function (i, line) {
-        if (topic_reg.test(line)){
-            sections.push([line]);
-        } else {
-            sections[sections.length-1].push(line);
-        }
-    });
-    this.sections = sections;
-};
-
 Presen.init_title = function () {
-    var titles = this.sections[0];
+    var titles = this.sections[0].split(/\n/);
     document.title = titles[0];
     $("#title").html(titles[0]);
 };
@@ -76,8 +61,8 @@ Presen.cron = function () {
     $("#current_page").html((Presen.page+1));
 
     var used_time = parseInt( (now - Presen.start_time)/1000, 10 );
-    var used_min = parseInt(used_time/60.0, 10);
-    var used_sec = parseInt( used_time - (used_min*60.0), 10 );
+    var used_min  = parseInt(used_time/60.0, 10);
+    var used_sec  = parseInt( used_time - (used_min*60.0), 10 );
     $('#used_time').html('' + Presen.two_column(used_min) + ':' + Presen.two_column(used_sec));
 
     $("#footer").css('top', ($(window).height() - 40) + "px");
@@ -102,52 +87,11 @@ Presen.rewrite = function(){
     location.hash = "#" + p;
 };
 
-Presen.format = function(lines){
-    var context = [];
-    var mode = "p";
-    var pre_max = 0;
-    $(lines).each(function(i, v){
-        if (/^----$/.test(v)) {
-            return; // page separater
-        }
-
-        if(/^(\*\s)/.test(v)){
-            context.push(v.replace(/^\*+/, "").tag("h2"));
-            return;
-        }
-        if(/^(\*+)/.test(v)){
-            context.push(v.replace(/^\*+/, "").tag("h3"));
-            return;
-        }
-        if(/^\-\-/.test(v)){
-            context.push(v.replace(/^\-\-/,"&nbsp;&nbsp;*").tag("span", "list_child") + "<br />");
-            return;
-        }
-        if(/^\-/.test(v)){
-            context.push(v.replace(/^-/, '').tag("div","list"));
-            return;
-        }
-        
-        if (/^\>\|\|/.test(v)) { // >||
-            mode = "pre";
-            context.push("<pre>");
-            return;
-        }
-        if (/^\|\|\</.test(v)) { // ||<
-            mode = "p";
-            context.push("</pre>");
-            return;
-        }
-        
-        if (mode=="pre") {
-            pre_max = Math.max(v.length, pre_max);
-            context.push(v.escapeHTML().replace("&lt;B&gt;", "<B>").replace("&lt;/B&gt;", "</B>").tag("span") + "\n");
-        } else {
-            context.push(v.tag("span") + "<br>");
-        }
-    });
-    var pre_font_size = '' + parseInt($(window).width()/pre_max+10, 10) + "px";
-    return [context.join(""), pre_font_size];
+Presen.format = function(content){
+    var html          = markdown.toHTML(content);
+    var pre_max       = 0; // TODO
+    var pre_font_size = parseInt($(window).width()/pre_max+10, 10) + "px";
+    return [html, content, pre_font_size];
 };
 
 Presen.two_column = function (i) {
@@ -186,11 +130,20 @@ Presen.observe_key_event = function () {
             
             case 80: // p
             case 75: // k
-            case 38: Presen.prev();e.stopPropagation();break;
+            case 38: // <up>
+            case  8: // <backspace>
+                Presen.prev();
+                e.stopPropagation();
+                break;
             
             case 78: // n
             case 74: // j
-            case 40: Presen.next();e.stopPropagation();break;
+            case 40: // <down>
+            case 32: // <space>
+            case 13: // <enter>
+                Presen.next();
+                e.stopPropagation();
+                break;
 
             case 70: // f
                 $('#footer').toggle();
@@ -210,11 +163,12 @@ Presen.observe_key_event = function () {
 // -------------------------------------------------------------------------
 
 $(function (){
-    $.get('main.txt', function (text) {
+    $.get('main.md', function (text) {
         try {
-            Presen.init(text.split("\n"));
+            Presen.init(text.split(/\n----/));
         } catch(e) {
-            alert(e) 
+            console.log(e);
+            alert(e);
         }
     });
 
