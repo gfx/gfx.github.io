@@ -10,8 +10,12 @@ Yokohama.pm#8 2011/11/18
 =====================
 * `id:gfx` / `@__gfx__`
 * DeNAで働くプログラマ
-* 最近はiOSでC++が多い
-* Xslateのメンテナンスしてます
+* CPAN: HTML::FillInForm::Lite, Data::Util, Test::LeakTrace, Mouse, Text::Xslate, etc.
+
+----
+Agenda
+* Introduction to Text::Xslate
+* Future of Xslate
 
 ----
 What's Xslate
