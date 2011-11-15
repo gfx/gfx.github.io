@@ -1,4 +1,5 @@
 (function () {
+"use strict";
 
 var Presen = {
     start_time: new Date()
@@ -13,6 +14,7 @@ Presen.init = function(data){
 
     $("#total_page").html(Presen.sections.length);
 
+    Presen.cron();
     setInterval(
         Presen.cron, 10
     );
@@ -69,7 +71,6 @@ Presen.cron = function () {
 
     var body = $(window);
     var topic = $('#topics');
-    // topic.html('<h1>'+[body.width(), topic.width(), $(document).width()].join(" ")+'</h1>');
     if (topic.width() > body.width()) {
         topic.html(' ' +topic.width() + " " + body.width());
     }
@@ -89,9 +90,9 @@ Presen.rewrite = function(){
 
 Presen.format = function(content){
     var html          = markdown.toHTML(content);
-    var pre_max       = 0; // TODO
+    var pre_max       = 80; // TODO
     var pre_font_size = parseInt($(window).width()/pre_max+10, 10) + "px";
-    return [html, content, pre_font_size];
+    return [html, pre_font_size];
 };
 
 Presen.two_column = function (i) {
@@ -165,7 +166,7 @@ Presen.observe_key_event = function () {
 $(function (){
     $.get('main.md', function (text) {
         try {
-            Presen.init(text.split(/\n----/));
+            Presen.init(text.split(/\n----*/));
         } catch(e) {
             console.log(e);
             alert(e);
@@ -175,4 +176,4 @@ $(function (){
     Presen.observe_key_event();
 });
 
-})();
+})(this);

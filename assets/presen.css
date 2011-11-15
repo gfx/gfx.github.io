@@ -32,12 +32,10 @@ body * {
 }
 
 #topics pre {
-    padding-left: 4px;
-    font-size: 80%;
+    padding: 10px;
     background-color: #eceeee;
     word-break: break-all;
     text-align: left;
-    padding:0 3px 2px;
     font-family:Monaco, Andale Mono, Courier New, monospace;
     font-size:12px;
     -webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;
@@ -52,7 +50,6 @@ body * {
 }
 
 #topics .code {
-    padding-left: 4px;
     font-size: 80%;
     background-color: #202010;
     text-align: left;
