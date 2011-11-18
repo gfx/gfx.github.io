@@ -34,11 +34,16 @@ body * {
 #topics pre {
     padding: 10px;
     background-color: #eceeee;
+    color: black;
     word-break: break-all;
     text-align: left;
     font-family:Monaco, Andale Mono, Courier New, monospace;
     font-size:12px;
     -webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;
+}
+
+#topics code {
+    background-color: #eceeee;
     color: black;
 }
 
