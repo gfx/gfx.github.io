@@ -1,0 +1,3 @@
+[submodule "clion.js"]
+	path = clion.js
+	url = git://github.com/gfx/clion.js.git
