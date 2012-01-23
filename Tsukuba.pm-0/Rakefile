@@ -1,0 +1,12 @@
+
+task :default => [ ] do
+    cd '../clion.js' do
+        sh 'git', 'pull';
+        sh 'rake';
+    end
+
+    cp_r '../clion.js/dist', '.';
+    cp_r '../clion.js/demo', '.';
+
+end
+
