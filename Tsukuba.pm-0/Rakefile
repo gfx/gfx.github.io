@@ -5,8 +5,8 @@ task :default => [ ] do
         sh 'rake';
     end
 
+    cp_r '../clion.js/example', '.';
     cp_r '../clion.js/dist', '.';
     cp_r '../clion.js/demo', '.';
-
 end
 
